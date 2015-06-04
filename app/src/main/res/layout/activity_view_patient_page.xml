@@ -16,13 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:hint="Enter Name"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:id="@+id/txtSearchName"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
             android:text="Search"
             android:id="@+id/butPatientSearch"
             android:onClick="searchPatientByName"
@@ -76,28 +76,31 @@
         >
         <Button
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25"
             android:text="APPOINTMENT"
             android:textSize="10dp"
             />
+
         <Button
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:text="EDIT"
             android:textSize="10dp"
+            android:text="EDIT"
             />
+
+
         <Button
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25"
             android:text="DELETE"
             android:textSize="10dp"
             />
         <Button
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25"
             android:text="REPORT"
             android:textSize="10dp"
