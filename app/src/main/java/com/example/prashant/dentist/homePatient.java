@@ -36,7 +36,7 @@ public class homePatient extends ActionBarActivity {
         Intent i = new Intent(this,viewPatientPage.class);
         startActivity(i);
     }
-/*
+
     public void gotoAddNewAppointmentPage(View view){
         Intent i = new Intent(this,addNewAppointment.class);
         startActivity(i);
@@ -47,7 +47,7 @@ public class homePatient extends ActionBarActivity {
         startActivity(i);
     }
 
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
