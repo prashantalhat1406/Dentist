@@ -21,7 +21,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appiontment_page);
-
+/*
         Spinner year = (Spinner)findViewById(R.id.spYear);
         ArrayAdapter<CharSequence> adaptery = ArrayAdapter.createFromResource(this,R.array.Years, android.R.layout.simple_spinner_item);
         year.setAdapter(adaptery);
@@ -34,7 +34,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         Spinner datel = (Spinner)findViewById(R.id.spDate);
         ArrayAdapter<CharSequence> adapterd = ArrayAdapter.createFromResource(this,R.array.Dates, android.R.layout.simple_spinner_item);
         datel.setAdapter(adapterd);
-
+*/
         displayAllAppointments();
 
     }
