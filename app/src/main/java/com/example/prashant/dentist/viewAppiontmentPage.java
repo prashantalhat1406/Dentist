@@ -35,6 +35,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         ArrayAdapter<CharSequence> adapterd = ArrayAdapter.createFromResource(this,R.array.Dates, android.R.layout.simple_spinner_item);
         datel.setAdapter(adapterd);
 */
+
         displayAllAppointments();
 
     }

@@ -16,14 +16,14 @@ public class homePatient extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_patient);
-/*
+
         Button bt  =(Button) findViewById(R.id.butViewAppiontment);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoViewAppointmentPage();
             }
-        });*/
+        });
     }
 
     public void displayAddNewPatientActivity(View view){
