@@ -45,6 +45,14 @@ public class viewPatientPage extends ActionBarActivity {
             }
         });
 
+        Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
+        bAppointmeent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoNewAppointmentScreen();
+            }
+        });
+
 
     }
 
@@ -80,9 +88,11 @@ public class viewPatientPage extends ActionBarActivity {
 
 
 
-    public void openAppointmentActivity ()
+    public void gotoNewAppointmentScreen ()
     {
-        Toast.makeText(getApplicationContext(), "work in progress", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,addNewAppointment.class);
+        startActivity(i);
+        //Toast.makeText(getApplicationContext(), "work in progress", Toast.LENGTH_SHORT).show();
     }
 
     public void openReportsActivity()
@@ -239,9 +249,6 @@ public class viewPatientPage extends ActionBarActivity {
                     });
 
                     editDialog.show();
-
-                    //db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
-                    //Intent intent = new Intent();
                     pdb.close();
                     i = i + 1;
                 }
@@ -251,39 +258,5 @@ public class viewPatientPage extends ActionBarActivity {
         catch(Exception e){
             e.printStackTrace();
         }
-
-/*
-        Dialog editDialog = new Dialog(this);
-        editDialog.setContentView(R.layout.editdialoglayout);
-        editDialog.setTitle("Edit Patient");
-        editDialog.show();*/
-        //editDialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT);
-
-
-        /*AlertDialog.Builder editDialog = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = getLayoutInflater();
-
-        editDialog.setView(inflater.inflate(R.layout.activity_edit_patient_page,null));
-        editDialog.create();*/
-        /*TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
-        int i =0;
-        try {
-            while (i < pt.getChildCount()) {
-                TableRow tr = (TableRow) pt.getChildAt(i);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                if (cb.isChecked()) {
-                    patientDatabaseHandler db = new patientDatabaseHandler(this);
-                    db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
-                    //Intent intent = new Intent();
-                    db.close();
-                    i = i + 1;
-                }
-                i = i + 1;
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }*/
     }
 }

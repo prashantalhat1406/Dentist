@@ -80,6 +80,7 @@
             android:layout_weight="0.25"
             android:text="SESSION"
             android:textSize="10dp"
+            android:id="@+id/butViewPatientAppointment"
             />
 
         <Button
