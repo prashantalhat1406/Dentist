@@ -1,11 +1,16 @@
 package com.example.prashant.dentist;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,11 +30,21 @@ public class viewPatientPage extends ActionBarActivity {
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
 
-        Button b = (Button)findViewById(R.id.butPatDelete);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button bDelete = (Button)findViewById(R.id.butViewPatientDelete);
+        bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {deletePatient(); displayAllExistingPatients(); }
         });
+
+        Button bEdit = (Button)findViewById(R.id.butViewPatientEdit);
+        bEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPatient();
+            }
+        });
+
+
     }
 
     @Override
@@ -164,5 +179,43 @@ public class viewPatientPage extends ActionBarActivity {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void editPatient()
+    {
+        Dialog editDialog = new Dialog(this);
+        editDialog.setContentView(R.layout.activity_edit_patient_page);
+        editDialog.setTitle("Edit Patient");
+
+
+        editDialog.show();
+        //editDialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT);
+
+
+        /*AlertDialog.Builder editDialog = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        editDialog.setView(inflater.inflate(R.layout.activity_edit_patient_page,null));
+        editDialog.create();*/
+        /*TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
+        int i =0;
+        try {
+            while (i < pt.getChildCount()) {
+                TableRow tr = (TableRow) pt.getChildAt(i);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                if (cb.isChecked()) {
+                    patientDatabaseHandler db = new patientDatabaseHandler(this);
+                    db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
+                    //Intent intent = new Intent();
+                    db.close();
+                    i = i + 1;
+                }
+                i = i + 1;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }*/
     }
 }

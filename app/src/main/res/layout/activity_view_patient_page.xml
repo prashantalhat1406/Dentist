@@ -88,7 +88,7 @@
             android:layout_weight="0.25"
             android:textSize="10dp"
             android:text="EDIT"
-            android:id="@+id/butPatEdit"
+            android:id="@+id/butViewPatientEdit"
             />
 
 
@@ -98,7 +98,7 @@
             android:layout_weight="0.25"
             android:text="DELETE"
             android:textSize="10dp"
-            android:id="@+id/butPatDelete"
+            android:id="@+id/butViewPatientDelete"
             />
         <Button
             android:layout_width="0dp"
