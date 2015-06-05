@@ -2,6 +2,7 @@ package com.example.prashant.dentist;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -59,11 +60,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
         mi=cal.get(Calendar.MINUTE);
 
         currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
-        currentDate.setText(d+"/"+(m+1)+"/"+y);
+        currentDate.setText(d + "/" + (m + 1) + "/" + y);
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {showDialog(0);
+            }
+        });
+
+        Button newApt = (Button)findViewById(R.id.butNewAppointment);
+        newApt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {gotoNewAppointmentScreen();
             }
         });
 
@@ -102,6 +110,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayAllAppointments();
+    }
+
+    public void gotoNewAppointmentScreen()
+    {
+        Intent i = new Intent(this,addNewAppointment.class);
+        startActivity(i);
     }
 
     public void displayAllAppointments(){
