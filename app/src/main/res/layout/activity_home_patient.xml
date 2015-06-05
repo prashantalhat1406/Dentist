@@ -20,8 +20,7 @@
             android:layout_weight="0.5"
             android:text="New Patient"
             android:id="@+id/butNewPatient"
-            android:onClick="displayAddNewPatientActivity"
-            />
+            android:onClick="displayAddNewPatientActivity"            />
 
         <Button
             android:layout_width="0dp"

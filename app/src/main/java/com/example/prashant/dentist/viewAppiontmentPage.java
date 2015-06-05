@@ -162,10 +162,24 @@ public class viewAppiontmentPage extends ActionBarActivity {
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    currentDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                    displayAppointmentForDate(currentDate.getText().toString());
+
+                    try {
+                        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                        Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.setTime(dObj);
+                        myCal.add(Calendar.DAY_OF_YEAR, 1);
+                        currentDate.setText(df.format(myCal.getTime()));
+                        displayAppointmentForDate(currentDate.getText().toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    //currentDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    //displayAppointmentForDate(currentDate.getText().toString());
                 }
             }, y, m, d);
+
+
 
     }
 
