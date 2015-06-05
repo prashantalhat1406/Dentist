@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -74,13 +75,16 @@ public class addNewAppointment extends ActionBarActivity {
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                     e.setText(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
-                    /*try {
-                        e.setText(new SimpleDateFormat("dd-mm-yyyy").format(new SimpleDateFormat("dd/mm/yyyy").parse(dayOfMonth + "/" + monthOfYear + "/" + year)).toString());
-                    }
-                    catch(Exception e){
+                     //e.setText(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
+                    try {
+                        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                        Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.setTime(dObj);
+                        e.setText(df.format(myCal.getTime()));
+                    }catch (Exception e){
                         e.printStackTrace();
-                    }*/
+                    }
                 }
             },y,m,d);
         }

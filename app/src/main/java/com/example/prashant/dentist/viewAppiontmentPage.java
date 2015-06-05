@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +21,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
-
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -62,10 +64,27 @@ public class viewAppiontmentPage extends ActionBarActivity {
         h=cal.get(Calendar.HOUR_OF_DAY);
         mi=cal.get(Calendar.MINUTE);
 
-        displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
+
 
         currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
-        currentDate.setText(d + "/" + (m + 1) + "/" + y);
+        //currentDate.setText(d + "/" + (m + 1) + "/" + y);
+
+
+
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+            Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            currentDate.setText(df.format(myCal.getTime()));
+            displayAppointmentForDate(currentDate.getText().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
 
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +113,43 @@ public class viewAppiontmentPage extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 deleteAppointment();
+            }
+        });
+
+        Button previousApt = (Button)findViewById(R.id.butVAPrevious);
+        previousApt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                    Date dObj = df.parse(currentDate.getText().toString());
+                    Calendar myCal = Calendar.getInstance();
+                    myCal.setTime(dObj);
+                    myCal.add(Calendar.DAY_OF_YEAR, -1);
+                    currentDate.setText(df.format(myCal.getTime()));
+                    displayAppointmentForDate(currentDate.getText().toString());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Button nextApt = (Button)findViewById(R.id.butVANext);
+        nextApt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                    Date dObj = df.parse(currentDate.getText().toString());
+                    Calendar myCal = Calendar.getInstance();
+                    myCal.setTime(dObj);
+                    myCal.add(Calendar.DAY_OF_YEAR, 1);
+                    currentDate.setText(df.format(myCal.getTime()));
+                    displayAppointmentForDate(currentDate.getText().toString());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

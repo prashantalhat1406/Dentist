@@ -86,14 +86,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="PREVIOUS"
-            android:id="@+id/butPrevious"/>
+            android:id="@+id/butVAPrevious"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="NEXT"
-            android:id="@+id/butNext"/>
+            android:id="@+id/butVANext"/>
     </LinearLayout>
 
     <LinearLayout
