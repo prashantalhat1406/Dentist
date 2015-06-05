@@ -1,21 +1,35 @@
 package com.example.prashant.dentist;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
 import java.util.List;
 
 
 public class viewAppiontmentPage extends ActionBarActivity {
+
+    private Calendar cal;
+    int y, m, d,h,mi;
+    Button bd,bt;
+    TextView currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +51,33 @@ public class viewAppiontmentPage extends ActionBarActivity {
 */
 
         displayAllAppointments();
+        cal = Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH);
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        h=cal.get(Calendar.HOUR_OF_DAY);
+        mi=cal.get(Calendar.MINUTE);
 
+        currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
+        bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
+        bd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showDialog(0);
+            }
+        });
+
+
+
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                currentDate.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+            }
+        },y,m,d);
     }
 
     @Override

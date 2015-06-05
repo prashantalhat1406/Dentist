@@ -74,7 +74,7 @@ public class addNewAppointment extends ActionBarActivity {
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                     e.setText(dayOfMonth+"/" + monthOfYear + "/" + year);
+                     e.setText(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
                     /*try {
                         e.setText(new SimpleDateFormat("dd-mm-yyyy").format(new SimpleDateFormat("dd/mm/yyyy").parse(dayOfMonth + "/" + monthOfYear + "/" + year)).toString());
                     }
