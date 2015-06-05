@@ -119,6 +119,20 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         return  appointmentList;
     }
 
+    public appointmentInformation getAppointmentInfoByDateTime(String currentDate, String currentTime){
+        appointmentInformation ai=new appointmentInformation(); // = new ArrayList<appointmentInformation>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? AND " + KEY_ATIME + " LIKE ? ", new String[]{"%" + currentDate + "%","%" + currentTime + "%"},null,null,null,null );
+
+        if(cursor.moveToFirst()) {
+            ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getString(6),cursor.getString(7),cursor.getString(8));
+        }
+        cursor.close();
+        db.close();
+        return  ai;
+    }
+
     public List<appointmentInformation> getAllAppointmentInfo(){
         List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
 

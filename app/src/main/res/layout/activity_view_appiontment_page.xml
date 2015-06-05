@@ -102,7 +102,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/patientTableheader"
+            android:id="@+id/aptTableheader"
             >
             <TableRow>
                 <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.05" />
@@ -145,19 +145,19 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="NEW"
-            android:id="@+id/butNewAppointment"/>
+            android:id="@+id/butVANewAppointment"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="EDIT"
-            android:id="@+id/butEditAppointment"/>
+            android:id="@+id/butVAEditAppointment"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="DELETE"
-            android:id="@+id/butDeleteAppointment"/>
+            android:id="@+id/butVADeleteAppointment"/>
     </LinearLayout>
 
 </LinearLayout>
