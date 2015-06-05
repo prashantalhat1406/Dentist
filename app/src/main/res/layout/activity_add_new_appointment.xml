@@ -114,11 +114,7 @@
             android:id="@+id/txttd"
             />
     </LinearLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="0.3">
 
-    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -132,6 +128,12 @@
             android:text="ADD"
             android:onClick="addAppointmentToDatabase"
             android:id="@+id/butAddAppointment"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="0.3">
 
     </LinearLayout>
 

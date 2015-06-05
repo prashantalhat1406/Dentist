@@ -1,5 +1,6 @@
 package com.example.prashant.dentist;
 
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +11,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.util.List;
 
 
@@ -22,12 +22,16 @@ public class addNewAppointment extends ActionBarActivity {
         setContentView(R.layout.activity_add_new_appointment);
         populatePatientNameForAutoComplete();
 
+
+
         Button addButton = (Button)findViewById(R.id.butAddAppointment);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {addAppointmentToDatabase();}
         });
     }
+
+
 
     public void populatePatientNameForAutoComplete(){
         patientDatabaseHandler pdb = new patientDatabaseHandler(this);
