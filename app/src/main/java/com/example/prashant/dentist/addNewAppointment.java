@@ -22,8 +22,6 @@ public class addNewAppointment extends ActionBarActivity {
         setContentView(R.layout.activity_add_new_appointment);
         populatePatientNameForAutoComplete();
 
-
-
         Button addButton = (Button)findViewById(R.id.butAddAppointment);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
