@@ -36,6 +36,10 @@
             android:name=".viewAppiontmentPage"
             android:label="@string/title_activity_view_appiontment_page" >
         </activity>
+        <activity
+            android:name=".editPatientPage"
+            android:label="@string/title_activity_edit_patient_page" >
+        </activity>
     </application>
 
 </manifest>

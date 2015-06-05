@@ -61,4 +61,5 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+    <string name="title_activity_edit_patient_page">Edit Patient</string>
 </resources>
