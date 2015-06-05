@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -23,6 +24,12 @@ public class viewPatientPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
+
+        Button b = (Button)findViewById(R.id.butPatDelete);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {deletePatient(); displayAllExistingPatients(); }
+        });
     }
 
     @Override
