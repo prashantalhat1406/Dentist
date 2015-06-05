@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -183,12 +184,79 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void editPatient()
     {
+        int i =0;
+        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
+        try {
+            while (i < pt.getChildCount()) {
+                TableRow tr = (TableRow) pt.getChildAt(i);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                if (cb.isChecked()) {
+                    final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+
+                    final patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(cb.getText().toString()));
+
+                    final Dialog editDialog = new Dialog(this);
+                    editDialog.setContentView(R.layout.editdialoglayout);
+                    editDialog.setTitle("Edit Patient");
+
+                    final EditText name = (EditText)editDialog.findViewById(R.id.txtEditPatientName);
+                    name.setText(pi.getName());
+
+                    final EditText phone = (EditText)editDialog.findViewById(R.id.txtEditPatientPhone);
+                    phone.setText(pi.getPhone());
+
+                    final EditText address = (EditText)editDialog.findViewById(R.id.txtEditPatientAddress);
+                    address.setText(pi.getAddress());
+
+                    final RadioButton sexM = (RadioButton)editDialog.findViewById(R.id.rdbEditMale);
+                    final RadioButton sexF = (RadioButton)editDialog.findViewById(R.id.rdbEditFemale);
+                    if (pi.getSex() == "M")
+                        sexM.setSelected(true);
+                    else
+                        sexF.setSelected(true);
+
+
+                    final EditText age = (EditText)editDialog.findViewById(R.id.txtEditPatientAge);
+                    age.setText(pi.getAge());
+
+                    Button bSave = (Button) editDialog.findViewById(R.id.butEditPatient);
+                    bSave.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            pi.setName(name.getText().toString());
+                            pi.setPhone(phone.getText().toString());
+                            pi.setAddress(address.getText().toString());
+                            pi.setAge(age.getText().toString());
+                            if (sexM.isSelected())
+                                pi.setSex(sexM.getText().toString());
+                            else
+                                pi.setSex(sexF.getText().toString());
+
+                            pdb.updatePatientInfo(pi);
+                            editDialog.dismiss();
+                            displayAllExistingPatients();
+                        }
+                    });
+
+                    editDialog.show();
+
+                    //db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
+                    //Intent intent = new Intent();
+                    pdb.close();
+                    i = i + 1;
+                }
+                i = i + 1;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+/*
         Dialog editDialog = new Dialog(this);
-        editDialog.setContentView(R.layout.activity_edit_patient_page);
+        editDialog.setContentView(R.layout.editdialoglayout);
         editDialog.setTitle("Edit Patient");
-
-
-        editDialog.show();
+        editDialog.show();*/
         //editDialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT);
 
 

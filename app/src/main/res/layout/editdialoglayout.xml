@@ -150,7 +150,6 @@
             android:layout_weight="0.5"
             android:text="Save"
             android:id="@+id/butEditPatient"
-            android:onClick="editPatientDataToDatabase"
             />
     </LinearLayout>
 
