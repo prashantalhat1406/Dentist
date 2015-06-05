@@ -51,7 +51,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         datel.setAdapter(adapterd);
 */
 
-        displayAllAppointments();
+        //displayAllAppointments();
         cal = Calendar.getInstance();
         y=cal.get(Calendar.YEAR);
         m=cal.get(Calendar.MONTH);
@@ -59,8 +59,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
         h=cal.get(Calendar.HOUR_OF_DAY);
         mi=cal.get(Calendar.MINUTE);
 
+        displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
+
         currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
         currentDate.setText(d + "/" + (m + 1) + "/" + y);
+
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +118,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        displayAllAppointments();
+        //displayAllAppointments();
+        displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
     }
 
     public void gotoNewAppointmentScreen()
@@ -149,7 +153,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 name.setText(pi.getName());
 
                 TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                dt.setText(ai.getaDate() + " - " + ai.getaTime());
+                //dt.setText(ai.getaDate() + " - " + ai.getaTime());
+                dt.setText(ai.getaTime());
 
                 TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
                 pt.setText(ai.getProposedTreatment());
@@ -191,7 +196,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 name.setText(pi.getName());
 
                 TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                dt.setText(ai.getaDate() + " - " + ai.getaTime());
+                //dt.setText(ai.getaDate() + " - " + ai.getaTime());
+                dt.setText(ai.getaTime());
 
                 TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
                 pt.setText(ai.getProposedTreatment());
