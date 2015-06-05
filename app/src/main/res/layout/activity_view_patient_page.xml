@@ -41,8 +41,8 @@
             <TableRow>
                 <TextView android:text="" android:layout_weight="0.05" android:gravity="center"/>
                 <TextView android:text="No" android:layout_weight="0.1" android:gravity="center"/>
-                <TextView android:text="Name" android:layout_weight="0.4" android:gravity="center"/>
-                <TextView android:text="Phone" android:layout_weight="0.45" android:gravity="center"/>
+                <TextView android:text="Name" android:layout_weight="0.4" android:gravity="center_vertical" />
+                <TextView android:text="Phone" android:layout_weight="0.45" android:gravity="center_vertical"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>

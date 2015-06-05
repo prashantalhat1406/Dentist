@@ -10,14 +10,15 @@
         android:layout_weight="0.4"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
         android:id="@+id/name"/>
 
     <TextView android:text="Phone"
         android:layout_weight="0.5"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:id="@+id/phone"/>
 
 </TableRow>
