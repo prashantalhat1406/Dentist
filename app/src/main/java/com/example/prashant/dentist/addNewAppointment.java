@@ -1,6 +1,9 @@
 package com.example.prashant.dentist;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,12 +12,22 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 
 public class addNewAppointment extends ActionBarActivity {
+
+    private Calendar cal;
+    int y, m, d,h,mi;
+    Button bd,bt;
+    EditText e,t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +40,59 @@ public class addNewAppointment extends ActionBarActivity {
             @Override
             public void onClick(View v) {addAppointmentToDatabase();}
         });
+
+        cal = Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH);
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        h=cal.get(Calendar.HOUR_OF_DAY);
+        mi=cal.get(Calendar.MINUTE);
+
+        e= (EditText)findViewById(R.id.txtDate);
+        t=(EditText)findViewById(R.id.txtTime);
+        bd= (Button)findViewById(R.id.showDateDialog);
+
+        bd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showDialog(0);
+            }
+        });
+
+        bt = (Button)findViewById(R.id.showTimeDialog);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showDialog(1);
+            }
+        });
+
+
     }
 
-
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id==0){
+            return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                     e.setText(dayOfMonth+"/" + monthOfYear + "/" + year);
+                    /*try {
+                        e.setText(new SimpleDateFormat("dd-mm-yyyy").format(new SimpleDateFormat("dd/mm/yyyy").parse(dayOfMonth + "/" + monthOfYear + "/" + year)).toString());
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }*/
+                }
+            },y,m,d);
+        }
+        else {
+            return new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    t.setText(hourOfDay + "::" + minute);
+                }
+            },h,mi,false);
+        }
+    }
 
     public void populatePatientNameForAutoComplete(){
         patientDatabaseHandler pdb = new patientDatabaseHandler(this);

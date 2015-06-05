@@ -43,10 +43,16 @@
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:inputType="date"
             android:id="@+id/txtDate"
             />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="D"
+            android:id="@+id/showDateDialog"
+            android:layout_weight="0.1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -65,9 +71,15 @@
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:inputType="time"
             android:id="@+id/txtTime"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="T"
+            android:id="@+id/showTimeDialog"
+            android:layout_weight="0.1"/>
     </LinearLayout>
 
     <LinearLayout
