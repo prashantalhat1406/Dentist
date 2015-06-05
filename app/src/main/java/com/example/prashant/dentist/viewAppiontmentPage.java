@@ -59,6 +59,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         mi=cal.get(Calendar.MINUTE);
 
         currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
+        currentDate.setText(d+"/"+(m+1)+"/"+y);
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 currentDate.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                displayAppointmentForDate(currentDate.getText().toString());
             }
         },y,m,d);
     }
@@ -141,5 +143,46 @@ public class viewAppiontmentPage extends ActionBarActivity {
             e.printStackTrace();
         }
 
+    }
+
+    public void displayAppointmentForDate(String currentD)
+    {
+        try {
+            TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
+            aptTable.removeAllViews();
+
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(currentD);
+
+            LayoutInflater inflater = getLayoutInflater();
+
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+
+            for (appointmentInformation ai : appointmentList) {
+                TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
+                //cb.setText(String.valueOf( ai.getAID()));
+
+                TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
+                aptID.setText(String.valueOf(ai.getAID()));
+
+                patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+                TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
+                name.setText(pi.getName());
+
+                TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
+                dt.setText(ai.getaDate() + " - " + ai.getaTime());
+
+                TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
+                pt.setText(ai.getProposedTreatment());
+
+                aptTable.addView(tr);
+            }
+
+            pdb.close();
+            adb.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
