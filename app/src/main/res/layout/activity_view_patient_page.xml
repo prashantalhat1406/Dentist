@@ -79,11 +79,20 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="SESSION"
+            android:layout_weight="0.33"
+            android:text="APPOINTMENT"
             android:textSize="10dp"
             android:id="@+id/butViewPatientAppointment"
             />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:textSize="10dp"
+            android:text="NEW"
+            android:id="@+id/butViewPatientEdit"
+            />
+        <!--
 
         <Button
             android:layout_width="0dp"
@@ -103,10 +112,12 @@
             android:textSize="10dp"
             android:id="@+id/butViewPatientDelete"
             />
+
+        -->
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.33"
             android:text="DETAILS"
             android:textSize="10dp"
             />

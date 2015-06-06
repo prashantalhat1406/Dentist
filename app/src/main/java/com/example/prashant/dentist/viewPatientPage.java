@@ -30,7 +30,7 @@ public class viewPatientPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
-
+/*
         Button bDelete = (Button)findViewById(R.id.butViewPatientDelete);
         bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class viewPatientPage extends ActionBarActivity {
                 editPatient();
             }
         });
-
+*/
         Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
         bAppointmeent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +142,14 @@ public class viewPatientPage extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menuVPEdit) {
+            editPatient();
+            return true;
+        }
+
+        if (id == R.id.menuVPDelete) {
+            deletePatient();
+            displayAllExistingPatients();
             return true;
         }
 
