@@ -84,6 +84,9 @@ public class viewPatientPage extends ActionBarActivity {
             phone.setText(pi.getPhone());
             pt.addView(row);
         }
+
+        searchname.setText("");
+
     }
 
 
