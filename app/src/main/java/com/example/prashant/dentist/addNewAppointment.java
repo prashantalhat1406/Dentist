@@ -77,7 +77,7 @@ public class addNewAppointment extends ActionBarActivity {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                      //e.setText(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
                     try {
-                        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);

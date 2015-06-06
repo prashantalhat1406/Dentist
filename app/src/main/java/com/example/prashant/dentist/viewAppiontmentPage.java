@@ -72,7 +72,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
 
         try {
-            SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
@@ -122,11 +122,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
             public void onClick(View v) {
 
                 try {
-                    SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     Date dObj = df.parse(currentDate.getText().toString());
                     Calendar myCal = Calendar.getInstance();
                     myCal.setTime(dObj);
-                    myCal.add(Calendar.DAY_OF_YEAR, -1);
+                    myCal.add(Calendar.DATE, -1);
                     currentDate.setText(df.format(myCal.getTime()));
                     displayAppointmentForDate(currentDate.getText().toString());
                 }catch (Exception e){
@@ -140,11 +140,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     Date dObj = df.parse(currentDate.getText().toString());
                     Calendar myCal = Calendar.getInstance();
                     myCal.setTime(dObj);
-                    myCal.add(Calendar.DAY_OF_YEAR, 1);
+                    myCal.add(Calendar.DATE, 1);
                     currentDate.setText(df.format(myCal.getTime()));
                     displayAppointmentForDate(currentDate.getText().toString());
                 }catch (Exception e){
@@ -164,7 +164,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                     try {
-                        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);
@@ -209,7 +209,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         //displayAllAppointments();
-        displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
+        //displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
+        try {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
+        Calendar myCal = Calendar.getInstance();
+        myCal.setTime(dObj);
+        myCal.add(Calendar.DAY_OF_YEAR, 1);
+        currentDate.setText(df.format(myCal.getTime()));
+        displayAppointmentForDate(currentDate.getText().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void gotoNewAppointmentScreen()
