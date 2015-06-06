@@ -237,7 +237,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                     adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
                     adb.close();
-                    rowIndex=rowIndex+1;
                 }
                 rowIndex=rowIndex+1;
             }

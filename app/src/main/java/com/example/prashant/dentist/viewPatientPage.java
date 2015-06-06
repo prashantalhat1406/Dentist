@@ -182,7 +182,6 @@ public class viewPatientPage extends ActionBarActivity {
                     patientDatabaseHandler db = new patientDatabaseHandler(this);
                     db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
                     db.close();
-                    i = i + 1;
                 }
                 i = i + 1;
             }
