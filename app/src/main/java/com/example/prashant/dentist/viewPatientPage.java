@@ -45,6 +45,15 @@ public class viewPatientPage extends ActionBarActivity {
             }
         });
 */
+        Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
+        bNewPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewPatientDialog();
+
+            }
+        });
+
         Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
         bAppointmeent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,6 +209,70 @@ public class viewPatientPage extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+
+    public void addNewPatientDialog()
+    {
+        final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+        final patientInformation pi = new patientInformation();
+        final int recordNumber = pdb.getLastRecordID() + 1;
+
+        final Dialog addNP = new Dialog(this);
+        addNP.setContentView(R.layout.addnewpatientdialog);
+        addNP.setTitle("ADD PATIENT");
+
+        final EditText name = (EditText)addNP.findViewById(R.id.txtANPDPatientName);
+        final EditText phone = (EditText)addNP.findViewById(R.id.txtANPDPatientPhone);
+        final EditText address = (EditText)addNP.findViewById(R.id.txtANPDPatientAddress);
+        final EditText age = (EditText)addNP.findViewById(R.id.txtANPDPatientAge);
+        final RadioButton sexM = (RadioButton)addNP.findViewById(R.id.rdbANPDmale);
+        final RadioButton sexF = (RadioButton)addNP.findViewById(R.id.rdbANPDfemale);
+
+
+
+        Button addButton = (Button)addNP.findViewById(R.id.butANPDialogNew);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (name.getText().length() != 0) {
+                    if (phone.getText().length() == 10) {
+                        if (address.getText().length() != 0) {
+                            if (Integer.parseInt(age.getText().toString()) > 0) {
+                                pi.setID(recordNumber);
+                                pi.setName(name.getText().toString());
+                                pi.setPhone(phone.getText().toString());
+                                pi.setAddress(address.getText().toString());
+                                pi.setAge(age.getText().toString());
+                                if (sexM.isChecked())
+                                    pi.setSex(sexM.getText().toString());
+                                else
+                                    pi.setSex(sexF.getText().toString());
+
+                                pdb.addPatientInfo(pi);
+                                addNP.dismiss();
+                                Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                displayAllExistingPatients();
+
+                            } else
+                                Toast.makeText(getApplicationContext(), "Please enter correct Age", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(getApplicationContext(), "Please enter Address", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Please enter 10 digit phone", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Please enter Name", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+            }
+        });
+
+        addNP.show();
+        pdb.close();
+    }
+
 
     public void editPatient()
     {

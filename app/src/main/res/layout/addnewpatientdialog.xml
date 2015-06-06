@@ -1,5 +1,5 @@
 <LinearLayout
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="0.8"
-            android:id="@+id/txtEditPatientName"
+            android:id="@+id/txtANPDPatientName"
             android:inputType="text" />
 
     </LinearLayout>
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="0.8"
-            android:id="@+id/txtEditPatientPhone"
+            android:id="@+id/txtANPDPatientPhone"
             android:inputType="phone" />
 
     </LinearLayout>
@@ -54,8 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -69,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="0.8"
-            android:id="@+id/txtEditPatientAddress"
+            android:id="@+id/txtANPDPatientAddress"
             android:inputType="text" />
 
     </LinearLayout>
@@ -78,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -100,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:text="M"
                 android:layout_weight="0.1"
-                android:id="@+id/rdbEditMale"
+                android:id="@+id/rdbANPDmale"
                 android:gravity="center_vertical"
                 />
             <RadioButton
@@ -108,7 +107,7 @@
                 android:layout_height="match_parent"
                 android:text="F"
                 android:layout_weight="0.1"
-                android:id="@+id/rdbEditFemale"
+                android:id="@+id/rdbANPDfemale"
                 android:gravity="center_vertical"
                 />
         </RadioGroup>
@@ -124,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -137,9 +136,18 @@
         <EditText
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
-            android:id="@+id/txtEditPatientAge"
+            android:layout_weight="0.2"
+            android:id="@+id/txtANPDPatientAge"
             android:inputType="number" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:text=""
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
+
 
     </LinearLayout>
 
@@ -154,10 +162,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Save"
-            android:id="@+id/butEditPatient"
+            android:id="@+id/butANPDialogNew"
+
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Appointment"
+            android:id="@+id/butANPDialogAppointment"
+
             />
     </LinearLayout>
-
-
 
 </LinearLayout>

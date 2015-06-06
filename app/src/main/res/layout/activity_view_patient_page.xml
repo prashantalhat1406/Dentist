@@ -90,7 +90,7 @@
             android:layout_weight="0.33"
             android:textSize="10dp"
             android:text="NEW"
-            android:id="@+id/butViewPatientEdit"
+            android:id="@+id/butVPNEW"
             />
         <!--
 
