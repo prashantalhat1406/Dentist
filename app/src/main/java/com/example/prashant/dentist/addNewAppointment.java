@@ -4,6 +4,7 @@ package com.example.prashant.dentist;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,7 +35,23 @@ public class addNewAppointment extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_appointment);
-        populatePatientNameForAutoComplete();
+        try{
+            Intent i = getIntent();
+            if (i.getExtras().getString("pid").length() == 0 ){
+                populatePatientNameForAutoComplete();
+            }
+            else{
+                AutoCompleteTextView actv = (AutoCompleteTextView)findViewById(R.id.autotxtPatient);
+
+                patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+                patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(i.getExtras().getString("pid")));
+                actv.setText(pi.getName()+"-"+pi.getID());
+                actv.setEnabled(false);
+            }
+
+
+        }catch (Exception e){e.printStackTrace();}
+
 
         Button addButton = (Button)findViewById(R.id.butAddAppointment);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -132,12 +149,34 @@ public class addNewAppointment extends ActionBarActivity {
         int lastApptID=1;
 
         try {
-            adb = new appointmentDatabaseHandler(this);
-            lastApptID = adb.getLastAppointmentID()+1;
-            appointmentInformation ai = new appointmentInformation(lastApptID,Integer.parseInt(pid),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
-            adb.addAppointmentInfo(ai);
-            adb.close();
-            Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+            if(name.getText().length() == 0 ){
+                Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_SHORT).show();
+            }else{
+                if(dat.getText().length() == 0){
+                    Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(tim.getText().length() ==0 ){
+                        Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if (pt.getText().length() == 0 ){
+                            Toast.makeText(getApplicationContext(), "Enter Proposed Treatment", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(td.getText().length() == 0 ){
+                                Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
+                            }else{
+                                adb = new appointmentDatabaseHandler(this);
+                                lastApptID = adb.getLastAppointmentID()+1;
+                                appointmentInformation ai = new appointmentInformation(lastApptID,Integer.parseInt(pid),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
+                                adb.addAppointmentInfo(ai);
+                                adb.close();
+                                Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                }
+
+            }
         }
         catch(Exception e){
             e.printStackTrace();

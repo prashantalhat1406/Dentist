@@ -148,11 +148,27 @@ public class editAppointment extends ActionBarActivity {
         EditText pt = (EditText)findViewById(R.id.txtEApt);
         EditText td = (EditText)findViewById(R.id.txtEAtd);
 
-        ai = new appointmentInformation(ai.getAID(),ai.getPID(),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
-        adb.updateAppointmentInfo(ai);
-        Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
 
+        if(dat.getText().length() == 0){
+            Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
+        }else{
+            if(tim.getText().length() ==0 ){
+                Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
+            }else{
+                if (pt.getText().length() == 0 ){
+                    Toast.makeText(getApplicationContext(), "Enter Proposed Treatment", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(td.getText().length() == 0 ){
+                        Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
+                    }else{
+                        ai = new appointmentInformation(ai.getAID(),ai.getPID(),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
+                        adb.updateAppointmentInfo(ai);
+                        Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+        }
         this.finish();
     }
 }

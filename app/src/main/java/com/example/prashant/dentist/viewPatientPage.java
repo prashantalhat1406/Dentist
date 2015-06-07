@@ -103,6 +103,8 @@ public class viewPatientPage extends ActionBarActivity {
     public void gotoNewAppointmentScreen ()
     {
         Intent i = new Intent(this,addNewAppointment.class);
+        //String pid = String.valueOf(getSelectedPatientID());
+        i.putExtra("pid",String.valueOf(getSelectedPatientID()));
         startActivity(i);
         //Toast.makeText(getApplicationContext(), "work in progress", Toast.LENGTH_SHORT).show();
     }
