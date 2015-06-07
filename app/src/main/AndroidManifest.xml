@@ -40,6 +40,10 @@
             android:name=".editPatientPage"
             android:label="@string/title_activity_edit_patient_page" >
         </activity>
+        <activity
+            android:name=".editAppointment"
+            android:label="@string/title_activity_edit_appointment" >
+        </activity>
     </application>
 
 </manifest>

@@ -86,6 +86,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
 
 
+
+
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +158,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
     }
 
+
+
     @Override
     protected Dialog onCreateDialog(int id) {
+
 
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -178,6 +183,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     //displayAppointmentForDate(currentDate.getText().toString());
                 }
             }, y, m, d);
+
 
 
 
@@ -231,6 +237,35 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
     public void displayEditAppointmentScreen(){
 
+        int rowIndex=0;
+        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
+
+
+        try {
+            while (rowIndex < aptTable.getChildCount()) {
+                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView aid = (TextView) tr.getChildAt(1);
+
+                if (cb.isChecked()) {
+                    appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+                    //adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
+
+                    //displayAppointmentForDate(currentDate.getText().toString());
+                    Intent i = new Intent(this,editAppointment.class);
+                    //String aidString = aid.getText().toString();
+                    i.putExtra("aid",aid.getText().toString());
+                    startActivity(i);
+                    adb.close();
+                    displayAppointmentForDate(currentDate.getText().toString());
+                }
+                rowIndex=rowIndex+1;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     public void deleteAppointment(){
@@ -248,6 +283,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                     adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
                     adb.close();
+                    displayAppointmentForDate(currentDate.getText().toString());
                 }
                 rowIndex=rowIndex+1;
             }
