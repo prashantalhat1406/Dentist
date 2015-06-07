@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.prashant.dentist.viewPatientPage">
-    <item android:id="@+id/menuVPEdit" android:title="EDIT" android:showAsAction="never"/>
+    <item android:id="@+id/menuVPEdit"  android:title="EDIT" android:showAsAction="never"/>
     <item android:id="@+id/menuVPDelete" android:title="DELETE" android:showAsAction="never"/>
 </menu>

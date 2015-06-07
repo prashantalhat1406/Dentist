@@ -5,6 +5,7 @@
     >
 
     <CheckBox  android:text=""  android:id="@+id/rownumber" />
+    <TextView android:id="@+id/txtPatientRecordID"  android:visibility="invisible" android:layout_weight="0.1" />
 
     <TextView android:text="Name"
         android:layout_weight="0.4"

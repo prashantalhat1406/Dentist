@@ -125,8 +125,10 @@ public class viewPatientPage extends ActionBarActivity {
         LayoutInflater inflat = getLayoutInflater();
 
         for(patientInformation pi : patientList){
-            TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient ,pt,false);
-            CheckBox recnum = (CheckBox)row.findViewById(R.id.rownumber);
+            TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+            //CheckBox recnum = (CheckBox)row.findViewById(R.id.rownumber);
+            //recnum.setText(Integer.toString( pi.getID()));
+            TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
             recnum.setText(Integer.toString( pi.getID()));
             TextView name = (TextView)row.findViewById(R.id.name) ;
             name.setText(pi.getName());
@@ -176,8 +178,9 @@ public class viewPatientPage extends ActionBarActivity {
             while (i < pt.getChildCount()) {
                 TableRow tr = (TableRow) pt.getChildAt(i);
                 CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView tv = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
-                    patientIDs = Integer.parseInt(cb.getText().toString());
+                    patientIDs = Integer.parseInt(tv.getText().toString());
                     i = i + 1;
                     break;
                 }
@@ -199,9 +202,10 @@ public class viewPatientPage extends ActionBarActivity {
             while (i < pt.getChildCount()) {
                 TableRow tr = (TableRow) pt.getChildAt(i);
                 CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView tv = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
                     patientDatabaseHandler db = new patientDatabaseHandler(this);
-                    db.deletePatientInfo(Integer.parseInt(cb.getText().toString()));
+                    db.deletePatientInfo(Integer.parseInt(tv.getText().toString()));
                     db.close();
                 }
                 i = i + 1;
@@ -284,10 +288,11 @@ public class viewPatientPage extends ActionBarActivity {
             while (i < pt.getChildCount()) {
                 TableRow tr = (TableRow) pt.getChildAt(i);
                 CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView tv = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
                     final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
 
-                    final patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(cb.getText().toString()));
+                    final patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(tv.getText().toString()));
 
                     final Dialog editDialog = new Dialog(this);
                     editDialog.setContentView(R.layout.editdialoglayout);
