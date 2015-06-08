@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    android:id="@+id/tablerowAppointmentStaticHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.05" />
+    <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.25" android:text="Time" android:gravity="center"/>
+    <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.30" android:text="Patient Name" android:gravity="center"/>
+    <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.4" android:text="Proposed Treatment" android:gravity="center"/>
+</TableRow>

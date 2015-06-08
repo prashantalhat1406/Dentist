@@ -77,6 +77,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="wrap_content"
+                android:text="Day"
+                android:id="@+id/rdbVADay"/>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="wrap_content"
+                android:text="Week"
+                android:id="@+id/rdbVAWeek"/>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="wrap_content"
+                android:text="Month"
+                android:id="@+id/rdbVAMonth"
+                />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
@@ -96,22 +128,26 @@
             android:id="@+id/butVANext"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="0.05">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/aptTableheader"
-            >
-            <TableRow>
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.05" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.25" android:text="Time" android:gravity="center"/>
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.30" android:text="Patient Name" android:gravity="center"/>
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.4" android:text="Proposed Treatment" android:gravity="center"/>
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+    <!--
+<LinearLayout
+   android:layout_width="match_parent"
+   android:layout_height="0dp" android:layout_weight="0.05">
+   <TableLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/aptTableheader"
+       >
+
+       <TableRow>
+           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.05" />
+           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.25" android:text="Time" android:gravity="center"/>
+           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.30" android:text="Patient Name" android:gravity="center"/>
+           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.4" android:text="Proposed Treatment" android:gravity="center"/>
+       </TableRow>
+
+   </TableLayout>
+</LinearLayout>
+-->
 
     <LinearLayout
         android:layout_width="match_parent"
