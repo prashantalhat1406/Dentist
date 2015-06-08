@@ -96,9 +96,15 @@ public class addNewAppointment extends ActionBarActivity {
                     try {
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
-                        Calendar myCal = Calendar.getInstance();
-                        myCal.setTime(dObj);
-                        e.setText(df.format(myCal.getTime()));
+                        Date cDate = new Date();
+                        if (dObj.compareTo(cDate)>=0) {
+                            Calendar myCal = Calendar.getInstance();
+                            myCal.setTime(dObj);
+                            e.setText(df.format(myCal.getTime()));
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
+                            e.setText("");
+                        }
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -109,7 +115,21 @@ public class addNewAppointment extends ActionBarActivity {
             return new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    t.setText(hourOfDay + "::" + minute);
+                    try{
+                        Calendar timeCheck = Calendar.getInstance();
+                        timeCheck.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        timeCheck.set(Calendar.MINUTE, minute);
+                        if(Calendar.getInstance().after(timeCheck)) {
+                            Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                            t.setText("");
+                        }else{
+                            t.setText(hourOfDay + "::" + minute);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
                 }
             },h,mi,false);
         }
