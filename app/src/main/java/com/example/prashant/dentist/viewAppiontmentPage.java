@@ -94,6 +94,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
             public void onClick(View v) {showDialog(0);
             }
         });
+/* All Buttons on View Appointment screen are removed.
+EDIT & DELETE action available in Menu.
+Add New Appointment is available in View Patient screen
 
         Button newApt = (Button)findViewById(R.id.butVANewAppointment);
         newApt.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +120,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 deleteAppointment();
             }
         });
+        */
 
         Button previousApt = (Button)findViewById(R.id.butVAPrevious);
         previousApt.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +208,12 @@ public class viewAppiontmentPage extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menuVAEdit) {
+            displayEditAppointmentScreen();
+            return true;
+        }
+        if (id == R.id.menuVADelete) {
+            deleteAppointment();
             return true;
         }
 
