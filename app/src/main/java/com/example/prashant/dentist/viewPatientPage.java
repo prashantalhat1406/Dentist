@@ -239,6 +239,8 @@ public class viewPatientPage extends ActionBarActivity {
         final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
         final patientInformation pi = new patientInformation();
         final int recordNumber = pdb.getLastRecordID() + 1;
+        boolean sexSelected=false;
+
 
         final Dialog addNP = new Dialog(this);
         addNP.setContentView(R.layout.addnewpatientdialog);
@@ -253,6 +255,10 @@ public class viewPatientPage extends ActionBarActivity {
 
 
 
+
+
+
+
         Button addButton = (Button)addNP.findViewById(R.id.butANPDialogNew);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,21 +268,24 @@ public class viewPatientPage extends ActionBarActivity {
                     if (phone.getText().length() == 10) {
                         if (address.getText().length() != 0) {
                             if (Integer.parseInt(age.getText().toString()) > 0) {
-                                pi.setID(recordNumber);
-                                pi.setName(name.getText().toString());
-                                pi.setPhone(phone.getText().toString());
-                                pi.setAddress(address.getText().toString());
-                                pi.setAge(age.getText().toString());
-                                if (sexM.isChecked())
-                                    pi.setSex(sexM.getText().toString());
-                                else
-                                    pi.setSex(sexF.getText().toString());
+                                if(sexM.isChecked() || sexF.isChecked()) {
 
-                                pdb.addPatientInfo(pi);
-                                addNP.dismiss();
-                                Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
-                                displayAllExistingPatients();
+                                    pi.setID(recordNumber);
+                                    pi.setName(name.getText().toString());
+                                    pi.setPhone(phone.getText().toString());
+                                    pi.setAddress(address.getText().toString());
+                                    pi.setAge(age.getText().toString());
+                                    if (sexM.isChecked())
+                                        pi.setSex(sexM.getText().toString());
+                                    else
+                                        pi.setSex(sexF.getText().toString());
 
+                                    pdb.addPatientInfo(pi);
+                                    addNP.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                    displayAllExistingPatients();
+                                }else
+                                    Toast.makeText(getApplicationContext(), "Please select Sex", Toast.LENGTH_SHORT).show();
                             } else
                                 Toast.makeText(getApplicationContext(), "Please enter correct Age", Toast.LENGTH_SHORT).show();
                         } else
@@ -327,10 +336,10 @@ public class viewPatientPage extends ActionBarActivity {
 
                     final RadioButton sexM = (RadioButton)editDialog.findViewById(R.id.rdbEditMale);
                     final RadioButton sexF = (RadioButton)editDialog.findViewById(R.id.rdbEditFemale);
-                    if (pi.getSex() == "M")
-                        sexM.setSelected(true);
+                    if (pi.getSex().equals("M"))
+                        sexM.setChecked(true);
                     else
-                        sexF.setSelected(true);
+                        sexF.setChecked(true);
 
 
                     final EditText age = (EditText)editDialog.findViewById(R.id.txtEditPatientAge);
