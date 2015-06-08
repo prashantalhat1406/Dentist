@@ -32,7 +32,6 @@
             android:text="View Patients"
             android:id="@+id/butExistingPatient"
             android:onClick="displayExistingPatientActivity"
-
             />
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
