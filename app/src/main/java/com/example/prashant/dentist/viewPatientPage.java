@@ -180,6 +180,7 @@ public class viewPatientPage extends ActionBarActivity {
 
         if (id == R.id.menuVPDelete) {
             deletePatient();
+
             displayAllExistingPatients();
             return true;
         }
@@ -225,6 +226,11 @@ public class viewPatientPage extends ActionBarActivity {
                     patientDatabaseHandler db = new patientDatabaseHandler(this);
                     db.deletePatientInfo(Integer.parseInt(tv.getText().toString()));
                     db.close();
+                    noOfPatientSelected=noOfPatientSelected-1;
+                    if(noOfPatientSelected==0){
+                        Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
+                        apptButton.setEnabled(false);
+                    }
                 }
                 i = i + 1;
             }
@@ -284,6 +290,7 @@ public class viewPatientPage extends ActionBarActivity {
                                     addNP.dismiss();
                                     Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
                                     displayAllExistingPatients();
+
                                 }else
                                     Toast.makeText(getApplicationContext(), "Please select Sex", Toast.LENGTH_SHORT).show();
                             } else
@@ -361,6 +368,11 @@ public class viewPatientPage extends ActionBarActivity {
                             pdb.updatePatientInfo(pi);
                             editDialog.dismiss();
                             displayAllExistingPatients();
+                            noOfPatientSelected=noOfPatientSelected-1;
+                            if(noOfPatientSelected==0){
+                                Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
+                                apptButton.setEnabled(false);
+                            }
                         }
                     });
 
