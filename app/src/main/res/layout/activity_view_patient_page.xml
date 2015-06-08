@@ -85,6 +85,7 @@
             android:text="APPOINTMENT"
             android:textSize="10dp"
             android:id="@+id/butViewPatientAppointment"
+            android:enabled="false"
             />
         <Button
             android:layout_width="0dp"
