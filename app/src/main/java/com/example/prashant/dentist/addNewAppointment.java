@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class addNewAppointment extends ActionBarActivity {
     int y, m, d,h,mi;
     Button bd,bt;
     EditText e,t;
+    Spinner sP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,20 @@ public class addNewAppointment extends ActionBarActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {showDialog(1);
+            }
+        });
+
+        sP=(Spinner)findViewById(R.id.spnANAproposedTreamnet);
+        ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        sP.setAdapter(adapterpt);
+        sP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -158,13 +175,18 @@ public class addNewAppointment extends ActionBarActivity {
         EditText name = (EditText)findViewById(R.id.autotxtPatient);
         EditText dat = (EditText)findViewById(R.id.txtDate);
         EditText tim = (EditText)findViewById(R.id.txtTime);
-        EditText pt = (EditText)findViewById(R.id.txtpt);
+        //EditText pt = (EditText)findViewById(R.id.txtpt);
+        Spinner pt = (Spinner)findViewById(R.id.spnANAproposedTreamnet);
         EditText td = (EditText)findViewById(R.id.txttd);
 
         String pid = name.getText().toString().split("-")[1];
 
         //patientDatabaseHandler pdb = new patientDatabaseHandler(this);
         //patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(i));
+
+
+
+
         appointmentDatabaseHandler adb;
         int lastApptID=1;
 
@@ -178,20 +200,20 @@ public class addNewAppointment extends ActionBarActivity {
                     if(tim.getText().length() ==0 ){
                         Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
                     }else{
-                        if (pt.getText().length() == 0 ){
+                        /*if (pt.getSelectedItem().length() == 0 ){
                             Toast.makeText(getApplicationContext(), "Enter Proposed Treatment", Toast.LENGTH_SHORT).show();
-                        }else{
+                        }else{*/
                             if(td.getText().length() == 0 ){
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
                             }else{
                                 adb = new appointmentDatabaseHandler(this);
                                 lastApptID = adb.getLastAppointmentID()+1;
-                                appointmentInformation ai = new appointmentInformation(lastApptID,Integer.parseInt(pid),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
+                                appointmentInformation ai = new appointmentInformation(lastApptID,Integer.parseInt(pid),dat.getText().toString(),tim.getText().toString(),pt.getSelectedItem().toString(),td.getText().toString());
                                 adb.addAppointmentInfo(ai);
                                 adb.close();
                                 Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
                             }
-                        }
+                        /*}*/
                     }
 
                 }
@@ -204,7 +226,7 @@ public class addNewAppointment extends ActionBarActivity {
         name.setText("");
         dat.setText("");
         tim.setText("");
-        pt.setText("");
+        //pt.setText("");
         td.setText("");
         this.finish();
     }

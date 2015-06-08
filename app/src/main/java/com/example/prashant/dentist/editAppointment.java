@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class editAppointment extends ActionBarActivity {
     EditText  dat, tim;
     private Calendar cal;
     int y, m, d,h,mi;
+    Spinner sP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +59,32 @@ public class editAppointment extends ActionBarActivity {
         TextView name = (TextView)findViewById(R.id.txtEAPatientName);
         dat = (EditText)findViewById(R.id.txtEADate);
         tim = (EditText)findViewById(R.id.txtEATime);
-        EditText pt = (EditText)findViewById(R.id.txtEApt);
+        //EditText pt = (EditText)findViewById(R.id.txtEApt);
         EditText td = (EditText)findViewById(R.id.txtEAtd);
+
+        sP=(Spinner)findViewById(R.id.spnEAProposedTreatment);
+        ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        sP.setAdapter(adapterpt);
+
+
+        sP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         name.setText(pi.getName());
         dat.setText(ai.getaDate());
         tim.setText(ai.getaTime());
-        pt.setText(ai.getProposedTreatment());
+        //pt.setText(ai.getProposedTreatment());
+        int spinerValue = adapterpt.getPosition(ai.getProposedTreatment());
+        sP.setSelection(spinerValue);
+        spinerValue=0;
         td.setText(ai.getToothDetails());
 
         Button saveButton = (Button) findViewById(R.id.butEAEditAppointment);
@@ -166,7 +188,8 @@ public class editAppointment extends ActionBarActivity {
 
         dat = (EditText)findViewById(R.id.txtEADate);
         tim = (EditText)findViewById(R.id.txtEATime);
-        EditText pt = (EditText)findViewById(R.id.txtEApt);
+        //EditText pt = (EditText)findViewById(R.id.txtEApt);
+        Spinner pt = (Spinner)findViewById(R.id.spnEAProposedTreatment);
         EditText td = (EditText)findViewById(R.id.txtEAtd);
 
 
@@ -176,18 +199,18 @@ public class editAppointment extends ActionBarActivity {
             if(tim.getText().length() ==0 ){
                 Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
             }else{
-                if (pt.getText().length() == 0 ){
+                /*if (pt.getText().length() == 0 ){
                     Toast.makeText(getApplicationContext(), "Enter Proposed Treatment", Toast.LENGTH_SHORT).show();
-                }else{
+                }else{*/
                     if(td.getText().length() == 0 ){
                         Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
                     }else{
-                        ai = new appointmentInformation(ai.getAID(),ai.getPID(),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
+                        ai = new appointmentInformation(ai.getAID(),ai.getPID(),dat.getText().toString(),tim.getText().toString(),pt.getSelectedItem().toString(),td.getText().toString());
                         adb.updateAppointmentInfo(ai);
                         Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
                         this.finish();
                     }
-                }
+                /*}*/
             }
 
         }

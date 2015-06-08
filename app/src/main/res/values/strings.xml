@@ -61,6 +61,14 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+    <array name="ProposedTreatment">
+        <item>Cap Fillting</item>
+        <item>Cap Measurement</item>
+        <item>Check Up</item>
+        <item>Cleaning</item>
+        <item>Filling</item>
+        <item>Tooth Removal</item>
+    </array>
     <string name="title_activity_edit_patient_page">Edit Patient</string>
     <string name="title_activity_edit_appointment">Edit Appointment</string>
 </resources>

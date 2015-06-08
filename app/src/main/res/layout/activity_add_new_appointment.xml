@@ -95,6 +95,15 @@
             android:text="Proposed Treatment"
             android:gravity="center"
             />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnANAproposedTreamnet"
+            >
+
+        </Spinner>
+        <!--
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,6 +112,7 @@
             android:lines="2"
             android:id="@+id/txtpt"
             />
+            -->
     </LinearLayout>
 
     <LinearLayout
