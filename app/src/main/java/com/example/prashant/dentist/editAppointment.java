@@ -164,11 +164,11 @@ public class editAppointment extends ActionBarActivity {
                         ai = new appointmentInformation(ai.getAID(),ai.getPID(),dat.getText().toString(),tim.getText().toString(),pt.getText().toString(),td.getText().toString());
                         adb.updateAppointmentInfo(ai);
                         Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
+                        this.finish();
                     }
                 }
             }
 
         }
-        this.finish();
     }
 }
