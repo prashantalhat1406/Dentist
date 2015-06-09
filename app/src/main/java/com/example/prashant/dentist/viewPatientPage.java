@@ -86,8 +86,28 @@ public class viewPatientPage extends ActionBarActivity {
 
         for (patientInformation pi : patientList) {
             TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
-            CheckBox recnum = (CheckBox) row.findViewById(R.id.rownumber);
-            recnum.setText(Integer.toString(pi.getID()));
+
+            final CheckBox cb = (CheckBox)row.findViewById(R.id.rownumber);
+            cb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(cb.isChecked()){
+                        noOfPatientSelected=noOfPatientSelected+1;
+                        Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
+                        apptButton.setEnabled(true);
+
+                    }else{
+                        noOfPatientSelected=noOfPatientSelected-1;
+                        if(noOfPatientSelected==0){
+                            Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
+                            apptButton.setEnabled(false);
+                        }
+                    }
+                }
+            });
+            //recnum.setText(Integer.toString( pi.getID()));
+            TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
+            recnum.setText(Integer.toString( pi.getID()));
             TextView name = (TextView) row.findViewById(R.id.name);
             name.setText(pi.getName());
             TextView phone = (TextView) row.findViewById(R.id.phone);
