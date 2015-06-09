@@ -37,36 +37,33 @@ public class viewAppiontmentPage extends ActionBarActivity {
     Button bd,bt;
     TextView currentDate;
     RadioButton dayA,weekA,monthA;
-    //String editedDate, editedTime;
-    //EditText editedDate, editedTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appiontment_page);
-/*
-        Spinner year = (Spinner)findViewById(R.id.spYear);
-        ArrayAdapter<CharSequence> adaptery = ArrayAdapter.createFromResource(this,R.array.Years, android.R.layout.simple_spinner_item);
-        year.setAdapter(adaptery);
-
-
-        Spinner month = (Spinner)findViewById(R.id.spMonth);
-        ArrayAdapter<CharSequence> adapterm = ArrayAdapter.createFromResource(this,R.array.Months, android.R.layout.simple_spinner_item);
-        month.setAdapter(adapterm);
-
-        Spinner datel = (Spinner)findViewById(R.id.spDate);
-        ArrayAdapter<CharSequence> adapterd = ArrayAdapter.createFromResource(this,R.array.Dates, android.R.layout.simple_spinner_item);
-        datel.setAdapter(adapterd);
-*/
 
         dayA = (RadioButton)findViewById(R.id.rdbVADay);
         dayA.setChecked(true);
+        dayA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayAppointmentForDate(currentDate.getText().toString());
+            }
+        });
+
         weekA = (RadioButton)findViewById(R.id.rdbVAWeek);
         weekA.setChecked(false);
+        weekA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayAppointmentForWeek(currentDate.getText().toString());
+            }
+        });
         monthA = (RadioButton)findViewById(R.id.rdbVAMonth);
         monthA.setChecked(false);
 
-        //displayAllAppointments();
         cal = Calendar.getInstance();
         y=cal.get(Calendar.YEAR);
         m=cal.get(Calendar.MONTH);
@@ -77,10 +74,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
 
         currentDate = (TextView)findViewById(R.id.txtViewAppointmentCurrentDate);
-        //currentDate.setText(d + "/" + (m + 1) + "/" + y);
-
-
-
         try {
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
@@ -99,33 +92,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             }
         });
 
-/* All Buttons on View Appointment screen are removed.
-EDIT & DELETE action available in Menu.
-Add New Appointment is available in View Patient screen
 
-        Button newApt = (Button)findViewById(R.id.butVANewAppointment);
-        newApt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {gotoNewAppointmentScreen();
-            }
-        });
 
-        Button editApt = (Button)findViewById(R.id.butVAEditAppointment);
-        editApt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayEditAppointmentScreen();
-            }
-        });
-
-        Button deleteApt = (Button)findViewById(R.id.butVADeleteAppointment);
-        deleteApt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAppointment();
-            }
-        });
-        */
 
         Button previousApt = (Button)findViewById(R.id.butVAPrevious);
         previousApt.setOnClickListener(new View.OnClickListener() {
@@ -147,14 +115,12 @@ Add New Appointment is available in View Patient screen
                         myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                         myCal.add(Calendar.DATE, -7);
                         currentDate.setText(df.format(myCal.getTime()));
-                        //displayAppointmentForDate(currentDate.getText().toString());
                         displayAppointmentForWeek(currentDate.getText().toString());
                     }
 
                     if(monthA.isChecked()){
                         myCal.add(Calendar.MONTH,-1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        //displayAppointmentForDate(currentDate.getText().toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -180,30 +146,24 @@ Add New Appointment is available in View Patient screen
                         myCal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
                         myCal.add(Calendar.DATE, 7);
                         currentDate.setText(df.format(myCal.getTime()));
-                        //displayAppointmentForDate(currentDate.getText().toString());
                         displayAppointmentForWeek(currentDate.getText().toString());
                     }
 
                     if(monthA.isChecked()){
                         myCal.add(Calendar.MONTH, 1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        //displayAppointmentForDate(currentDate.getText().toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
-
-
     }
 
 
 
     @Override
     protected Dialog onCreateDialog(int id) {
-
-
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -213,33 +173,22 @@ Add New Appointment is available in View Patient screen
                         Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);
-                        //myCal.add(Calendar.DAY_OF_YEAR, 1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        //displayAppointmentForDate(currentDate.getText().toString());
+
                         if(dayA.isChecked()) {
-                            myCal.add(Calendar.DATE, 1);
                             currentDate.setText(df.format(myCal.getTime()));
                             displayAppointmentForDate(currentDate.getText().toString());
                         }
                         if(weekA.isChecked()){
-                            myCal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
-                            myCal.add(Calendar.DATE, 7);
+                            myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                             currentDate.setText(df.format(myCal.getTime()));
-                            //displayAppointmentForDate(currentDate.getText().toString());
                             displayAppointmentForWeek(currentDate.getText().toString());
                         }
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    //currentDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                    //displayAppointmentForDate(currentDate.getText().toString());
                 }
             }, y, m, d);
-
-
-
-
     }
 
     @Override
@@ -272,83 +221,79 @@ Add New Appointment is available in View Patient screen
     @Override
     protected void onResume() {
         super.onResume();
-        //displayAllAppointments();
-        //displayAppointmentForDate(d + "/" + (m + 1) + "/" + y);
         try {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
         Calendar myCal = Calendar.getInstance();
         myCal.setTime(dObj);
-        myCal.add(Calendar.DAY_OF_YEAR, 1);
+
         currentDate.setText(df.format(myCal.getTime()));
-        displayAppointmentForDate(currentDate.getText().toString());
+        if(dayA.isChecked()) {
+            displayAppointmentForDate(currentDate.getText().toString());
+        }
+        if(weekA.isChecked()){
+            displayAppointmentForWeek(currentDate.getText().toString());
+        }
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void gotoNewAppointmentScreen()
-    {
-        Intent i = new Intent(this,addNewAppointment.class);
-        startActivity(i);
-    }
-
     public void displayEditAppointmentScreen(){
-
-        int rowIndex=0;
+        int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
 
 
         try {
             while (rowIndex < aptTable.getChildCount()) {
                 TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                TextView aid = (TextView) tr.getChildAt(1);
-
-                if (cb.isChecked()) {
-                    appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-                    //adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
-
-                    //displayAppointmentForDate(currentDate.getText().toString());
-                    Intent i = new Intent(this,editAppointment.class);
-                    //String aidString = aid.getText().toString();
-                    i.putExtra("aid",aid.getText().toString());
-                    startActivity(i);
-                    adb.close();
-                    displayAppointmentForDate(currentDate.getText().toString());
+                    CheckBox cb = (CheckBox) tr.getChildAt(0);
+                    TextView aid = (TextView) tr.getChildAt(1);
+                    if (cb.isChecked()) {
+                        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+                        Intent i = new Intent(this, editAppointment.class);
+                        i.putExtra("aid", aid.getText().toString());
+                        startActivity(i);
+                        adb.close();
+                        if(dayA.isChecked()) {
+                            displayAppointmentForDate(currentDate.getText().toString());
+                        }
+                        if(weekA.isChecked()){
+                            displayAppointmentForWeek(currentDate.getText().toString());
+                        }
+                    }
+                rowIndex = rowIndex + 1;
                 }
-                rowIndex=rowIndex+1;
-            }
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
 
     public void deleteAppointment(){
-        int rowIndex=0;
+        int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
-
-
         try {
             while (rowIndex < aptTable.getChildCount()) {
                 TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
                 CheckBox cb = (CheckBox) tr.getChildAt(0);
                 TextView aid = (TextView) tr.getChildAt(1);
-
                 if (cb.isChecked()) {
                     appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                     adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
                     adb.close();
-                    displayAppointmentForDate(currentDate.getText().toString());
+                    if(dayA.isChecked()) {
+                        displayAppointmentForDate(currentDate.getText().toString());
+                    }
+                    if(weekA.isChecked()){
+                        displayAppointmentForWeek(currentDate.getText().toString());
+                    }
                 }
                 rowIndex=rowIndex+1;
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
     public void displayAppointmentForWeek(String currentD){
@@ -428,12 +373,8 @@ Add New Appointment is available in View Patient screen
             aptTable.addView(trHeader);
 
             for (appointmentInformation ai : appointmentList) {
-
-
-
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
                 CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
-                //cb.setText(String.valueOf( ai.getAID()));
 
                 TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
                 aptID.setText(String.valueOf(ai.getAID()));
@@ -443,7 +384,6 @@ Add New Appointment is available in View Patient screen
                 name.setText(pi.getName());
 
                 TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                //dt.setText(ai.getaDate() + " - " + ai.getaTime());
                 dt.setText(ai.getaTime());
 
                 TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
