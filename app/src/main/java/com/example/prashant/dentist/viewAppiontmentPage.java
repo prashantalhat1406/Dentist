@@ -351,31 +351,21 @@ Add New Appointment is available in View Patient screen
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
 
-            /*
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        Calendar myCal = Calendar.getInstance();
-                        myCal.setTime(dObj);
-                        myCal.add(Calendar.DAY_OF_YEAR, 1);
-                        currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForDate(currentDate.getText().toString());
-            */
-
+            //add static row
+            TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
+            aptTable.addView(trHeader);
 
             for(int index=0;index<7;index++){
                 //add day of the week row
-                TableRow trDate = (TableRow) inflater.inflate(R.layout.tablerowappointmentdayheader,aptTable,false);
+                TableRow trDate = (TableRow) inflater.inflate(R.layout.tablerowappointmentdayheader, aptTable, false);
                 TextView tvDayOfWeek = (TextView) trDate.findViewById(R.id.txtVARowDayHeaderDate);
                 TextView tvAptCount = (TextView)trDate.findViewById(R.id.txtVARowDayHeaderCount);
                 tvDayOfWeek.setText(df.format(myCal.getTime()));
                 List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 tvAptCount.setText(String.valueOf( appointmentList.size()));
+                trDate.setBackgroundResource(R.color.material_blue_grey_800);
+                if (appointmentList.size()!=0)
                 aptTable.addView(trDate);
-
-                //add static row
-                TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-                aptTable.addView(trHeader);
-
                 //add all appointments for given day
 
                 for (appointmentInformation ai : appointmentList) {

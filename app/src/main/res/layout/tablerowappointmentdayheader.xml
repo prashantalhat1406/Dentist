@@ -3,10 +3,10 @@
     android:id="@+id/tablerowAppointmentDayHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/abc_item_background_holo_dark">
 
-    <TextView android:layout_width="wrap_content" android:text="Date : "/>
-    <TextView android:layout_width="wrap_content" android:id="@+id/txtVARowDayHeaderDate"/>
-    <TextView android:layout_width="wrap_content" android:text=" Total : " android:paddingLeft="10dp"/>
-    <TextView android:layout_width="wrap_content" android:id="@+id/txtVARowDayHeaderCount"/>
+    <TextView android:layout_width="wrap_content" android:text="Date : " android:textColor="#FFFFFF"/>
+    <TextView android:layout_width="wrap_content" android:id="@+id/txtVARowDayHeaderDate" android:textColor="#FFFFFF"/>
+    <TextView android:layout_width="wrap_content" android:text=" Total : " android:paddingLeft="10dp" android:textColor="#FFFFFF"/>
+    <TextView android:layout_width="wrap_content" android:id="@+id/txtVARowDayHeaderCount" android:textColor="#FFFFFF"/>
 </TableRow>
