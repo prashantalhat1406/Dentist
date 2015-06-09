@@ -63,6 +63,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
         });
         monthA = (RadioButton)findViewById(R.id.rdbVAMonth);
         monthA.setChecked(false);
+        monthA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(monthA.isChecked()){
+                    displayAppointmentForMonth(currentDate.getText().toString());
+                }
+            }
+        });
 
         cal = Calendar.getInstance();
         y=cal.get(Calendar.YEAR);
@@ -121,6 +129,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     if(monthA.isChecked()){
                         myCal.add(Calendar.MONTH,-1);
                         currentDate.setText(df.format(myCal.getTime()));
+                        displayAppointmentForMonth(currentDate.getText().toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -152,6 +161,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     if(monthA.isChecked()){
                         myCal.add(Calendar.MONTH, 1);
                         currentDate.setText(df.format(myCal.getTime()));
+                        displayAppointmentForMonth(currentDate.getText().toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -180,10 +190,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                             displayAppointmentForDate(currentDate.getText().toString());
                         }
                         if(weekA.isChecked()){
-                            myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                             currentDate.setText(df.format(myCal.getTime()));
                             displayAppointmentForWeek(currentDate.getText().toString());
                         }
+                        if(monthA.isChecked()){
+                            currentDate.setText(df.format(myCal.getTime()));
+                            displayAppointmentForMonth(currentDate.getText().toString());
+                        }
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -234,6 +248,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
         if(weekA.isChecked()){
             displayAppointmentForWeek(currentDate.getText().toString());
         }
+        if(monthA.isChecked()){
+            displayAppointmentForMonth(currentDate.getText().toString());
+        }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -262,6 +279,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         if(weekA.isChecked()){
                             displayAppointmentForWeek(currentDate.getText().toString());
                         }
+                        if(monthA.isChecked()){
+                            displayAppointmentForMonth(currentDate.getText().toString());
+                        }
                     }
                 rowIndex = rowIndex + 1;
                 }
@@ -288,10 +308,79 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     if(weekA.isChecked()){
                         displayAppointmentForWeek(currentDate.getText().toString());
                     }
+                    if(monthA.isChecked()){
+                        displayAppointmentForMonth(currentDate.getText().toString());
+                    }
                 }
                 rowIndex=rowIndex+1;
             }
         }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void displayAppointmentForMonth(String currentD)
+    {
+        try{
+            TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
+            aptTable.removeAllViews();
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+
+            LayoutInflater inflater = getLayoutInflater();
+
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date dObj = df.parse(currentD);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            myCal.set(Calendar.DAY_OF_MONTH, 1);
+
+            TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
+            aptTable.addView(trHeader);
+
+            for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
+                //add day of the Month row
+                TableRow trDate = (TableRow) inflater.inflate(R.layout.tablerowappointmentdayheader, aptTable, false);
+                TextView tvDayOfWeek = (TextView) trDate.findViewById(R.id.txtVARowDayHeaderDate);
+                TextView tvAptCount = (TextView)trDate.findViewById(R.id.txtVARowDayHeaderCount);
+                tvDayOfWeek.setText(df.format(myCal.getTime()));
+                List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
+                tvAptCount.setText(String.valueOf( appointmentList.size()));
+                trDate.setBackgroundResource(R.color.material_blue_grey_800);
+                if (appointmentList.size()!=0)
+                    aptTable.addView(trDate);
+                //add all appointments for given day
+
+                for (appointmentInformation ai : appointmentList) {
+                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
+                    CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
+
+                    TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
+                    aptID.setText(String.valueOf(ai.getAID()));
+
+                    patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+                    TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
+                    name.setText(pi.getName());
+
+                    TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
+                    dt.setText(ai.getaTime());
+
+                    TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
+                    pt.setText(ai.getProposedTreatment());
+
+                    aptTable.addView(tr);
+                }
+
+
+                myCal.add(Calendar.DAY_OF_YEAR, 1);//next Day
+            }
+            pdb.close();
+            adb.close();
+
+
+
+
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -304,10 +393,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
 
             LayoutInflater inflater = getLayoutInflater();
+            /*SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date dObj = df.parse(currentD);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+*/
+
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dObj = df.parse(currentD);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
+            myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            //myCal.add(Calendar.DATE, 7);
 
             //add static row
             TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
