@@ -213,9 +213,22 @@ Add New Appointment is available in View Patient screen
                         Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);
-                        myCal.add(Calendar.DAY_OF_YEAR, 1);
+                        //myCal.add(Calendar.DAY_OF_YEAR, 1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForDate(currentDate.getText().toString());
+                        //displayAppointmentForDate(currentDate.getText().toString());
+                        if(dayA.isChecked()) {
+                            myCal.add(Calendar.DATE, 1);
+                            currentDate.setText(df.format(myCal.getTime()));
+                            displayAppointmentForDate(currentDate.getText().toString());
+                        }
+                        if(weekA.isChecked()){
+                            myCal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+                            myCal.add(Calendar.DATE, 7);
+                            currentDate.setText(df.format(myCal.getTime()));
+                            //displayAppointmentForDate(currentDate.getText().toString());
+                            displayAppointmentForWeek(currentDate.getText().toString());
+                        }
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }
