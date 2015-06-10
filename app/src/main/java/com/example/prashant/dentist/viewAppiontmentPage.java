@@ -13,11 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -229,6 +231,13 @@ public class viewAppiontmentPage extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.menuVAPayment) {
+            addPaymentDetails();
+            return true;
+        }
+
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -311,6 +320,72 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     if(monthA.isChecked()){
                         displayAppointmentForMonth(currentDate.getText().toString());
                     }
+                }
+                rowIndex=rowIndex+1;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addPaymentDetails(){
+
+
+
+
+        int rowIndex=1;
+        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
+        try {
+            while (rowIndex < aptTable.getChildCount()) {
+                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView n = (TextView) tr.getChildAt(3);
+                final TextView aid = (TextView) tr.getChildAt(1);
+                if (cb.isChecked()) {
+                    final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+                    final Dialog addPayment = new Dialog(this);
+                    addPayment.setContentView(R.layout.addpaymentdialog);
+
+
+                    //patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+                    //final patientInformation pi = pdb.getPatientInfoByID(ai.getAID());
+                    addPayment.setTitle("Add Payment for " + n.getText());
+
+                    //TextView name = (TextView)addPayment.findViewById(R.id.txtAPDName);
+                    final Spinner paymentInfo = (Spinner)addPayment.findViewById(R.id.spnAPDPayment);
+                    ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(this,R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+                    paymentInfo.setAdapter(adapterPayment);
+
+                    final Spinner actualTreatmentInfo = (Spinner)addPayment.findViewById(R.id.spnAPDActualTreatment);
+                    ArrayAdapter<CharSequence> adapterActualtreatment = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+                    actualTreatmentInfo.setAdapter(adapterActualtreatment);
+
+                    Button addButton = (Button)addPayment.findViewById(R.id.butAPDAdd);
+                    addButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            appointmentInformation ai =  adb.getAppointmentInfoByID(Integer.parseInt(aid.getText().toString()));
+                            ai.setPayment(Integer.parseInt( paymentInfo.getSelectedItem().toString()));
+                            ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
+
+                            /*appointmentInformation ai = new appointmentInformation(Integer.parseInt(aid.getText().toString()),
+                                    ai.getPID(),
+                                    ai.getaDate(),ai.getaTime(),
+                                    actualTreatmentInfo.getSelectedItem().toString(),
+                                    Integer.parseInt( paymentInfo.getSelectedItem().toString()));*/
+                            adb.updateAppointmentInfo(ai);
+                        }
+                    });
+
+
+
+                    addPayment.show();
+                    adb.close();
+
+
+                    //adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
+
                 }
                 rowIndex=rowIndex+1;
             }
