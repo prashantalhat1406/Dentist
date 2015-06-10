@@ -330,10 +330,25 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
     public void addPaymentDetails(){
 
+        Dialog addPayment = new Dialog(this);
+        addPayment.setContentView(R.layout.addpaymentdialog);
+        addPayment.setTitle("Add Payment");
+
+
+/*
+        final  Spinner paymentInfo = (Spinner)addPayment.findViewById(R.id.spnAPDPayment);
+        ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this,R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+        paymentInfo.setAdapter(adapterPayment);
+
+        final Spinner actualTreatmentInfo = (Spinner)addPayment.findViewById(R.id.spnAPDActualTreatment);
+        ArrayAdapter<CharSequence> adapterActualtreatment = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        actualTreatmentInfo.setAdapter(adapterActualtreatment);
+*/
+        addPayment.show();
 
 
 
-        int rowIndex=1;
+       /* int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
         try {
             while (rowIndex < aptTable.getChildCount()) {
@@ -369,11 +384,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
                             ai.setPayment(Integer.parseInt( paymentInfo.getSelectedItem().toString()));
                             ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
 
-                            /*appointmentInformation ai = new appointmentInformation(Integer.parseInt(aid.getText().toString()),
+                            appointmentInformation ai = new appointmentInformation(Integer.parseInt(aid.getText().toString()),
                                     ai.getPID(),
                                     ai.getaDate(),ai.getaTime(),
                                     actualTreatmentInfo.getSelectedItem().toString(),
-                                    Integer.parseInt( paymentInfo.getSelectedItem().toString()));*/
+                                    Integer.parseInt( paymentInfo.getSelectedItem().toString()));
                             adb.updateAppointmentInfo(ai);
                         }
                     });
@@ -391,7 +406,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             }
         }catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void displayAppointmentForMonth(String currentD)
