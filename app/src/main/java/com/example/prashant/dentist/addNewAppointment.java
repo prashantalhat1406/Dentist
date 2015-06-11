@@ -148,21 +148,28 @@ public class addNewAppointment extends ActionBarActivity {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     try{
-                        Calendar timeCheck = Calendar.getInstance();
-                        timeCheck.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        timeCheck.set(Calendar.MINUTE, minute);
+                        if(hourOfDay >= 10 && hourOfDay <= 21) {
+                            Calendar timeCheck = Calendar.getInstance();
+                            timeCheck.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            timeCheck.set(Calendar.MINUTE, minute);
 
-                        if(e.getText().length()==0){
-                            Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
-                        }else {
-                            if(currentDateFlag){
-                            if (Calendar.getInstance().after(timeCheck)) {
-                                Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
-                                t.setText("");
+                            if (e.getText().length() == 0) {
+                                Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
                             } else {
-                                t.setText(hourOfDay + "::" + minute);
-                            }}else
-                                t.setText(hourOfDay + "::" + minute);
+                                if (currentDateFlag) {
+                                    if (Calendar.getInstance().after(timeCheck)) {
+                                        Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                                        t.setText("");
+                                    } else {
+                                        t.setText(hourOfDay + "::" + minute);
+                                    }
+                                } else
+                                    t.setText(hourOfDay + "::" + minute);
+                            }
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Clinic working hours 10am-9pm", Toast.LENGTH_SHORT).show();
+                            t.setText(hourOfDay + "::" + minute);
                         }
 
                     }catch (Exception e){
