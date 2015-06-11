@@ -33,6 +33,7 @@ public class addNewAppointment extends ActionBarActivity {
     Button bd,bt;
     EditText e,t;
     Spinner sP;
+    boolean currentDateFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +114,22 @@ public class addNewAppointment extends ActionBarActivity {
                     try {
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
-                        Date cDate = new Date();
-                        if (dObj.compareTo(cDate)>=0) {
+                        /*Date cDate = new Date();
+                        cDate.setHours(0);
+                        cDate.setMinutes(0);
+                        cDate.setSeconds(0);*/
+
+                        Calendar tempCal = Calendar.getInstance();
+                        //tempCal.setTime(new Date());
+                        tempCal.set(Calendar.HOUR_OF_DAY, 0);
+                        tempCal.set(Calendar.MINUTE,0);
+                        tempCal.set(Calendar.SECOND,0);
+                        tempCal.set(Calendar.MILLISECOND, 0);
+                        //tempCal.add(Calendar.DATE, -1);
+
+                        if (!dObj.before(tempCal.getTime())) {
+                            //tempCal.add(Calendar.DATE, 1);
+                            currentDateFlag = dObj.equals(tempCal.getTime());
                             Calendar myCal = Calendar.getInstance();
                             myCal.setTime(dObj);
                             e.setText(df.format(myCal.getTime()));
@@ -136,12 +151,20 @@ public class addNewAppointment extends ActionBarActivity {
                         Calendar timeCheck = Calendar.getInstance();
                         timeCheck.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         timeCheck.set(Calendar.MINUTE, minute);
-                        if(Calendar.getInstance().after(timeCheck)) {
-                            Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
-                            t.setText("");
-                        }else{
-                            t.setText(hourOfDay + "::" + minute);
+
+                        if(e.getText().length()==0){
+                            Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
+                        }else {
+                            if(currentDateFlag){
+                            if (Calendar.getInstance().after(timeCheck)) {
+                                Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                                t.setText("");
+                            } else {
+                                t.setText(hourOfDay + "::" + minute);
+                            }}else
+                                t.setText(hourOfDay + "::" + minute);
                         }
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }
