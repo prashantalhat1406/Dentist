@@ -23,6 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:id="@+id/txtVPDName"/>
         </LinearLayout>
 
@@ -41,7 +42,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtVPDPhone"/>
+                android:id="@+id/txtVPDPhone"
+                android:gravity="center_vertical"/>
         </LinearLayout>
 
         <LinearLayout
@@ -51,26 +53,28 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.3"
                 android:layout_height="wrap_content"
                 android:text="Age "
                 android:gravity="center_vertical"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.3"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtVPDAge"/>
+                android:id="@+id/txtVPDAge"
+                android:gravity="center_vertical"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
                 android:text="Sex "
                 android:gravity="center_vertical"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtVPDSex"/>
+                android:id="@+id/txtVPDSex"
+                android:gravity="center_vertical"/>
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +92,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtVPDAddress"/>
+                android:id="@+id/txtVPDAddress"
+                android:gravity="center_vertical"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

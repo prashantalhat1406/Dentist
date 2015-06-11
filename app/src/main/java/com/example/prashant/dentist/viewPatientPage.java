@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -167,6 +168,10 @@ public class viewPatientPage extends ActionBarActivity {
         Dialog patientDetails = new Dialog(this);
         patientDetails.setContentView(R.layout.viewpatientdetailsdialog);
         patientDetails.setTitle("Patient Details");
+
+        patientDetails.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+
 
         TextView name = (TextView)patientDetails.findViewById(R.id.txtVPDName);
         TextView phone = (TextView)patientDetails.findViewById(R.id.txtVPDPhone);
