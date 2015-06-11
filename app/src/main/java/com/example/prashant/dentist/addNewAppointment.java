@@ -212,6 +212,11 @@ public class addNewAppointment extends ActionBarActivity {
                                 adb.addAppointmentInfo(ai);
                                 adb.close();
                                 Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                name.setText("");
+                                dat.setText("");
+                                tim.setText("");
+                                td.setText("");
+                                this.finish();
                             }
                         /*}*/
                     }
@@ -223,12 +228,7 @@ public class addNewAppointment extends ActionBarActivity {
         catch(Exception e){
             e.printStackTrace();
         }
-        name.setText("");
-        dat.setText("");
-        tim.setText("");
-        //pt.setText("");
-        td.setText("");
-        this.finish();
+
     }
 
     @Override
