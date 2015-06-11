@@ -380,7 +380,7 @@ public class viewPatientPage extends ActionBarActivity {
                             pi.setPhone(phone.getText().toString());
                             pi.setAddress(address.getText().toString());
                             pi.setAge(age.getText().toString());
-                            if (sexM.isSelected())
+                            if (sexM.isChecked())
                                 pi.setSex(sexM.getText().toString());
                             else
                                 pi.setSex(sexF.getText().toString());
