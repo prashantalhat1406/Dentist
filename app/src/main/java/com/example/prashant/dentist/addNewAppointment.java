@@ -230,16 +230,24 @@ public class addNewAppointment extends ActionBarActivity {
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
                             }else{
                                 adb = new appointmentDatabaseHandler(this);
-                                lastApptID = adb.getLastAppointmentID()+1;
-                                appointmentInformation ai = new appointmentInformation(lastApptID,Integer.parseInt(pid),dat.getText().toString(),tim.getText().toString(),pt.getSelectedItem().toString(),td.getText().toString());
-                                adb.addAppointmentInfo(ai);
-                                adb.close();
-                                Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
-                                name.setText("");
-                                dat.setText("");
-                                tim.setText("");
-                                td.setText("");
-                                this.finish();
+                                if (adb.getAppointmentCountForDateTime(dat.getText().toString(),tim.getText().toString())==0) {
+
+                                    lastApptID = adb.getLastAppointmentID() + 1;
+                                    appointmentInformation ai = new appointmentInformation(lastApptID, Integer.parseInt(pid), dat.getText().toString(), tim.getText().toString(), pt.getSelectedItem().toString(), td.getText().toString());
+                                    adb.addAppointmentInfo(ai);
+                                    adb.close();
+                                    Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                    name.setText("");
+                                    dat.setText("");
+                                    tim.setText("");
+                                    td.setText("");
+                                    this.finish();
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "Appointment Already existed", Toast.LENGTH_SHORT).show();
+                                    dat.setText("");
+                                    tim.setText("");
+                                }
+
                             }
                         /*}*/
                     }
