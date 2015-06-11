@@ -165,14 +165,14 @@
             android:id="@+id/butANPDialogNew"
 
             />
+        <!--
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Appointment"
             android:id="@+id/butANPDialogAppointment"
-
-            />
+            />-->
     </LinearLayout>
 
 </LinearLayout>
