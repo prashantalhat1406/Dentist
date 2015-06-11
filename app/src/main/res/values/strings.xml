@@ -8,7 +8,7 @@
     <string name="title_activity_view_patient_page">View Patient</string>
     <string name="title_activity_add_new_appointment">New Appointment</string>
     <string name="title_activity_view_appiontment_page">View Appiontment</string>
-    <array name="ProposedTreatment">
+    <string-array name="ProposedTreatment">
         <item>Cap Fillting</item>
         <item>Cap Measurement</item>
         <item>Check Up</item>
@@ -16,8 +16,8 @@
         <item>Filling</item>
         <item>Tooth Removal</item>
         <item>Other</item>
-    </array>
-    <array name="PaymentDenominations">
+    </string-array>
+    <string-array name="PaymentDenominations">
         <item>100</item>
         <item>200</item>
         <item>300</item>
@@ -38,7 +38,7 @@
         <item>1800</item>
         <item>1900</item>
         <item>2000</item>
-    </array>
+    </string-array>
     <string name="title_activity_edit_patient_page">Edit Patient</string>
     <string name="title_activity_edit_appointment">Edit Appointment</string>
 </resources>

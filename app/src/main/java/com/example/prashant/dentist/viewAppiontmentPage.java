@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.text.DateFormat;
@@ -328,11 +329,59 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }
     }
 
-    public void addPaymentDetails(){
+    public void addPaymentDetails() {
 
-        Dialog addPayment = new Dialog(this);
-        addPayment.setContentView(R.layout.addpaymentdialog);
-        addPayment.setTitle("Add Payment");
+
+        int rowIndex = 1;
+        TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
+
+
+            while (rowIndex < aptTable.getChildCount()) {
+                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TextView n = (TextView) tr.getChildAt(3);
+                final TextView aid = (TextView) tr.getChildAt(1);
+                final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+                if (cb.isChecked()) {
+
+                    final Dialog addPayment = new Dialog(this);
+                    addPayment.setContentView(R.layout.addpaymentdialog);
+                    addPayment.setTitle("Add Payment");
+
+                    TextView nameOfPatient = (TextView)addPayment.findViewById(R.id.txtAPDName);
+                    nameOfPatient.setText(n.getText().toString());
+
+                    final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
+                    ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+                    paymentInfo.setAdapter(adapterPayment);
+
+                    final Spinner actualTreatmentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDActualTreatment);
+                    ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+                    actualTreatmentInfo.setAdapter(adapterTreatmentt);
+
+
+                    Button addButton = (Button)addPayment.findViewById(R.id.butAPDAdd);
+                    addButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            appointmentInformation ai = adb.getAppointmentInfoByID(Integer.parseInt(aid.getText().toString()));
+                            ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
+                            ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
+                            adb.updateAppointmentInfo(ai);
+                            Toast.makeText(getApplicationContext(), "Payment Added", Toast.LENGTH_SHORT).show();
+                            addPayment.dismiss();
+                        }
+                    });
+
+                    cb.setChecked(false);
+                    addPayment.show();
+                }
+                adb.close();
+                rowIndex=rowIndex+1;
+            }
+
+
+    }
 
 
 /*
@@ -344,7 +393,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         ArrayAdapter<CharSequence> adapterActualtreatment = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
         actualTreatmentInfo.setAdapter(adapterActualtreatment);
 */
-        addPayment.show();
+
 
 
 
@@ -357,7 +406,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 TextView n = (TextView) tr.getChildAt(3);
                 final TextView aid = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
-                    final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+
                     final Dialog addPayment = new Dialog(this);
                     addPayment.setContentView(R.layout.addpaymentdialog);
 
@@ -407,7 +456,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }catch(Exception e){
             e.printStackTrace();
         }*/
-    }
+    //}
 
     public void displayAppointmentForMonth(String currentD)
     {
