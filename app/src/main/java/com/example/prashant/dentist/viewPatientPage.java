@@ -63,6 +63,15 @@ public class viewPatientPage extends ActionBarActivity {
             }
         });
 
+        Button bDetails = (Button)findViewById(R.id.butVPDetails);
+        bDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPatientDetails();
+                displayAllExistingPatients();
+            }
+        });
+
 
     }
 
@@ -95,12 +104,28 @@ public class viewPatientPage extends ActionBarActivity {
                         noOfPatientSelected=noOfPatientSelected+1;
                         Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                         apptButton.setEnabled(true);
+                        //details button
+                        if(noOfPatientSelected == 1){
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(true);
+                        }else{
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(false);
+                        }
 
                     }else{
                         noOfPatientSelected=noOfPatientSelected-1;
                         if(noOfPatientSelected==0){
                             Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                             apptButton.setEnabled(false);
+                        }
+                        //details button
+                        if(noOfPatientSelected == 1){
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(true);
+                        }else{
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(false);
                         }
                     }
                 }
@@ -130,9 +155,57 @@ public class viewPatientPage extends ActionBarActivity {
         //Toast.makeText(getApplicationContext(), "work in progress", Toast.LENGTH_SHORT).show();
     }
 
-    public void openReportsActivity()
-    {
-        Toast.makeText(getApplicationContext(), "work in progress", Toast.LENGTH_SHORT).show();
+    public void viewPatientDetails(){
+        int pID = getSelectedPatientID();
+
+        patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+
+        patientInformation pi = pdb.getPatientInfoByID(pID);
+        List<appointmentInformation> appointmentList = adb.getAppointmentInfoByPaitentID(pID);
+
+        Dialog patientDetails = new Dialog(this);
+        patientDetails.setContentView(R.layout.viewpatientdetailsdialog);
+        patientDetails.setTitle("Patient Details");
+
+        TextView name = (TextView)patientDetails.findViewById(R.id.txtVPDName);
+        TextView phone = (TextView)patientDetails.findViewById(R.id.txtVPDPhone);
+        TextView age = (TextView)patientDetails.findViewById(R.id.txtVPDAge);
+        TextView sex = (TextView)patientDetails.findViewById(R.id.txtVPDSex);
+        TextView address = (TextView)patientDetails.findViewById(R.id.txtVPDAddress);
+
+        name.setText(pi.getName());
+        phone.setText(pi.getPhone());
+        age.setText(pi.getAge());
+        sex.setText(pi.getSex());
+        address.setText(pi.getAddress());
+        try {
+
+
+
+        TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
+        patientDetailsTable.removeAllViews();
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        for (appointmentInformation ai : appointmentList) {
+            TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforpatientdetails,patientDetailsTable,false);
+
+            TextView adate = (TextView)tr.findViewById(R.id.txtVPDDate);
+            TextView treatment = (TextView)tr.findViewById(R.id.txtVPDTreatmentDone);
+            TextView payment = (TextView)tr.findViewById(R.id.txtVPDPayment);
+
+            adate.setText(ai.getaDate());
+            treatment.setText(ai.getActualTreatment());
+            payment.setText(String.valueOf(ai.getPayment()));
+
+            patientDetailsTable.addView(tr);
+        }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        patientDetails.show();
     }
 
 
@@ -155,12 +228,29 @@ public class viewPatientPage extends ActionBarActivity {
                         noOfPatientSelected=noOfPatientSelected+1;
                         Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                         apptButton.setEnabled(true);
+                        //details button
+                        if(noOfPatientSelected == 1){
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(true);
+                        }else{
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(false);
+                        }
 
                     }else{
                         noOfPatientSelected=noOfPatientSelected-1;
                         if(noOfPatientSelected==0){
                             Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                             apptButton.setEnabled(false);
+                        }
+
+                        //details button
+                        if(noOfPatientSelected == 1){
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(true);
+                        }else{
+                            Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                            detailButton.setEnabled(false);
                         }
                 }
                 }
@@ -209,7 +299,7 @@ public class viewPatientPage extends ActionBarActivity {
     }
 
     public int getSelectedPatientID(){
-        int patientIDs=-1;
+        int patientID=-1;
 
         TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
         int i =0;
@@ -219,7 +309,7 @@ public class viewPatientPage extends ActionBarActivity {
                 CheckBox cb = (CheckBox) tr.getChildAt(0);
                 TextView tv = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
-                    patientIDs = Integer.parseInt(tv.getText().toString());
+                    patientID = Integer.parseInt(tv.getText().toString());
                     i = i + 1;
                     break;
                 }
@@ -230,7 +320,7 @@ public class viewPatientPage extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        return patientIDs;
+        return patientID;
     }
 
     public void deletePatient()
@@ -250,6 +340,14 @@ public class viewPatientPage extends ActionBarActivity {
                     if(noOfPatientSelected==0){
                         Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                         apptButton.setEnabled(false);
+                    }
+                    //details button
+                    if(noOfPatientSelected == 1){
+                        Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                        detailButton.setEnabled(true);
+                    }else{
+                        Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                        detailButton.setEnabled(false);
                     }
                 }
                 i = i + 1;
@@ -392,6 +490,14 @@ public class viewPatientPage extends ActionBarActivity {
                             if(noOfPatientSelected==0){
                                 Button apptButton = (Button)findViewById(R.id.butViewPatientAppointment);
                                 apptButton.setEnabled(false);
+                            }
+                            //details button
+                            if(noOfPatientSelected == 1){
+                                Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                                detailButton.setEnabled(true);
+                            }else{
+                                Button detailButton = (Button)findViewById(R.id.butVPDetails);
+                                detailButton.setEnabled(false);
                             }
                         }
                     });

@@ -123,6 +123,8 @@
             android:layout_weight="0.33"
             android:text="DETAILS"
             android:textSize="10dp"
+            android:id="@+id/butVPDetails"
+            android:enabled="false"
             />
     </LinearLayout>
 
