@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:text="Name"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
@@ -21,7 +21,7 @@
         <EditText
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.7"
             android:id="@+id/txtANPDPatientName"
             android:inputType="text" />
 
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:text="Phone"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
@@ -44,7 +44,7 @@
         <EditText
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.7"
             android:id="@+id/txtANPDPatientPhone"
             android:inputType="phone" />
 
@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:text="Address"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
@@ -67,7 +67,7 @@
         <EditText
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.7"
             android:id="@+id/txtANPDPatientAddress"
             android:inputType="text" />
 
@@ -82,7 +82,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:text="Sex"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
@@ -114,7 +114,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.4"
             />
 
     </LinearLayout>
@@ -128,7 +128,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:text="Age"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
@@ -143,7 +143,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.6"
+            android:layout_weight="0.5"
             android:text=""
             android:gravity="center_vertical"
             android:paddingLeft="10dp"/>
