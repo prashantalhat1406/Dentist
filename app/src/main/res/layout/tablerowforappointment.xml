@@ -4,7 +4,7 @@
     android:id="@+id/tableRowForAppointment"
     >
 
-    <CheckBox  android:layout_width="0dp" android:layout_weight="0.1"
+    <CheckBox  android:layout_width="0dp" android:layout_weight="0.12"
         android:text=""
         android:id="@+id/aptcheckbox"
         />
@@ -17,7 +17,7 @@
         android:layout_weight="0.2"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:id="@+id/aptdateTime"/>
 
     <TextView android:text="Patient Name"
@@ -25,15 +25,15 @@
         android:layout_weight="0.2"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:id="@+id/aptpatientName"/>
 
     <TextView android:text="Proposed Action"
         android:width="0dp"
-        android:layout_weight="0.49"
+        android:layout_weight="0.47"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="left"
+        android:gravity="center_vertical"
         android:id="@+id/aptproposedaction"/>
 
 
