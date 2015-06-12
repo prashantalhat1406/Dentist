@@ -396,7 +396,7 @@ public class viewPatientPage extends ActionBarActivity {
                 if (name.getText().length() != 0) {
                     if (phone.getText().length() == 10) {
                         if (address.getText().length() != 0) {
-                            if (Integer.parseInt(age.getText().toString()) > 1 && Integer.parseInt(age.getText().toString()) < 100 ) {
+                            if (age.getText().length() != 0 && Integer.parseInt(age.getText().toString()) > 1 && Integer.parseInt(age.getText().toString()) < 100 ) {
                                 if(sexM.isChecked() || sexF.isChecked()) {
 
                                     pi.setID(recordNumber);
