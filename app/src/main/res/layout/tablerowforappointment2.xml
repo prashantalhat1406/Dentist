@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/shapeforappointmentrow">
+    <LinearLayout android:layout_width="0dp" android:layout_weight="0.1" android:layout_height="match_parent" android:orientation="vertical">
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/cbVAR"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.01"
+            android:layout_height="match_parent"
+            android:id="@+id/txtVARaptID"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="0dp" android:layout_weight="0.3" android:layout_height="match_parent" android:orientation="vertical">
+        <TextView android:text="12-Jun-2015"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="0.5" android:gravity="center"
+            android:textColor="#07233f"
+            android:id="@+id/txtVARdate"/>
+        <TextView android:text="12::00"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="0.5" android:gravity="center" android:textColor="#07233f"
+            android:id="@+id/txtVARtime"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="0dp" android:layout_weight="0.6" android:layout_height="match_parent" android:orientation="vertical">
+        <TextView android:text="Prashant Alhat\t\t9823958259"
+            android:layout_width="match_parent"
+            android:textColor="#07233f"
+            android:layout_height="0dp" android:layout_weight="0.5" android:gravity="center"
+            android:id="@+id/txtVARnamephone"/>
+        <TextView android:text="Cap Fitting"
+            android:layout_width="match_parent"
+            android:textColor="#07233f"
+            android:layout_height="0dp" android:layout_weight="0.5" android:gravity="center"
+            android:id="@+id/txtVARtreatment"/>
+    </LinearLayout>
+</TableRow>

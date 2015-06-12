@@ -275,8 +275,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
         try {
             while (rowIndex < aptTable.getChildCount()) {
                 TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                    CheckBox cb = (CheckBox) tr.getChildAt(0);
-                    TextView aid = (TextView) tr.getChildAt(1);
+                    //CheckBox cb = (CheckBox) tr.getChildAt(0);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+                    //TextView aid = (TextView) tr.getChildAt(1);
+                TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
                     if (cb.isChecked()) {
                         appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                         Intent i = new Intent(this, editAppointment.class);
@@ -306,8 +308,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
         try {
             while (rowIndex < aptTable.getChildCount()) {
                 TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                TextView aid = (TextView) tr.getChildAt(1);
+                //CheckBox cb = (CheckBox) tr.getChildAt(0);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+                //TextView aid = (TextView) tr.getChildAt(1);
+                TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
                 if (cb.isChecked()) {
                     appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                     adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
@@ -338,9 +342,12 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
             while (rowIndex < aptTable.getChildCount()) {
                 TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                TextView n = (TextView) tr.getChildAt(3);
-                final TextView aid = (TextView) tr.getChildAt(1);
+                //CheckBox cb = (CheckBox) tr.getChildAt(0);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+                //TextView n = (TextView) tr.getChildAt(3);
+                TextView n = (TextView) tr.findViewById(R.id.txtVARnamephone);
+                //final TextView aid = (TextView) tr.getChildAt(1);
+                final TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
                 final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
                 if (cb.isChecked()) {
 
@@ -349,7 +356,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     addPayment.setTitle("Add Payment");
 
                     TextView nameOfPatient = (TextView)addPayment.findViewById(R.id.txtAPDName);
-                    nameOfPatient.setText(n.getText().toString());
+                    String tempArr[] = n.getText().toString().split(" ");
+                    nameOfPatient.setText(tempArr[0]);
 
                     final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
                     ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
@@ -401,8 +409,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             myCal.setTime(dObj);
             myCal.set(Calendar.DAY_OF_MONTH, 1);
 
-            TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            aptTable.addView(trHeader);
+            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
+            //aptTable.addView(trHeader);
 
             for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
                 //add day of the Month row
@@ -418,6 +426,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 //add all appointments for given day
 
                 for (appointmentInformation ai : appointmentList) {
+                    /*
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
                     CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
 
@@ -432,6 +441,28 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     dt.setText(ai.getaTime());
 
                     TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
+                    pt.setText(ai.getProposedTreatment());
+
+                    aptTable.addView(tr);
+                    */
+
+                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                    CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+
+                    TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
+                    aptID.setText(String.valueOf(ai.getAID()));
+
+                    patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+                    TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
+                    name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+
+                    TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
+                    dt.setText(ai.getaDate());
+
+                    TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
+                    tm.setText(ai.getaTime());
+
+                    TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
                     pt.setText(ai.getProposedTreatment());
 
                     aptTable.addView(tr);
@@ -473,8 +504,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             //myCal.add(Calendar.DATE, 7);
 
             //add static row
-            TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            aptTable.addView(trHeader);
+            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
+            //aptTable.addView(trHeader);
 
             for(int index=0;index<7;index++){
                 //add day of the week row
@@ -490,6 +521,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 //add all appointments for given day
 
                 for (appointmentInformation ai : appointmentList) {
+                    /*
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
                     CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
 
@@ -504,6 +536,26 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     dt.setText(ai.getaTime());
 
                     TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
+                    pt.setText(ai.getProposedTreatment());
+
+                    aptTable.addView(tr);*/
+                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                    CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+
+                    TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
+                    aptID.setText(String.valueOf(ai.getAID()));
+
+                    patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+                    TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
+                    name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+
+                    TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
+                    dt.setText(ai.getaDate());
+
+                    TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
+                    tm.setText(ai.getaTime());
+
+                    TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
                     pt.setText(ai.getProposedTreatment());
 
                     aptTable.addView(tr);
@@ -532,10 +584,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-            TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            aptTable.addView(trHeader);
+            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
+            //aptTable.addView(trHeader);
 
             for (appointmentInformation ai : appointmentList) {
+                /*
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
                 CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
 
@@ -550,6 +603,25 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 dt.setText(ai.getaTime());
 
                 TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
+                pt.setText(ai.getProposedTreatment());
+                */
+                TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+
+                TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
+                aptID.setText(String.valueOf(ai.getAID()));
+
+                patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+                TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
+                name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+
+                TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
+                dt.setText(ai.getaDate());
+
+                TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
+                tm.setText(ai.getaTime());
+
+                TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
                 pt.setText(ai.getProposedTreatment());
 
                 aptTable.addView(tr);
