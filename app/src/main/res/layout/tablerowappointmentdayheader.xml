@@ -7,7 +7,7 @@
     <CheckBox
         android:visibility="invisible"
         android:text=""
-        android:id="@+id/aptcheckbox"
+        android:id="@+id/cbVAR"
         />
     <TextView
         android:layout_width="wrap_content"

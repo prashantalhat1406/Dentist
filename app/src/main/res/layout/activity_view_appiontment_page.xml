@@ -8,26 +8,32 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
+        android:background="@drawable/rectanglegreen"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="Select Date : "
-            android:gravity="center_vertical"/>
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:text="06/05/2015"
             android:gravity="center_vertical"
+            android:textColor="#000000"
             android:id="@+id/txtViewAppointmentCurrentDate"/>
         <Button
             android:layout_height="wrap_content"
             android:text="D"
             android:layout_width="0dp"
             android:layout_weight="0.1"
+            android:textColor="#FFFFFF"
             android:id="@+id/butViewAppiontmentDateDialog"
+            android:background="@drawable/buttoncirclegreen"
             />
         <!--
         <TextView
@@ -79,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/rectanglegreen"
         >
         <RadioGroup
             android:layout_width="match_parent"
@@ -112,20 +119,27 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
+        android:background="@drawable/rectanglegreen"
         >
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="PREVIOUS"
-            android:id="@+id/butVAPrevious"/>
+            android:id="@+id/butVAPrevious"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/buttonovalgreen"
+            />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="NEXT"
-            android:id="@+id/butVANext"/>
+            android:id="@+id/butVANext"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/buttonovalgreen"
+            />
     </LinearLayout>
 
     <!--
@@ -154,6 +168,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.65"
         android:orientation="horizontal"
+        android:background="@drawable/rectanglegreen"
         >
         <ScrollView
             android:layout_width="match_parent"

@@ -26,15 +26,15 @@
         </activity>
         <activity
             android:name=".viewPatientPage"
-            android:label="@string/title_activity_view_patient_page" >
+            android:label="@string/title_activity_view_patient_page" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".addNewAppointment"
-            android:label="@string/title_activity_add_new_appointment" >
+            android:label="@string/title_activity_add_new_appointment" android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".viewAppiontmentPage"
-            android:label="@string/title_activity_view_appiontment_page" >
+            android:label="@string/title_activity_view_appiontment_page" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".editPatientPage"
@@ -42,7 +42,7 @@
         </activity>
         <activity
             android:name=".editAppointment"
-            android:label="@string/title_activity_edit_appointment" >
+            android:label="@string/title_activity_edit_appointment" android:screenOrientation="portrait">
         </activity>
     </application>
 

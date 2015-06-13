@@ -46,7 +46,8 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:id="@+id/txtANPDPatientPhone"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:maxLength="10" />
 
     </LinearLayout>
 

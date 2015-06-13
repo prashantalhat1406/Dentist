@@ -273,8 +273,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
         while (rowIndex < aptTable.getChildCount()) {
             TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
             CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
-            TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
+
             if (cb.isChecked()) {
+                TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
                 aID =Integer.parseInt(aid.getText().toString());
                 break;
             }
@@ -446,7 +447,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     adb.updateAppointmentInfo(ai);
                     Toast.makeText(getApplicationContext(), "Payment Added", Toast.LENGTH_SHORT).show();
                     addPayment.dismiss();
-                    clearAllSelection();
+                    //clearAllSelection();
                 }
             });
             addPayment.show();
@@ -543,6 +544,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     aptTable.addView(trDate);
                 //add all appointments for given day
 
+                boolean color = false;
+
                 for (appointmentInformation ai : appointmentList) {
                     /*
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
@@ -565,6 +568,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     */
 
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+
+                    if(color == false){
+                        color=true;
+                        tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);
+                    }else{
+                        color=false;
+                        tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
+                    }
                     CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
 
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
@@ -632,6 +643,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 if (appointmentList.size()!=0)
                 aptTable.addView(trDate);
                 //add all appointments for given day
+                boolean color=false;
 
                 for (appointmentInformation ai : appointmentList) {
                     /*
@@ -653,6 +665,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
                     aptTable.addView(tr);*/
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                    if(color == false){
+                        color=true;
+                        tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);
+                    }else{
+                        color=false;
+                        tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
+                    }
+
                     CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
 
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
@@ -699,6 +719,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
             //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
             //aptTable.addView(trHeader);
+            boolean color=false;
 
             for (appointmentInformation ai : appointmentList) {
                 /*
@@ -719,6 +740,13 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 pt.setText(ai.getProposedTreatment());
                 */
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                if(color == false){
+                    color=true;
+                    tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);
+                }else{
+                    color=false;
+                    tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
+                }
                 CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
 
                 TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);

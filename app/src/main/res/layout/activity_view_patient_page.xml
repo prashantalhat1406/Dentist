@@ -2,13 +2,14 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rectangleblue">
 
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1">
+        android:layout_weight="0.1" android:background="@drawable/rectangleblue">
 
         <EditText
             android:paddingTop="5dp"
@@ -26,6 +27,8 @@
             android:layout_weight="0.2"
             android:text="Search"
             android:textSize="10dp"
+            android:background="@drawable/buttonblue"
+            android:textColor="#FFFFFF"
             android:id="@+id/butPatientSearch"
             android:onClick="searchPatientByName"
             />
@@ -53,6 +56,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.65"
         android:orientation="horizontal"
+        android:background="@drawable/rectangleblue"
         >
         <ScrollView
             android:layout_width="match_parent"
@@ -82,6 +86,8 @@
             android:text="APPOINTMENT"
             android:textSize="10dp"
             android:id="@+id/butViewPatientAppointment"
+            android:background="@drawable/buttonblue"
+            android:textColor="#FFFFFF"
             android:enabled="true"
             />
         <Button
@@ -90,7 +96,21 @@
             android:layout_weight="0.33"
             android:textSize="10dp"
             android:text="NEW"
+            android:background="@drawable/buttonblue"
+            android:textColor="#FFFFFF"
             android:id="@+id/butVPNEW"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:text="DETAILS"
+            android:textSize="10dp"
+            android:id="@+id/butVPDetails"
+            android:background="@drawable/buttonblue"
+            android:textColor="#FFFFFF"
+            android:enabled="true"
             />
         <!--
 
@@ -114,15 +134,7 @@
             />
 
         -->
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:text="DETAILS"
-            android:textSize="10dp"
-            android:id="@+id/butVPDetails"
-            android:enabled="true"
-            />
+
     </LinearLayout>
 
 </LinearLayout>

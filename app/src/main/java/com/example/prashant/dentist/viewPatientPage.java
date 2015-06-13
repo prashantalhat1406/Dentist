@@ -88,8 +88,16 @@ public class viewPatientPage extends ActionBarActivity {
         patientDatabaseHandler db = new patientDatabaseHandler(this);
         List<patientInformation> patientList = db.getPatientInfoByName(searchname.getText().toString());
         LayoutInflater inflat = getLayoutInflater();
+        boolean color = false;
         for (patientInformation pi : patientList) {
             TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+            if(color == false){
+                color=true;
+                row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
+            }else{
+                color=false;
+                row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
+            }
             final CheckBox cb = (CheckBox)row.findViewById(R.id.rownumber);
             TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
             recnum.setText(Integer.toString( pi.getID()));
@@ -104,9 +112,14 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void gotoNewAppointmentScreen ()
     {
-        Intent i = new Intent(this,addNewAppointment.class);
-        i.putExtra("pid", String.valueOf(getSelectedPatientID()));
-        startActivity(i);
+        int pID = getSelectedPatientID();
+        if (pID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent i = new Intent(this, addNewAppointment.class);
+            i.putExtra("pid", String.valueOf(pID));
+            startActivity(i);
+        }
     }
 
     public void viewPatientDetails(){
@@ -161,8 +174,16 @@ public class viewPatientPage extends ActionBarActivity {
         patientDatabaseHandler db = new patientDatabaseHandler(this);
         List<patientInformation> patientList = db.getAllPatientInfo();
         LayoutInflater inflat = getLayoutInflater();
+        boolean color=false;
         for(patientInformation pi : patientList){
             TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+            if(color == false){
+                color=true;
+                row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
+            }else{
+                color=false;
+                row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
+            }
             final CheckBox cb = (CheckBox)row.findViewById(R.id.rownumber);
             TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
             recnum.setText(Integer.toString( pi.getID()));
