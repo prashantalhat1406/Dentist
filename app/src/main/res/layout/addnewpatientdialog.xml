@@ -2,7 +2,8 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rectangleblue">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,8 @@
             android:layout_weight="0.3"
             android:text="Name"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -39,7 +41,8 @@
             android:layout_weight="0.3"
             android:text="Phone"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -63,7 +66,8 @@
             android:layout_weight="0.3"
             android:text="Address"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -86,20 +90,21 @@
             android:layout_weight="0.3"
             android:text="Sex"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="0.3"
+            android:layout_weight="0.4"
 
             >
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="M"
-                android:layout_weight="0.1"
+                android:layout_weight="0.2"
                 android:id="@+id/rdbANPDmale"
                 android:gravity="center_vertical"
                 />
@@ -107,7 +112,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="F"
-                android:layout_weight="0.1"
+                android:layout_weight="0.2"
                 android:id="@+id/rdbANPDfemale"
                 android:gravity="center_vertical"
                 />
@@ -115,7 +120,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             />
 
     </LinearLayout>
@@ -132,7 +137,8 @@
             android:layout_weight="0.3"
             android:text="Age"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -140,7 +146,7 @@
             android:layout_weight="0.2"
             android:id="@+id/txtANPDPatientAge"
             android:inputType="number"
-            android:maxLength="10" />
+            android:maxLength="2" />
 
         <TextView
             android:layout_width="0dp"
@@ -165,16 +171,10 @@
             android:layout_weight="0.5"
             android:text="Save"
             android:id="@+id/butANPDialogNew"
-
+            android:background="@drawable/buttonblue"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
             />
-        <!--
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Appointment"
-            android:id="@+id/butANPDialogAppointment"
-            />-->
     </LinearLayout>
 
 </LinearLayout>
