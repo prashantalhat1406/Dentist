@@ -454,7 +454,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
-                    name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+                    name.setText(pi.getName()+ " , " + pi.getPhone());
 
                     TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
                     dt.setText(ai.getaDate());
@@ -547,7 +547,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
-                    name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+                    name.setText(pi.getName()+ " , " + pi.getPhone());
 
                     TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
                     dt.setText(ai.getaDate());
@@ -613,7 +613,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
                 patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                 TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
-                name.setText(pi.getName()+ "\t\t\t" + pi.getPhone());
+                name.setText(pi.getName()+ " , " + pi.getPhone());
 
                 TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
                 dt.setText(ai.getaDate());
