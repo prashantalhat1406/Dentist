@@ -65,6 +65,22 @@ public class viewPatientPage extends ActionBarActivity {
         displayAllExistingPatients();
     }
 
+    public void clearAllSelection(){
+        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
+        int i =0;
+        try {
+            while (i < pt.getChildCount()) {
+                TableRow tr = (TableRow) pt.getChildAt(i);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                if (cb.isChecked()) {cb.setChecked(false);}
+                i = i + 1;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void searchPatientByName(View view) {
         EditText searchname = (EditText) findViewById(R.id.txtSearchName);
         TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
@@ -85,7 +101,6 @@ public class viewPatientPage extends ActionBarActivity {
         }
         searchname.setText("");
     }
-
 
     public void gotoNewAppointmentScreen ()
     {
@@ -135,6 +150,7 @@ public class viewPatientPage extends ActionBarActivity {
                 e.printStackTrace();
             }
             patientDetails.show();
+            clearAllSelection();
         }
     }
 
@@ -156,6 +172,7 @@ public class viewPatientPage extends ActionBarActivity {
             phone.setText(pi.getPhone());
             pt.addView(row);
         }
+        clearAllSelection();
     }
 
 
@@ -176,6 +193,7 @@ public class viewPatientPage extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.menuVPEdit) {
             editPatient();
+            clearAllSelection();
             return true;
         }
         if (id == R.id.menuVPDelete) {
