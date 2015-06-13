@@ -267,7 +267,44 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }
     }
 
+    public int getSelectedAppointmentID(){
+        int rowIndex=0,aID=-1;
+        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
+        while (rowIndex < aptTable.getChildCount()) {
+            TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
+            CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+            TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
+            if (cb.isChecked()) {
+                aID =Integer.parseInt(aid.getText().toString());
+                break;
+            }
+            rowIndex=rowIndex+1;
+        }
+        return aID;
+    }
+
     public void displayEditAppointmentScreen(){
+        int aID = getSelectedAppointmentID();
+
+        if(aID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            Intent i = new Intent(this, editAppointment.class);
+            i.putExtra("aid", String.valueOf(aID));
+            startActivity(i);
+            adb.close();
+            if (dayA.isChecked()) {
+                displayAppointmentForDate(currentDate.getText().toString());
+            }
+            if (weekA.isChecked()) {
+                displayAppointmentForWeek(currentDate.getText().toString());
+            }
+            if (monthA.isChecked()) {
+                displayAppointmentForMonth(currentDate.getText().toString());
+            }
+        }
+        /*
         int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
 
@@ -300,9 +337,29 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+        */
     }
 
     public void deleteAppointment(){
+        int aID = getSelectedAppointmentID();
+
+        if(aID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            adb.deleteAppointmentInfo(aID);
+            adb.close();
+            if (dayA.isChecked()) {
+                displayAppointmentForDate(currentDate.getText().toString());
+            }
+            if (weekA.isChecked()) {
+                displayAppointmentForWeek(currentDate.getText().toString());
+            }
+            if (monthA.isChecked()) {
+                displayAppointmentForMonth(currentDate.getText().toString());
+            }
+        }
+        /*
         int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
         try {
@@ -331,11 +388,72 @@ public class viewAppiontmentPage extends ActionBarActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+        */
+    }
+
+    public String getPatientNameFromAID(int aID){
+        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+        patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+        appointmentInformation ai = adb.getAppointmentInfoByID(aID);
+        patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+        return pi.getName();
+    }
+
+    public void clearAllSelection(){
+
+        int rowIndex = 1;
+        TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
+        while (rowIndex < aptTable.getChildCount()) {
+            TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
+            CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+            if (cb.isChecked()) {cb.setChecked(false);}
+        }
+
     }
 
     public void addPaymentDetails() {
+        final int aID = getSelectedAppointmentID();
+
+        if(aID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+
+            final Dialog addPayment = new Dialog(this);
+            addPayment.setContentView(R.layout.addpaymentdialog);
+            addPayment.setTitle("Add Payment");
+
+            TextView nameOfPatient = (TextView) addPayment.findViewById(R.id.txtAPDName);
+            nameOfPatient.setText(getPatientNameFromAID(aID));
+
+            final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
+            ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+            paymentInfo.setAdapter(adapterPayment);
+
+            final Spinner actualTreatmentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDActualTreatment);
+            ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+            actualTreatmentInfo.setAdapter(adapterTreatmentt);
 
 
+            Button addButton = (Button)addPayment.findViewById(R.id.butAPDAdd);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    appointmentInformation ai = adb.getAppointmentInfoByID(aID);
+                    ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
+                    ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
+                    adb.updateAppointmentInfo(ai);
+                    Toast.makeText(getApplicationContext(), "Payment Added", Toast.LENGTH_SHORT).show();
+                    addPayment.dismiss();
+                    clearAllSelection();
+                }
+            });
+            addPayment.show();
+
+        }
+
+/*
         int rowIndex = 1;
         TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
 
@@ -387,7 +505,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 adb.close();
                 rowIndex=rowIndex+1;
             }
-
+*/
 
     }
 
@@ -490,11 +608,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
 
             LayoutInflater inflater = getLayoutInflater();
-            /*SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Date dObj = df.parse(currentD);
-            Calendar myCal = Calendar.getInstance();
-            myCal.setTime(dObj);
-*/
 
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dObj = df.parse(currentD);
