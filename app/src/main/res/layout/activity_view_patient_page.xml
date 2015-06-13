@@ -121,7 +121,7 @@
             android:text="DETAILS"
             android:textSize="10dp"
             android:id="@+id/butVPDetails"
-            android:enabled="false"
+            android:enabled="true"
             />
     </LinearLayout>
 
