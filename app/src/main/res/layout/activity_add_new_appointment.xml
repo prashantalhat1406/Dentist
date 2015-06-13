@@ -1,9 +1,12 @@
 <LinearLayout
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@drawable/rectanglegreen"
+    android:gravity="center_vertical"
     >
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,13 +14,16 @@
         android:layout_weight="0.1"
         android:orientation="horizontal"
         android:paddingTop="10dp"
+
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Paitent Name"
-            android:gravity="center"/>
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"/>
 
         <AutoCompleteTextView
             android:layout_width="0dp"
@@ -38,7 +44,9 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Date"
-            android:gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             />
         <EditText
             android:layout_width="0dp"
@@ -49,9 +57,12 @@
             />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="D"
             android:id="@+id/showDateDialog"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:background="@drawable/buttoncirclegreen"
             android:layout_weight="0.1"/>
     </LinearLayout>
 
@@ -66,7 +77,9 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Time"
-            android:gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             />
         <EditText
             android:layout_width="0dp"
@@ -76,9 +89,12 @@
             android:id="@+id/txtTime"/>
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="T"
             android:id="@+id/showTimeDialog"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:background="@drawable/buttoncirclegreen"
             android:layout_weight="0.1"/>
     </LinearLayout>
 
@@ -92,8 +108,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
-            android:text="Proposed Treatment"
-            android:gravity="center"
+            android:textColor="#000000"
+            android:text="Treatment"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             />
         <Spinner
             android:layout_width="0dp"
@@ -126,37 +144,44 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Tooth Details"
-            android:gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             />
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.2"
             android:inputType="text"
             android:id="@+id/txttd"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:visibility="invisible"
             />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_height="fill_parent"
+
         android:orientation="horizontal"
         >
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="ADD"
             android:onClick="addAppointmentToDatabase"
-            android:id="@+id/butAddAppointment"/>
+            android:id="@+id/butAddAppointment"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:background="@drawable/buttonovalgreen"
+            />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="0.3">
-
-    </LinearLayout>
 
 </LinearLayout>
