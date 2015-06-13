@@ -96,42 +96,46 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void viewPatientDetails(){
         int pID = getSelectedPatientID();
-        patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-        patientInformation pi = pdb.getPatientInfoByID(pID);
-        List<appointmentInformation> appointmentList = adb.getAppointmentInfoByPaitentID(pID);
-        Dialog patientDetails = new Dialog(this);
-        patientDetails.setContentView(R.layout.viewpatientdetailsdialog);
-        patientDetails.setTitle("Patient Details");
-        patientDetails.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        TextView name = (TextView)patientDetails.findViewById(R.id.txtVPDName);
-        TextView phone = (TextView)patientDetails.findViewById(R.id.txtVPDPhone);
-        TextView age = (TextView)patientDetails.findViewById(R.id.txtVPDAge);
-        TextView sex = (TextView)patientDetails.findViewById(R.id.txtVPDSex);
-        TextView address = (TextView)patientDetails.findViewById(R.id.txtVPDAddress);
-        name.setText(pi.getName());
-        phone.setText(pi.getPhone());
-        age.setText(pi.getAge());
-        sex.setText(pi.getSex());
-        address.setText(pi.getAddress());
-        try {
-            TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
-            patientDetailsTable.removeAllViews();
-            LayoutInflater inflater = getLayoutInflater();
-            for (appointmentInformation ai : appointmentList) {
-                TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforpatientdetails,patientDetailsTable,false);
-                TextView adate = (TextView)tr.findViewById(R.id.txtVPDDate);
-                TextView treatment = (TextView)tr.findViewById(R.id.txtVPDTreatmentDone);
-                TextView payment = (TextView)tr.findViewById(R.id.txtVPDPayment);
-                adate.setText(ai.getaDate());
-                treatment.setText(ai.getActualTreatment());
-                payment.setText(String.valueOf(ai.getPayment()));
-                patientDetailsTable.addView(tr);
+        if (pID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            patientInformation pi = pdb.getPatientInfoByID(pID);
+            List<appointmentInformation> appointmentList = adb.getAppointmentInfoByPaitentID(pID);
+            Dialog patientDetails = new Dialog(this);
+            patientDetails.setContentView(R.layout.viewpatientdetailsdialog);
+            patientDetails.setTitle("Patient Details");
+            patientDetails.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            TextView name = (TextView) patientDetails.findViewById(R.id.txtVPDName);
+            TextView phone = (TextView) patientDetails.findViewById(R.id.txtVPDPhone);
+            TextView age = (TextView) patientDetails.findViewById(R.id.txtVPDAge);
+            TextView sex = (TextView) patientDetails.findViewById(R.id.txtVPDSex);
+            TextView address = (TextView) patientDetails.findViewById(R.id.txtVPDAddress);
+            name.setText(pi.getName());
+            phone.setText(pi.getPhone());
+            age.setText(pi.getAge());
+            sex.setText(pi.getSex());
+            address.setText(pi.getAddress());
+            try {
+                TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
+                patientDetailsTable.removeAllViews();
+                LayoutInflater inflater = getLayoutInflater();
+                for (appointmentInformation ai : appointmentList) {
+                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforpatientdetails, patientDetailsTable, false);
+                    TextView adate = (TextView) tr.findViewById(R.id.txtVPDDate);
+                    TextView treatment = (TextView) tr.findViewById(R.id.txtVPDTreatmentDone);
+                    TextView payment = (TextView) tr.findViewById(R.id.txtVPDPayment);
+                    adate.setText(ai.getaDate());
+                    treatment.setText(ai.getActualTreatment());
+                    payment.setText(String.valueOf(ai.getPayment()));
+                    patientDetailsTable.addView(tr);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e) {
-            e.printStackTrace();
+            patientDetails.show();
         }
-        patientDetails.show();
     }
 
 
@@ -207,23 +211,13 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void deletePatient()
     {
-        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
-        int i =0;
-        try {
-            while (i < pt.getChildCount()) {
-                TableRow tr = (TableRow) pt.getChildAt(i);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                TextView tv = (TextView) tr.getChildAt(1);
-                if (cb.isChecked()) {
-                    patientDatabaseHandler db = new patientDatabaseHandler(this);
-                    db.deletePatientInfo(Integer.parseInt(tv.getText().toString()));
-                    db.close();
-                }
-                i = i + 1;
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
+        int pID = getSelectedPatientID();
+        if (pID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            patientDatabaseHandler db = new patientDatabaseHandler(this);
+            db.deletePatientInfo(pID);
+            db.close();
         }
     }
 
@@ -283,60 +277,49 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void editPatient()
     {
-        int i =0;
-        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
-        try {
-            while (i < pt.getChildCount()) {
-                TableRow tr = (TableRow) pt.getChildAt(i);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
-                TextView tv = (TextView) tr.getChildAt(1);
-                if (cb.isChecked()) {
-                    final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-                    final patientInformation pi = pdb.getPatientInfoByID(Integer.parseInt(tv.getText().toString()));
-                    final Dialog editDialog = new Dialog(this);
-                    editDialog.setContentView(R.layout.editdialoglayout);
-                    editDialog.setTitle("Edit Patient");
-                    final EditText name = (EditText)editDialog.findViewById(R.id.txtEditPatientName);
-                    name.setText(pi.getName());
-                    final EditText phone = (EditText)editDialog.findViewById(R.id.txtEditPatientPhone);
-                    phone.setText(pi.getPhone());
-                    final EditText address = (EditText)editDialog.findViewById(R.id.txtEditPatientAddress);
-                    address.setText(pi.getAddress());
-                    final RadioButton sexM = (RadioButton)editDialog.findViewById(R.id.rdbEditMale);
-                    final RadioButton sexF = (RadioButton)editDialog.findViewById(R.id.rdbEditFemale);
-                    if (pi.getSex().equals("M"))
-                        sexM.setChecked(true);
+        int pID = getSelectedPatientID();
+        if (pID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {
+            final patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+            final patientInformation pi = pdb.getPatientInfoByID(pID);
+            final Dialog editDialog = new Dialog(this);
+            editDialog.setContentView(R.layout.editdialoglayout);
+            editDialog.setTitle("Edit Patient");
+            final EditText name = (EditText)editDialog.findViewById(R.id.txtEditPatientName);
+            name.setText(pi.getName());
+            final EditText phone = (EditText)editDialog.findViewById(R.id.txtEditPatientPhone);
+            phone.setText(pi.getPhone());
+            final EditText address = (EditText)editDialog.findViewById(R.id.txtEditPatientAddress);
+            address.setText(pi.getAddress());
+            final RadioButton sexM = (RadioButton)editDialog.findViewById(R.id.rdbEditMale);
+            final RadioButton sexF = (RadioButton)editDialog.findViewById(R.id.rdbEditFemale);
+            if (pi.getSex().equals("M"))
+                sexM.setChecked(true);
+            else
+                sexF.setChecked(true);
+            final EditText age = (EditText)editDialog.findViewById(R.id.txtEditPatientAge);
+            age.setText(pi.getAge());
+            Button bSave = (Button) editDialog.findViewById(R.id.butEditPatient);
+            bSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pi.setName(name.getText().toString());
+                    pi.setPhone(phone.getText().toString());
+                    pi.setAddress(address.getText().toString());
+                    pi.setAge(age.getText().toString());
+                    if (sexM.isChecked())
+                        pi.setSex(sexM.getText().toString());
                     else
-                        sexF.setChecked(true);
-                    final EditText age = (EditText)editDialog.findViewById(R.id.txtEditPatientAge);
-                    age.setText(pi.getAge());
-                    Button bSave = (Button) editDialog.findViewById(R.id.butEditPatient);
-                    bSave.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            pi.setName(name.getText().toString());
-                            pi.setPhone(phone.getText().toString());
-                            pi.setAddress(address.getText().toString());
-                            pi.setAge(age.getText().toString());
-                            if (sexM.isChecked())
-                                pi.setSex(sexM.getText().toString());
-                            else
-                                pi.setSex(sexF.getText().toString());
-                            pdb.updatePatientInfo(pi);
-                            editDialog.dismiss();
-                            displayAllExistingPatients();
-                        }
-                    });
-
-                    editDialog.show();
-                    pdb.close();
-                    i = i + 1;
+                        pi.setSex(sexF.getText().toString());
+                    pdb.updatePatientInfo(pi);
+                    editDialog.dismiss();
+                    displayAllExistingPatients();
                 }
-                i = i + 1;
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
+            });
+
+            editDialog.show();
+            pdb.close();
         }
     }
 }
