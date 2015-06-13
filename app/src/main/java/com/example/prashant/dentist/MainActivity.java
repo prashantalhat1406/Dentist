@@ -40,7 +40,8 @@ public class MainActivity extends ActionBarActivity {
     public void displayPatientHomePage(View view)
     {
 
-        Intent i = new Intent(this,homePatient.class);
+        //Intent i = new Intent(this,homePatient.class);
+        Intent i = new Intent(this,patientTabs.class);
         startActivity(i);
     }
 }

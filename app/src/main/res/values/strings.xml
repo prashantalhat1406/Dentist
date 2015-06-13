@@ -41,4 +41,5 @@
     </string-array>
     <string name="title_activity_edit_patient_page">Edit Patient</string>
     <string name="title_activity_edit_appointment">Edit Appointment</string>
+    <string name="title_activity_patient_tabs">patientTabs</string>
 </resources>
