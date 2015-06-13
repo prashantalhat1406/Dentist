@@ -156,7 +156,11 @@ public class viewPatientPage extends ActionBarActivity {
                     TextView payment = (TextView) tr.findViewById(R.id.txtVPDPayment);
                     adate.setText(ai.getaDate());
                     treatment.setText(ai.getActualTreatment());
-                    payment.setText(String.valueOf(ai.getPayment()));
+                    if(ai.getPayment()==0)
+                        payment.setText("-");
+                    else
+                        payment.setText(String.valueOf(ai.getPayment()));
+
                     patientDetailsTable.addView(tr);
                 }
             } catch (Exception e) {
