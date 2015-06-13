@@ -148,13 +148,14 @@ public class addNewAppointment extends ActionBarActivity {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     try{
-                        if(hourOfDay >= 10 && hourOfDay <= 21) {
+                        if(hourOfDay >= 10 && hourOfDay <= 20) {
                             Calendar timeCheck = Calendar.getInstance();
                             timeCheck.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             timeCheck.set(Calendar.MINUTE, minute);
 
                             if (e.getText().length() == 0) {
                                 Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
+                                t.setText("");
                             } else {
                                 if (currentDateFlag) {
                                     if (Calendar.getInstance().after(timeCheck)) {
@@ -169,7 +170,7 @@ public class addNewAppointment extends ActionBarActivity {
                         }
                         else{
                             Toast.makeText(getApplicationContext(), "Clinic working hours 10am-9pm", Toast.LENGTH_SHORT).show();
-                            t.setText(hourOfDay + "::" + minute);
+                            t.setText("");
                         }
 
                     }catch (Exception e){
