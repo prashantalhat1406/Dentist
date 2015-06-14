@@ -66,7 +66,7 @@ public class patientDatabaseHandler extends SQLiteOpenHelper {
 
     public patientInformation getPatientInfoByID(int id){
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID,KEY_NAME,KEY_PHONE,KEY_ADDRESS,KEY_SEX,KEY_AGE}, KEY_ID + "=?", new String[]{String.valueOf(id)},null,null,null,null );
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_PHONE, KEY_ADDRESS, KEY_SEX, KEY_AGE}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         patientInformation pi = new patientInformation(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5));
@@ -139,6 +139,27 @@ public class patientDatabaseHandler extends SQLiteOpenHelper {
         db.close();
 
         return rowCount ;
+    }
+
+    public boolean isPatientAlreadyExist(String name, String phone){
+        boolean patientExist=false;
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NAME + "='" + name + "' AND " + KEY_PHONE + "='" + phone+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.getCount() == 0)
+                patientExist = false;
+            else
+                patientExist = true;
+            cursor.close();
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return patientExist;
     }
 
     public int updatePatientInfo(patientInformation pi){

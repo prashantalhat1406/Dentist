@@ -287,19 +287,24 @@ public class viewPatientPage extends ActionBarActivity {
                         if (address.getText().length() != 0) {
                             if (age.getText().length() != 0 && Integer.parseInt(age.getText().toString()) > 1 && Integer.parseInt(age.getText().toString()) < 100 ) {
                                 if(sexM.isChecked() || sexF.isChecked()) {
-                                    pi.setID(recordNumber);
-                                    pi.setName(name.getText().toString());
-                                    pi.setPhone(phone.getText().toString());
-                                    pi.setAddress(address.getText().toString());
-                                    pi.setAge(age.getText().toString());
-                                    if (sexM.isChecked())
-                                        pi.setSex(sexM.getText().toString());
-                                    else
-                                        pi.setSex(sexF.getText().toString());
-                                    pdb.addPatientInfo(pi);
-                                    addNP.dismiss();
-                                    Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
-                                    displayAllExistingPatients();
+                                    if (!pdb.isPatientAlreadyExist(name.getText().toString(),phone.getText().toString())) {
+                                        pi.setID(recordNumber);
+                                        pi.setName(name.getText().toString());
+                                        pi.setPhone(phone.getText().toString());
+                                        pi.setAddress(address.getText().toString());
+                                        pi.setAge(age.getText().toString());
+                                        if (sexM.isChecked())
+                                            pi.setSex(sexM.getText().toString());
+                                        else
+                                            pi.setSex(sexF.getText().toString());
+                                        pdb.addPatientInfo(pi);
+                                        addNP.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                        displayAllExistingPatients();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(), "Duplicate Record", Toast.LENGTH_SHORT).show();
+                                    }
+
 
                                 }else
                                     Toast.makeText(getApplicationContext(), "Please select Sex", Toast.LENGTH_SHORT).show();
