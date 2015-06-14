@@ -78,8 +78,13 @@ public class patientDatabaseHandler extends SQLiteOpenHelper {
     public List<patientInformation> getPatientInfoByName(String name){
         List<patientInformation> patientList = new ArrayList<patientInformation>();
 
+
+        //Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_PHONE, KEY_ADDRESS, KEY_SEX, KEY_AGE}, KEY_NAME + " LIKE ? ", new String[]{"%" + name + "%"}, null, null, null, null);
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NAME + " LIKE '%" + name + "%' ORDER BY " + KEY_NAME + " ASC" ;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID,KEY_NAME,KEY_PHONE,KEY_ADDRESS,KEY_SEX,KEY_AGE}, KEY_NAME + " LIKE ? ", new String[]{"%" + name + "%"},null,null,null,null );
+        Cursor cursor = db.rawQuery(query, null);
+
 
         if(cursor.moveToFirst()){
             do{
@@ -103,7 +108,7 @@ public class patientDatabaseHandler extends SQLiteOpenHelper {
     public List<patientInformation> getAllPatientInfo(){
         List<patientInformation> patientList = new ArrayList<patientInformation>();
 
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME + " ASC";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
