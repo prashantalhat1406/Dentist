@@ -104,8 +104,13 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
     public List<appointmentInformation> getAppointmentInfoByDate(String currentDate){
         List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
 
+        //SQLiteDatabase db = getReadableDatabase();
+        //Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? ", new String[]{"%" + currentDate + "%"},null,null,null,null );
+        //Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? ", new String[]{"%" + currentDate + "%"},null,null,null,KEY_ATIME + " DESC " );
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + currentDate + "%' ORDER BY " + KEY_ATIME + " ASC" ;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? ", new String[]{"%" + currentDate + "%"},null,null,null,null );
+        Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()) {
             do {
