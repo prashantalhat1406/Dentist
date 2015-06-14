@@ -1,8 +1,10 @@
 <LinearLayout
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rectanglegreen"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,15 +15,17 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.4"
             android:text="Name"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"
+            />
 
         <TextView
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:id="@+id/txtAPDName"
             android:inputType="text" />
 
@@ -36,14 +40,15 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="Actual Treatment"
+            android:layout_weight="0.4"
+            android:text="Treatment"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <Spinner
             android:layout_width="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:layout_height="match_parent"
             android:id="@+id/spnAPDActualTreatment">
         </Spinner>
@@ -59,14 +64,15 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.4"
             android:text="Payment"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textColor="#000000"/>
 
         <Spinner
             android:layout_width="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:layout_height="match_parent"
             android:id="@+id/spnAPDPayment"
             >
@@ -88,6 +94,8 @@
             android:text="ADD"
             android:gravity="center"
             android:id="@+id/butAPDAdd"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/buttonovalgreen"
             />
     </LinearLayout>
 
