@@ -16,6 +16,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION=1;
     private static final String DATABASE_NAME="appointmentManager";
+
     private static final String TABLE_NAME ="apptInfo";
 
     private static final String KEY_AID = "aid";

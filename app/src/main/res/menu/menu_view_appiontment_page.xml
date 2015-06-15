@@ -5,4 +5,5 @@
     <item android:id="@+id/menuVAEdit"  android:title="EDIT" android:showAsAction="never"/>
     <item android:id="@+id/menuVADelete" android:title="DELETE" android:showAsAction="never"/>
     <item android:id="@+id/menuVAPayment" android:title="PAYMENT" android:showAsAction="never"/>
+    <item android:id="@+id/menuVAPrescription" android:title="PRESCRIPTION" android:showAsAction="never"/>
 </menu>

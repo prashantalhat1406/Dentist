@@ -237,6 +237,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.menuVAPrescription) {
+            addPrescriptionDetails();
+            return true;
+        }
+
 
 
         return super.onOptionsItemSelected(item);
@@ -284,17 +289,17 @@ public class viewAppiontmentPage extends ActionBarActivity {
         return aID;
     }
 
-    public void displayEditAppointmentScreen(){
+    public void addPrescriptionDetails(){
         int aID = getSelectedAppointmentID();
 
         if(aID==-1){
             Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
         }else {
-            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-            Intent i = new Intent(this, editAppointment.class);
+            //appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            Intent i = new Intent(this, add_prescription.class);
             i.putExtra("aid", String.valueOf(aID));
             startActivity(i);
-            adb.close();
+            //adb.close();
             if (dayA.isChecked()) {
                 displayAppointmentForDate(currentDate.getText().toString());
             }
@@ -305,6 +310,30 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 displayAppointmentForMonth(currentDate.getText().toString());
             }
         }
+    }
+
+    public void displayEditAppointmentScreen() {
+        int aID = getSelectedAppointmentID();
+
+        if (aID == -1) {
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        } else {
+            //appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            Intent i = new Intent(this, editAppointment.class);
+            i.putExtra("aid", String.valueOf(aID));
+            startActivity(i);
+            //adb.close();
+            if (dayA.isChecked()) {
+                displayAppointmentForDate(currentDate.getText().toString());
+            }
+            if (weekA.isChecked()) {
+                displayAppointmentForWeek(currentDate.getText().toString());
+            }
+            if (monthA.isChecked()) {
+                displayAppointmentForMonth(currentDate.getText().toString());
+            }
+        }
+    }
         /*
         int rowIndex=1;
         TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
@@ -339,7 +368,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             e.printStackTrace();
         }
         */
-    }
+
 
     public void deleteAppointment(){
         int aID = getSelectedAppointmentID();
@@ -528,8 +557,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
             myCal.setTime(dObj);
             myCal.set(Calendar.DAY_OF_MONTH, 1);
 
-            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            //aptTable.addView(trHeader);
 
             for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
                 //add day of the Month row
@@ -547,25 +574,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 boolean color = false;
 
                 for (appointmentInformation ai : appointmentList) {
-                    /*
-                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
-                    CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
-
-                    TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
-                    aptID.setText(String.valueOf(ai.getAID()));
-
-                    patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
-                    TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
-                    name.setText(pi.getName());
-
-                    TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                    dt.setText(ai.getaTime());
-
-                    TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
-                    pt.setText(ai.getProposedTreatment());
-
-                    aptTable.addView(tr);
-                    */
 
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
 
@@ -625,11 +633,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
             myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-            //myCal.add(Calendar.DATE, 7);
 
-            //add static row
-            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            //aptTable.addView(trHeader);
 
             for(int index=0;index<7;index++){
                 //add day of the week row
@@ -639,31 +643,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 tvDayOfWeek.setText(df.format(myCal.getTime()));
                 List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 tvAptCount.setText(String.valueOf( appointmentList.size()));
-                trDate.setBackgroundResource(R.color.material_blue_grey_800);
+                trDate.setBackgroundResource(R.drawable.shapeofappointmentdayheader);
                 if (appointmentList.size()!=0)
                 aptTable.addView(trDate);
                 //add all appointments for given day
                 boolean color=false;
 
                 for (appointmentInformation ai : appointmentList) {
-                    /*
-                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
-                    CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
 
-                    TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
-                    aptID.setText(String.valueOf(ai.getAID()));
-
-                    patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
-                    TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
-                    name.setText(pi.getName());
-
-                    TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                    dt.setText(ai.getaTime());
-
-                    TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
-                    pt.setText(ai.getProposedTreatment());
-
-                    aptTable.addView(tr);*/
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
                     if(color == false){
                         color=true;
@@ -717,28 +704,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-            //TableRow trHeader = (TableRow) inflater.inflate(R.layout.tablerowappointmentstaticheader,aptTable,false);
-            //aptTable.addView(trHeader);
+
             boolean color=false;
 
             for (appointmentInformation ai : appointmentList) {
-                /*
-                TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
-
-                TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
-                aptID.setText(String.valueOf(ai.getAID()));
-
-                patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
-                TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
-                name.setText(pi.getName());
-
-                TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                dt.setText(ai.getaTime());
-
-                TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
-                pt.setText(ai.getProposedTreatment());
-                */
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
                 if(color == false){
                     color=true;
@@ -774,149 +743,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             e.printStackTrace();
         }
     }
-/* Not requried hav function to display apt as per dates
-    public void displayAllAppointments(){
-        try {
-            TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
-            aptTable.removeAllViews();
 
-            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-            List<appointmentInformation> appointmentList = adb.getAllAppointmentInfo();
-
-            LayoutInflater inflater = getLayoutInflater();
-
-            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-
-            for (appointmentInformation ai : appointmentList) {
-                TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment, aptTable, false);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.aptcheckbox);
-                //cb.setText(String.valueOf( ai.getAID()));
-
-                TextView aptID = (TextView) tr.findViewById(R.id.aptAptID);
-                aptID.setText(String.valueOf(ai.getAID()));
-
-                patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
-                TextView name = (TextView) tr.findViewById(R.id.aptpatientName);
-                name.setText(pi.getName());
-
-                TextView dt = (TextView) tr.findViewById(R.id.aptdateTime);
-                //dt.setText(ai.getaDate() + " - " + ai.getaTime());
-                dt.setText(ai.getaTime());
-
-                TextView pt = (TextView) tr.findViewById(R.id.aptproposedaction);
-                pt.setText(ai.getProposedTreatment());
-
-                aptTable.addView(tr);
-            }
-
-            pdb.close();
-            adb.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    */
-/*
-    public void displayEditAppointmentDialog()
-    {
-        int rowIndex=0;
-        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
-
-
-        try{
-            while (rowIndex < aptTable.getChildCount()){
-                TableRow tr = (TableRow)aptTable.getChildAt(rowIndex);
-                CheckBox cb = (CheckBox)tr.getChildAt(0);
-                TextView currentTime = (TextView)tr.getChildAt(2);
-                TextView ptName = (TextView)tr.getChildAt(3);
-
-                if(cb.isChecked()){
-                    final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-                    final appointmentInformation ai = adb.getAppointmentInfoByDateTime(currentDate.getText().toString(),currentTime.getText().toString());
-
-                    final Dialog editAppointment = new Dialog(this);
-                    editAppointment.setContentView(R.layout.editappointmentdialog);
-                    editAppointment.setTitle("Edit Appointment");
-
-                    patientDatabaseHandler pdb = new patientDatabaseHandler(this);
-                    List<patientInformation> patientList = pdb.getAllPatientInfo();
-                    String [] patientNames = new String[pdb.getPatientCount()];
-                    int i=0;
-                    for(patientInformation pi : patientList){patientNames[i]=pi.getName() + "-" + pi.getID() ;i=i+1;
-                    }
-                    final AutoCompleteTextView actv = (AutoCompleteTextView)editAppointment.findViewById(R.id.autotxtANAPatientName);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,patientNames);
-                    actv.setAdapter(adapter);
-                    actv.setText(ptName.getText().toString());
-
-                    final EditText edate = (EditText)editAppointment.findViewById(R.id.txtANADate);
-                    edate.setText(ai.getaDate());
-
-                    final EditText etime = (EditText)editAppointment.findViewById(R.id.txtANATime);
-                    etime.setText(ai.getaTime());
-
-                    final EditText ept = (EditText)editAppointment.findViewById(R.id.txtANApt);
-                    ept.setText(ai.getProposedTreatment());
-
-                    final EditText etd = (EditText)editAppointment.findViewById(R.id.txtANAtd);
-                    etd.setText(ai.getToothDetails());
-
-                    Button editDateButton = (Button)editAppointment.findViewById(R.id.showANADateDialog);
-                    editDateButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            showDialog(1);
-                        }
-                    });
-
-                    Button editTimeButton = (Button)editAppointment.findViewById(R.id.showANATimeDialog);
-                    editTimeButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {showDialog(2);
-                        }
-                    });
-
-
-
-                    editedDate = (EditText)editAppointment.findViewById(R.id.txtANADate);
-                    editedDate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {showDialog(1);
-                        }
-                    });
-
-                    editedTime=(EditText)editAppointment.findViewById(R.id.txtANATime);
-                    editedTime.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {showDialog(2);
-                        }
-                    });
-
-                    Button editA = (Button)editAppointment.findViewById(R.id.butANAEditAppointment);
-                    editA.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String pid = actv.getText().toString().split("-")[1];
-                            appointmentInformation newAI = new appointmentInformation(ai.getAID(),Integer.parseInt(pid),edate.getText().toString(),etime.getText().toString(),ept.getText().toString(),etd.getText().toString());
-                            adb.updateAppointmentInfo(newAI);
-                            adb.close();
-                            editAppointment.dismiss();
-                            displayAppointmentForDate(currentDate.getText().toString());
-                        }
-                    });
-
-                    editAppointment.show();
-                    rowIndex=rowIndex+1;
-                }
-
-                rowIndex=rowIndex+1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-*/
 
 
 }

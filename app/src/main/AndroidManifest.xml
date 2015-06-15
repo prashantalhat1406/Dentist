@@ -50,7 +50,12 @@
         </activity>
         <activity
             android:name=".patientTabs"
-            android:label="@string/title_activity_patient_tabs" android:screenOrientation="portrait" >
+            android:label="@string/title_activity_patient_tabs"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".add_prescription"
+            android:label="@string/title_activity_add_prescription" >
         </activity>
     </application>
 
