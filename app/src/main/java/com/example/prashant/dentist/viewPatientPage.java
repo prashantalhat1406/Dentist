@@ -140,11 +140,13 @@ public class viewPatientPage extends ActionBarActivity {
             TextView age = (TextView) patientDetails.findViewById(R.id.txtVPDAge);
             TextView sex = (TextView) patientDetails.findViewById(R.id.txtVPDSex);
             TextView address = (TextView) patientDetails.findViewById(R.id.txtVPDAddress);
+            TextView totalpayment = (TextView) patientDetails.findViewById(R.id.txtVPDTotalPayment);
             name.setText(pi.getName());
             phone.setText(pi.getPhone());
             age.setText(pi.getAge());
             sex.setText(pi.getSex());
             address.setText(pi.getAddress());
+            totalpayment.setText(String.valueOf( adb.getTotalPaymentForPatient(pi.getID())));
             try {
                 TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
                 patientDetailsTable.removeAllViews();

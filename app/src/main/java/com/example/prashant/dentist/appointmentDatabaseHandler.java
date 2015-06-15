@@ -129,7 +129,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         int appointmentCount = 0;
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? AND " + KEY_ATIME + " LIKE ? ", new String[]{"%" + currentDate + "%","%" + currentTime + "%"},null,null,null,null );
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? AND " + KEY_ATIME + " LIKE ? ", new String[]{"%" + currentDate + "%", "%" + currentTime + "%"}, null, null, null, null);
 /*
         if(cursor.moveToFirst()) {
             ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getString(6),cursor.getString(7),cursor.getString(8));
@@ -217,5 +217,26 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         }
 
         return  lastAID;
+    }
+
+    public int getTotalPaymentForPatient(int pID){
+        int totalPayment=0;
+
+        String query = "SELECT SUM(PAYMENT) FROM " + TABLE_NAME + " WHERE " + KEY_PID + " LIKE '%" + pID + "%'" ;
+        SQLiteDatabase db = getReadableDatabase();
+        try {
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+            totalPayment =  cursor.getInt(0);
+        }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return totalPayment;
     }
 }
