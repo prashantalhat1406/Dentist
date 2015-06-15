@@ -539,7 +539,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 tvDayOfWeek.setText(df.format(myCal.getTime()));
                 List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 tvAptCount.setText(String.valueOf( appointmentList.size()));
-                trDate.setBackgroundResource(R.color.material_blue_grey_800);
+                trDate.setBackgroundResource(R.drawable.shapeofappointmentdayheader);
                 if (appointmentList.size()!=0)
                     aptTable.addView(trDate);
                 //add all appointments for given day
