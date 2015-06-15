@@ -9,12 +9,17 @@
     <string name="title_activity_add_new_appointment">New Appointment</string>
     <string name="title_activity_view_appiontment_page">Appiontments</string>
     <string-array name="ProposedTreatment">
-        <item>Cap Fillting</item>
-        <item>Cap Measurement</item>
-        <item>Check Up</item>
+        <item>Check UP</item>
+        <item>Dental X-Ray</item>
+        <item>Ultrasonic Scaling</item>
+        <item>Root Canal</item>
+        <item>Cosmetic Treatment</item>
+        <item>Fixed Teeth</item>
+        <item>Extraction</item>
+        <item>Alignment</item>
         <item>Cleaning</item>
         <item>Filling</item>
-        <item>Tooth Removal</item>
+        <item>Oral Surgical Pro</item>
         <item>Other</item>
     </string-array>
     <string-array name="PaymentDenominations">
