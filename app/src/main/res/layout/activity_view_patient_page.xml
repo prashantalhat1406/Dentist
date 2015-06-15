@@ -29,9 +29,9 @@
             android:textSize="13dp"
             android:background="@drawable/buttonblue"
             android:textColor="#FFFFFF"
-            android:id="@+id/butPatientSearch"
-            android:onClick="searchPatientByName"
-            />
+            android:id="@+id/butPatientSearch" />
+            <!--android:onClick="searchPatientByName"-->
+
 
     </LinearLayout>
 <!--

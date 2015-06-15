@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -32,6 +33,14 @@ public class viewPatientPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
+
+        Button bSearch = (Button)findViewById(R.id.butPatientSearch);
+        bSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchPatientByName();
+            }
+        });
 
         Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
         bNewPatient.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +90,7 @@ public class viewPatientPage extends ActionBarActivity {
         }
     }
 
-    public void searchPatientByName(View view) {
+    public void searchPatientByName() {
         EditText searchname = (EditText) findViewById(R.id.txtSearchName);
         TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
         pt.removeAllViews();
@@ -89,25 +98,31 @@ public class viewPatientPage extends ActionBarActivity {
         List<patientInformation> patientList = db.getPatientInfoByName(searchname.getText().toString());
         LayoutInflater inflat = getLayoutInflater();
         boolean color = false;
-        for (patientInformation pi : patientList) {
-            TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
-            if(color == false){
-                color=true;
-                row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
-            }else{
-                color=false;
-                row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
+        if(patientList.size()!=0) {
+            for (patientInformation pi : patientList) {
+                TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+                if (color == false) {
+                    color = true;
+                    row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
+                } else {
+                    color = false;
+                    row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
+                }
+                final CheckBox cb = (CheckBox) row.findViewById(R.id.rownumber);
+                TextView recnum = (TextView) row.findViewById(R.id.txtPatientRecordID);
+                recnum.setText(Integer.toString(pi.getID()));
+                TextView name = (TextView) row.findViewById(R.id.name);
+                name.setText(pi.getName());
+                TextView phone = (TextView) row.findViewById(R.id.phone);
+                phone.setText(pi.getPhone());
+                pt.addView(row);
             }
-            final CheckBox cb = (CheckBox)row.findViewById(R.id.rownumber);
-            TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
-            recnum.setText(Integer.toString( pi.getID()));
-            TextView name = (TextView) row.findViewById(R.id.name);
-            name.setText(pi.getName());
-            TextView phone = (TextView) row.findViewById(R.id.phone);
-            phone.setText(pi.getPhone());
-            pt.addView(row);
-        }
+        }else
+            Toast.makeText(getApplicationContext(), "No Records Found", Toast.LENGTH_SHORT).show();
         searchname.setText("");
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+
     }
 
     public void gotoNewAppointmentScreen ()
