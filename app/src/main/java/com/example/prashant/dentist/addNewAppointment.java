@@ -162,10 +162,25 @@ public class addNewAppointment extends ActionBarActivity {
                                         Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
                                         t.setText("");
                                     } else {
-                                        t.setText(hourOfDay + "::" + minute);
+                                        if(hourOfDay<=12){
+                                            t.setText(hourOfDay + ":" + minute);
+                                        }
+                                        if(hourOfDay>12){
+                                            hourOfDay=hourOfDay-12;
+                                            t.setText(hourOfDay + ":" + minute);
+                                        }
                                     }
-                                } else
-                                    t.setText(hourOfDay + "::" + minute);
+                                } else{
+                                    if(hourOfDay<=12){
+                                        t.setText(hourOfDay + ":" + minute);
+                                    }
+                                    if(hourOfDay>12){
+                                        hourOfDay=hourOfDay-12;
+                                        t.setText(hourOfDay + ":" + minute);
+                                    }
+
+                                }
+
                             }
                         }
                         else{

@@ -33,6 +33,7 @@ public class editAppointment extends ActionBarActivity {
     private Calendar cal;
     int y, m, d,h,mi;
     Spinner sP;
+    boolean currentDateFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +118,42 @@ public class editAppointment extends ActionBarActivity {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     //e.setText(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
+
+                    /*
                     try {
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
                         Date cDate = new Date();
                         if (dObj.compareTo(cDate)>=0) {
+                            Calendar myCal = Calendar.getInstance();
+                            myCal.setTime(dObj);
+                            dat.setText(df.format(myCal.getTime()));
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
+                            dat.setText("");
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }*/
+                    try {
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        Date dObj = df.parse(dayOfMonth+"/" + (monthOfYear+1) + "/" + year);
+                        /*Date cDate = new Date();
+                        cDate.setHours(0);
+                        cDate.setMinutes(0);
+                        cDate.setSeconds(0);*/
+
+                        Calendar tempCal = Calendar.getInstance();
+                        //tempCal.setTime(new Date());
+                        tempCal.set(Calendar.HOUR_OF_DAY, 0);
+                        tempCal.set(Calendar.MINUTE,0);
+                        tempCal.set(Calendar.SECOND,0);
+                        tempCal.set(Calendar.MILLISECOND, 0);
+                        //tempCal.add(Calendar.DATE, -1);
+
+                        if (!dObj.before(tempCal.getTime())) {
+                            //tempCal.add(Calendar.DATE, 1);
+                            currentDateFlag = dObj.equals(tempCal.getTime());
                             Calendar myCal = Calendar.getInstance();
                             myCal.setTime(dObj);
                             dat.setText(df.format(myCal.getTime()));
@@ -140,7 +172,7 @@ public class editAppointment extends ActionBarActivity {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    try{
+                    /*try{
                         Calendar timeCheck = Calendar.getInstance();
                         timeCheck.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         timeCheck.set(Calendar.MINUTE, minute);
@@ -150,6 +182,50 @@ public class editAppointment extends ActionBarActivity {
                         }else{
                             tim.setText(hourOfDay + "::" + minute);
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }*/
+                    try{
+                        if(hourOfDay >= 10 && hourOfDay <= 20) {
+                            Calendar timeCheck = Calendar.getInstance();
+                            timeCheck.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            timeCheck.set(Calendar.MINUTE, minute);
+
+                            if (dat.getText().length() == 0) {
+                                Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
+                                tim.setText("");
+                            } else {
+                                if (currentDateFlag) {
+                                    if (Calendar.getInstance().after(timeCheck)) {
+                                        Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                                        tim.setText("");
+                                    } else {
+                                        if(hourOfDay<=12){
+                                            tim.setText(hourOfDay + ":" + minute);
+                                        }
+                                        if(hourOfDay>12){
+                                            hourOfDay=hourOfDay-12;
+                                            tim.setText(hourOfDay + ":" + minute);
+                                        }
+                                    }
+                                } else{
+                                    if(hourOfDay<=12){
+                                        tim.setText(hourOfDay + ":" + minute);
+                                    }
+                                    if(hourOfDay>12){
+                                        hourOfDay=hourOfDay-12;
+                                        tim.setText(hourOfDay + ":" + minute);
+                                    }
+
+                                }
+
+                            }
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Clinic working hours 10am-9pm", Toast.LENGTH_SHORT).show();
+                            tim.setText("");
+                        }
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }

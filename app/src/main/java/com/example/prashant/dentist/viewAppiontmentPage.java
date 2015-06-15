@@ -237,10 +237,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             return true;
         }
 
-        if (id == R.id.menuVAPrescription) {
+        /*if (id == R.id.menuVAPrescription) {
             addPrescriptionDetails();
             return true;
-        }
+        }*/
 
 
 
