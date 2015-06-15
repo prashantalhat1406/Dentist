@@ -21,9 +21,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Paitent Name"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"/>
+            style="@style/referenceLabel"/>
 
         <AutoCompleteTextView
             android:layout_width="0dp"
@@ -44,9 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Date"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
+            style="@style/referenceLabel"
             />
         <EditText
             android:layout_width="0dp"
@@ -77,9 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Time"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
+            style="@style/referenceLabel"
             />
         <EditText
             android:layout_width="0dp"
@@ -108,10 +102,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
-            android:textColor="#000000"
             android:text="Treatment"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
+            style="@style/referenceLabel"
             />
         <Spinner
             android:layout_width="0dp"
@@ -121,16 +113,8 @@
             >
 
         </Spinner>
-        <!--
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:inputType="textMultiLine"
-            android:lines="2"
-            android:id="@+id/txtpt"
-            />
-            -->
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -144,9 +128,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Tooth Details"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
+            style="@style/referenceLabel"
             />
         <EditText
             android:layout_width="0dp"

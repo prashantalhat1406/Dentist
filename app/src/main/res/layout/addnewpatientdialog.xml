@@ -16,9 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Name"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="#000000"/>
+            style="@style/referenceLabel"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -40,9 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Phone"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="#000000"/>
+            style="@style/referenceLabel"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -65,9 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Address"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="#000000"/>
+            style="@style/referenceLabel"/>
 
         <EditText
             android:layout_height="match_parent"
@@ -89,9 +83,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Sex"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="#000000"/>
+            style="@style/referenceLabel"/>
 
         <RadioGroup
             android:layout_width="0dp"
@@ -136,9 +128,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:text="Age"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="#000000"/>
+            style="@style/referenceLabel"/>
 
         <EditText
             android:layout_height="match_parent"

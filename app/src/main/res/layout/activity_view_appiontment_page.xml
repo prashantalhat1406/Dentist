@@ -15,16 +15,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="Select Date : "
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"/>
+            style="@style/referenceLabel"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:text="06/05/2015"
-            android:gravity="center_vertical"
-            android:textColor="#000000"
+            style="@style/referenceLabel"
             android:id="@+id/txtViewAppointmentCurrentDate"/>
         <Button
             android:layout_height="wrap_content"
@@ -35,49 +32,7 @@
             android:id="@+id/butViewAppiontmentDateDialog"
             android:background="@drawable/buttoncirclegreen"
             />
-        <!--
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:text="Year"
-            android:gravity="center"/>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:id="@+id/spYear"
-            android:gravity="center"
-            />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:text="Month"
-            android:gravity="center"/>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:id="@+id/spMonth"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:text="Day"
-            android:gravity="center"/>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:id="@+id/spDate"
-            android:gravity="center"
-            />
-            -->
 
     </LinearLayout>
 
@@ -142,26 +97,6 @@
             />
     </LinearLayout>
 
-    <!--
-<LinearLayout
-   android:layout_width="match_parent"
-   android:layout_height="0dp" android:layout_weight="0.05">
-   <TableLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/aptTableheader"
-       >
-
-       <TableRow>
-           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.05" />
-           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.25" android:text="Time" android:gravity="center"/>
-           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.30" android:text="Patient Name" android:gravity="center"/>
-           <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.4" android:text="Proposed Treatment" android:gravity="center"/>
-       </TableRow>
-
-   </TableLayout>
-</LinearLayout>
--->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -184,34 +119,6 @@
             </TableLayout>
         </ScrollView>
     </LinearLayout>
-    <!--
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:orientation="horizontal"
-            >
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="NEW"
-                android:id="@+id/butVANewAppointment"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="EDIT"
-                android:id="@+id/butVAEditAppointment"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="DELETE"
-                android:id="@+id/butVADeleteAppointment"/>
-
-    </LinearLayout>
-            -->
 
 </LinearLayout>
