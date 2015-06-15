@@ -6,7 +6,7 @@
     android:background="@drawable/rectangleblue">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1" android:background="@drawable/rectangleblue">
@@ -78,6 +78,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
+        android:background="@drawable/rectangleblue"
         >
         <Button
             android:layout_width="0dp"
@@ -112,28 +113,6 @@
             android:textColor="#FFFFFF"
             android:enabled="true"
             />
-        <!--
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:textSize="10dp"
-            android:text="EDIT"
-            android:id="@+id/butViewPatientEdit"
-            />
-
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="DELETE"
-            android:textSize="10dp"
-            android:id="@+id/butViewPatientDelete"
-            />
-
-        -->
 
     </LinearLayout>
 
