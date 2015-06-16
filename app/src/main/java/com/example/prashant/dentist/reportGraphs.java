@@ -43,13 +43,20 @@ public class reportGraphs extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_graphs);
-
+/*
         currentDate = (TextView)findViewById(R.id.txtVRCurrentDate);
 
         cal = Calendar.getInstance();
         y=cal.get(Calendar.YEAR);
         m=cal.get(Calendar.MONTH);
         d=cal.get(Calendar.DAY_OF_MONTH);
+        Button bDate = (Button)findViewById(R.id.butVRDateDialog);
+        bDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showDialog(0);
+            }
+        });
+        */
 
         Button bAppointmentwise = (Button)findViewById(R.id.butVRAppointmentwise);
         bAppointmentwise.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +66,7 @@ public class reportGraphs extends ActionBarActivity {
             }
         });
 
-        Button bDate = (Button)findViewById(R.id.butVRDateDialog);
-        bDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {showDialog(0);
-            }
-        });
+
 
 
 /*
@@ -150,15 +152,32 @@ public class reportGraphs extends ActionBarActivity {
     public void displayAppointmentWiseReport(){
         try {
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-            int[] paymentInfo = adb.getPaymentInfoMonthWise(currentDate.getText().toString());
-            int[] appointmentCount = adb.getAppointmentCountMonthWise(currentDate.getText().toString());
+
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar myCal = Calendar.getInstance();
+            //currentDate.setText(df.format(myCal.getTime()));
+
+            int[] paymentInfo = adb.getPaymentInfoMonthWise(df.format(myCal.getTime()).toString());
+            int[] appointmentCount = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()).toString());
             String[] monthNames = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
             LayoutInflater inflater = getLayoutInflater();
 
             TableLayout rptTable = (TableLayout) findViewById(R.id.reportTable);
-
             rptTable.removeAllViews();
+
+            TableRow trhead = (TableRow) inflater.inflate(R.layout.tablerowforreport, rptTable, false);
+            TextView refhead = (TextView) trhead.findViewById(R.id.txtVRReference);
+            refhead.setText("Month");
+            refhead.setBackgroundResource(R.drawable.shapeofreportrowdark);
+            TextView stat1head = (TextView) trhead.findViewById(R.id.txtVRStat1);
+            stat1head.setText("Appointments");
+            stat1head.setBackgroundResource(R.drawable.shapeofreportrowdark);
+            TextView stat2head = (TextView) trhead.findViewById(R.id.txtVRStat2);
+            stat2head.setText("Payment");
+            stat2head.setBackgroundResource(R.drawable.shapeofreportrowdark);
+            rptTable.addView(trhead);
+
             boolean color = false;
             for (int i = 0; i < 12; i++) {
 
@@ -170,23 +189,24 @@ public class reportGraphs extends ActionBarActivity {
                 TextView stat1 = (TextView) tr.findViewById(R.id.txtVRStat1);
                 stat1.setText(String.valueOf(appointmentCount[i]));
 
+
+
                 TextView stat2 = (TextView) tr.findViewById(R.id.txtVRStat2);
                 stat2.setText(String.valueOf(paymentInfo[i]));
 
                 if (color == false) {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    ref.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    stat1.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    stat2.setBackgroundResource(R.drawable.shapeofreportrowdark);
+                    //ref.setBackgroundResource(R.drawable.shapeofreportrowdark);
+                    //stat1.setBackgroundResource(R.drawable.shapeofreportrowdark);
+                    //stat2.setBackgroundResource(R.drawable.shapeofreportrowdark);
                     color = true;
                 } else {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                    ref.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                    stat1.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                    stat2.setBackgroundResource(R.drawable.shapeofreportrowlight);
+                    //ref.setBackgroundResource(R.drawable.shapeofreportrowlight);
+                    //stat1.setBackgroundResource(R.drawable.shapeofreportrowlight);
+                   // stat2.setBackgroundResource(R.drawable.shapeofreportrowlight);
                     color = false;
                 }
-
 
 
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
     android:background="@drawable/rectangleyellow">
-
+<!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -12,6 +12,7 @@
             android:orientation="horizontal"
             android:background="@drawable/rectangleyellow"
             >
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -36,7 +37,8 @@
                 />
 
 
-        </LinearLayout>
+
+        </LinearLayout>-->
 
 
         <LinearLayout
@@ -50,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="AppointmentWise"
+                android:text="Appointments"
                 android:id="@+id/butVRAppointmentwise"
                 android:textColor="#000000"
                 android:background="@drawable/buttonovalyellow"
@@ -60,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="TreatmentWise"
+                android:text="Treatments"
                 android:id="@+id/butVRTreatmentwise"
                 android:textColor="#000000"
                 android:background="@drawable/buttonovalyellow"

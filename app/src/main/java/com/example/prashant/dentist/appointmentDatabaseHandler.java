@@ -169,12 +169,16 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
             myCal.setTime(dObj);
             myCal.set(Calendar.MONTH,0);
             SQLiteDatabase db = getReadableDatabase();
-            for(int monthCount=0;monthCount<12;monthCount++){
+            int monthCount;
+            for(monthCount=0;monthCount<12;monthCount++){
                 myCal.set(Calendar.DAY_OF_MONTH, 1);
                 for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
-                    String query = "SELECT SUM(PAYMENT) FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + df.format(myCal.getTime()) + "%' ORDER BY " + KEY_ATIME + " ASC" ;
+                    String query = "SELECT SUM(PAYMENT) FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + df.format(myCal.getTime()) + "%' " ;
                     Cursor cursor = db.rawQuery(query, null);
-                    paymentInfo[monthCount]=paymentInfo[monthCount] +cursor.getInt(0);
+                    if (cursor != null) {
+                        cursor.moveToFirst();
+                        paymentInfo[monthCount] = paymentInfo[monthCount] + cursor.getInt(0);
+                    }
                     cursor.close();
                     myCal.add(Calendar.DAY_OF_YEAR, 1);//next Day
                 }

@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="Total Payment "
+                android:text="Payment "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"

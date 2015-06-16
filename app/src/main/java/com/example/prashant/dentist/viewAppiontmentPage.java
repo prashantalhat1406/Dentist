@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -395,6 +396,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             final Dialog addPayment = new Dialog(this);
             addPayment.setContentView(R.layout.addpaymentdialog);
             addPayment.setTitle("Add Payment");
+
+            addPayment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 450);//WindowManager.LayoutParams.MATCH_PARENT);
 
             TextView nameOfPatient = (TextView) addPayment.findViewById(R.id.txtAPDName);
             nameOfPatient.setText(getPatientNameFromAID(aID));
