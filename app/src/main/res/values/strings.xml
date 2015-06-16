@@ -48,4 +48,5 @@
     <string name="title_activity_edit_appointment">Edit Appointment</string>
     <string name="title_activity_patient_tabs">patientTabs</string>
     <string name="title_activity_add_prescription">add_prescription</string>
+    <string name="title_activity_testing_graphs">testingGraphs</string>
 </resources>

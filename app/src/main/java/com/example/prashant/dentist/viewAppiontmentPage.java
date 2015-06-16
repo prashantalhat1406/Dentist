@@ -47,6 +47,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appiontment_page);
 
+
+
         dayA = (RadioButton)findViewById(R.id.rdbVADay);
         dayA.setChecked(true);
         dayA.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +93,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
             currentDate.setText(df.format(myCal.getTime()));
-            displayAppointmentForDate(currentDate.getText().toString());
+            appointmentDatabaseHandler adb= new appointmentDatabaseHandler(this);
+            int []appointmentsMonthWise = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()));
+            //displayAppointmentForDate(currentDate.getText().toString());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -334,40 +338,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             }
         }
     }
-        /*
-        int rowIndex=1;
-        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
 
-
-        try {
-            while (rowIndex < aptTable.getChildCount()) {
-                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                    //CheckBox cb = (CheckBox) tr.getChildAt(0);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
-                    //TextView aid = (TextView) tr.getChildAt(1);
-                TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
-                    if (cb.isChecked()) {
-                        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-                        Intent i = new Intent(this, editAppointment.class);
-                        i.putExtra("aid", aid.getText().toString());
-                        startActivity(i);
-                        adb.close();
-                        if(dayA.isChecked()) {
-                            displayAppointmentForDate(currentDate.getText().toString());
-                        }
-                        if(weekA.isChecked()){
-                            displayAppointmentForWeek(currentDate.getText().toString());
-                        }
-                        if(monthA.isChecked()){
-                            displayAppointmentForMonth(currentDate.getText().toString());
-                        }
-                    }
-                rowIndex = rowIndex + 1;
-                }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        */
 
 
     public void deleteAppointment(){
@@ -389,36 +360,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 displayAppointmentForMonth(currentDate.getText().toString());
             }
         }
-        /*
-        int rowIndex=1;
-        TableLayout aptTable = (TableLayout)findViewById(R.id.apptTable);
-        try {
-            while (rowIndex < aptTable.getChildCount()) {
-                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                //CheckBox cb = (CheckBox) tr.getChildAt(0);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
-                //TextView aid = (TextView) tr.getChildAt(1);
-                TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
-                if (cb.isChecked()) {
-                    appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-                    adb.deleteAppointmentInfo(Integer.parseInt(aid.getText().toString()));
-                    adb.close();
-                    if(dayA.isChecked()) {
-                        displayAppointmentForDate(currentDate.getText().toString());
-                    }
-                    if(weekA.isChecked()){
-                        displayAppointmentForWeek(currentDate.getText().toString());
-                    }
-                    if(monthA.isChecked()){
-                        displayAppointmentForMonth(currentDate.getText().toString());
-                    }
-                }
-                rowIndex=rowIndex+1;
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        */
+
     }
 
     public String getPatientNameFromAID(int aID){
@@ -482,61 +424,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
             addPayment.show();
 
         }
-
-/*
-        int rowIndex = 1;
-        TableLayout aptTable = (TableLayout) findViewById(R.id.apptTable);
-
-
-            while (rowIndex < aptTable.getChildCount()) {
-                TableRow tr = (TableRow) aptTable.getChildAt(rowIndex);
-                //CheckBox cb = (CheckBox) tr.getChildAt(0);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
-                //TextView n = (TextView) tr.getChildAt(3);
-                TextView n = (TextView) tr.findViewById(R.id.txtVARnamephone);
-                //final TextView aid = (TextView) tr.getChildAt(1);
-                final TextView aid = (TextView) tr.findViewById(R.id.txtVARaptID);
-                final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-                if (cb.isChecked()) {
-
-                    final Dialog addPayment = new Dialog(this);
-                    addPayment.setContentView(R.layout.addpaymentdialog);
-                    addPayment.setTitle("Add Payment");
-
-                    TextView nameOfPatient = (TextView)addPayment.findViewById(R.id.txtAPDName);
-                    String tempArr[] = n.getText().toString().split(" ");
-                    nameOfPatient.setText(tempArr[0]);
-
-                    final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
-                    ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
-                    paymentInfo.setAdapter(adapterPayment);
-
-                    final Spinner actualTreatmentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDActualTreatment);
-                    ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
-                    actualTreatmentInfo.setAdapter(adapterTreatmentt);
-
-
-                    Button addButton = (Button)addPayment.findViewById(R.id.butAPDAdd);
-                    addButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            appointmentInformation ai = adb.getAppointmentInfoByID(Integer.parseInt(aid.getText().toString()));
-                            ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
-                            ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
-                            adb.updateAppointmentInfo(ai);
-                            Toast.makeText(getApplicationContext(), "Payment Added", Toast.LENGTH_SHORT).show();
-                            addPayment.dismiss();
-                        }
-                    });
-
-                    cb.setChecked(false);
-                    addPayment.show();
-                }
-                adb.close();
-                rowIndex=rowIndex+1;
-            }
-*/
-
     }
 
 
