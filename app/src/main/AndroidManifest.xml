@@ -59,7 +59,8 @@
         </activity>
         <activity
             android:name=".reportGraphs"
-            android:label="@string/title_activity_report_graphs" >
+            android:label="@string/title_activity_report_graphs"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

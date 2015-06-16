@@ -1,9 +1,12 @@
 package com.example.prashant.dentist;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -48,6 +51,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appiontment_page);
 
+        //ActionBar ab = getActionBar();
+        //ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3f0d7")));
 
 
         dayA = (RadioButton)findViewById(R.id.rdbVADay);

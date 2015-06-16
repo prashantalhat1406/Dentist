@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +34,11 @@ public class viewPatientPage extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
+
+        //ActionBar ab = getActionBar();
+        //ab.setBackgroundDrawable(new ColorDrawable(0xcfdafa));
+        //getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.accent_material_dark)));
+
         displayAllExistingPatients();
 
         Button bSearch = (Button)findViewById(R.id.butPatientSearch);
