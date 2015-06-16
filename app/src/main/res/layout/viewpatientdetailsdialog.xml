@@ -15,13 +15,13 @@
             android:orientation="horizontal" android:gravity="center_vertical">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:layout_height="wrap_content"
                 android:text="Name "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDName"
                 style="@style/boldBlueCV"/>
@@ -34,25 +34,25 @@
             android:orientation="horizontal" android:gravity="center_vertical">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:layout_height="wrap_content"
                 android:text="Phone "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.35"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDPhone"
                 style="@style/boldBlueCV"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.30"
                 android:layout_height="wrap_content"
                 android:text="Total Payment "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.15"
+                android:layout_weight="0.10"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDTotalPayment"
                 style="@style/boldBlueCV"/>
@@ -65,13 +65,13 @@
             android:orientation="horizontal" android:gravity="center_vertical">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:layout_height="wrap_content"
                 android:text="Age "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.35"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDAge"
                 style="@style/boldBlueCV"/>
@@ -97,13 +97,13 @@
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:layout_height="wrap_content"
                 android:text="Address "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDAddress"
                 style="@style/boldBlueCV"/>
