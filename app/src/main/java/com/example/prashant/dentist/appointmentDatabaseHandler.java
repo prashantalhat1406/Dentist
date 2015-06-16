@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,7 +33,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_TOOTHDETAILS = "toothDetails";
 
     public appointmentDatabaseHandler(Context context){
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -75,7 +78,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
 
     public appointmentInformation getAppointmentInfoByID(int aid){
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_AID + "=?", new String[]{String.valueOf(aid)},null,null,null,null );
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_AID + "=?", new String[]{String.valueOf(aid)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         appointmentInformation ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getString(6),cursor.getString(7),cursor.getString(8));
@@ -88,7 +91,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID,KEY_PID,KEY_ADATE,KEY_ATIME,KEY_STATUS,KEY_PAYMENT,KEY_PROPOSEDTREATMENT,KEY_ACTUALTREATMENT,KEY_TOOTHDETAILS}, KEY_PID + "=?", new String[]{String.valueOf(pid)},null,null,null,null );
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_PID + "=?", new String[]{String.valueOf(pid)}, null, null, null, null);
 
         if(cursor.moveToFirst()) {
             do {
@@ -123,6 +126,36 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return  appointmentList;
+    }
+
+    public int[] getAppointmentCountMonthWise(String currentDate){
+        //List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
+        int []appointmentCount={0,0,0,0,0,0,0,0,0,0,0,0};
+
+        try{
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date dObj = df.parse(currentDate);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            myCal.set(Calendar.MONTH,0);
+            SQLiteDatabase db = getReadableDatabase();
+            for(int monthCount=0;monthCount<12;monthCount++){
+                myCal.set(Calendar.DAY_OF_MONTH, 1);
+                for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
+                    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + df.format(myCal.getTime()) + "%' ORDER BY " + KEY_ATIME + " ASC" ;
+                    Cursor cursor = db.rawQuery(query, null);
+                    appointmentCount[monthCount]=appointmentCount[monthCount]+cursor.getCount();
+                    cursor.close();
+                    myCal.add(Calendar.DAY_OF_YEAR, 1);//next Day
+                 }
+                //myCal.add(Calendar.MONTH,1);
+            }
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return appointmentCount;
     }
 
     public int getAppointmentCountForDateTime(String currentDate, String currentTime){
