@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
+    android:background="@drawable/rectangleyellow">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangleyellow"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Select Date : "
+                style="@style/referenceLabel"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="06/05/2015"
+                style="@style/referenceLabel"
+                android:id="@+id/txtVRCurrentDate"/>
+            <Button
+                android:layout_height="wrap_content"
+                android:text="D"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:textColor="#000000"
+                android:id="@+id/butVRDateDialog"
+                android:background="@drawable/buttoncircleyellow"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangleyellow"
+            >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="AppointmentWise"
+                android:id="@+id/butVRAppointmentwise"
+                android:textColor="#000000"
+                android:background="@drawable/buttonovalyellow"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="TreatmentWise"
+                android:id="@+id/butVRTreatmentwise"
+                android:textColor="#000000"
+                android:background="@drawable/buttonovalyellow"
+                />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="0.8"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            >
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/reportTable"
+                android:showDividers="middle"
+                >
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

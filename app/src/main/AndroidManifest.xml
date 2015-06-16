@@ -57,6 +57,10 @@
             android:name=".add_prescription"
             android:label="@string/title_activity_add_prescription" >
         </activity>
+        <activity
+            android:name=".reportGraphs"
+            android:label="@string/title_activity_report_graphs" >
+        </activity>
     </application>
 
 </manifest>

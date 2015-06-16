@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,6 +16,16 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button bReports = (Button)findViewById(R.id.reports);
+        bReports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoReportScreen();
+
+            }
+        });
+
     }
 
     @Override
@@ -42,6 +52,11 @@ public class MainActivity extends ActionBarActivity {
 
         //Intent i = new Intent(this,testingGraphs.class);
         Intent i = new Intent(this,patientTabs.class);
+        startActivity(i);
+    }
+
+    public void  gotoReportScreen(){
+        Intent i = new Intent(this,reportGraphs.class);
         startActivity(i);
     }
 }

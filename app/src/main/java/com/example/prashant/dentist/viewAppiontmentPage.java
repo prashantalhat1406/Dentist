@@ -94,8 +94,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             myCal.setTime(dObj);
             currentDate.setText(df.format(myCal.getTime()));
             appointmentDatabaseHandler adb= new appointmentDatabaseHandler(this);
-            int []appointmentsMonthWise = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()));
-            //displayAppointmentForDate(currentDate.getText().toString());
+            //int []appointmentsMonthWise = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()));
+            displayAppointmentForDate(currentDate.getText().toString());
         }catch (Exception e){
             e.printStackTrace();
         }

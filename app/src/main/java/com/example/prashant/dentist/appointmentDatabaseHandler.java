@@ -129,7 +129,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
     }
 
     public int[] getAppointmentCountMonthWise(String currentDate){
-        //List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
+
         int []appointmentCount={0,0,0,0,0,0,0,0,0,0,0,0};
 
         try{
@@ -144,11 +144,10 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
                 for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
                     String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + df.format(myCal.getTime()) + "%' ORDER BY " + KEY_ATIME + " ASC" ;
                     Cursor cursor = db.rawQuery(query, null);
-                    appointmentCount[monthCount]=appointmentCount[monthCount]+cursor.getCount();
+                    appointmentCount[monthCount]=appointmentCount[monthCount] +cursor.getCount();
                     cursor.close();
                     myCal.add(Calendar.DAY_OF_YEAR, 1);//next Day
                  }
-                //myCal.add(Calendar.MONTH,1);
             }
             db.close();
         }catch (Exception e){
@@ -158,18 +157,42 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         return appointmentCount;
     }
 
+
+    public int[] getPaymentInfoMonthWise(String currentDate){
+
+        int []paymentInfo={0,0,0,0,0,0,0,0,0,0,0,0};
+
+        try{
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date dObj = df.parse(currentDate);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            myCal.set(Calendar.MONTH,0);
+            SQLiteDatabase db = getReadableDatabase();
+            for(int monthCount=0;monthCount<12;monthCount++){
+                myCal.set(Calendar.DAY_OF_MONTH, 1);
+                for(int index=0;index<myCal.getActualMaximum(Calendar.DAY_OF_MONTH);index++){
+                    String query = "SELECT SUM(PAYMENT) FROM " + TABLE_NAME + " WHERE " + KEY_ADATE + " LIKE '%" + df.format(myCal.getTime()) + "%' ORDER BY " + KEY_ATIME + " ASC" ;
+                    Cursor cursor = db.rawQuery(query, null);
+                    paymentInfo[monthCount]=paymentInfo[monthCount] +cursor.getInt(0);
+                    cursor.close();
+                    myCal.add(Calendar.DAY_OF_YEAR, 1);//next Day
+                }
+            }
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return paymentInfo;
+    }
+
     public int getAppointmentCountForDateTime(String currentDate, String currentTime){
         //appointmentInformation ai=new appointmentInformation(); // = new ArrayList<appointmentInformation>();
         int appointmentCount = 0;
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_ADATE + " LIKE ? AND " + KEY_ATIME + " LIKE ? ", new String[]{"%" + currentDate + "%", "%" + currentTime + "%"}, null, null, null, null);
-/*
-        if(cursor.moveToFirst()) {
-            ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getString(6),cursor.getString(7),cursor.getString(8));
-        }
-        */
-
         appointmentCount=cursor.getCount();
         cursor.close();
         db.close();
