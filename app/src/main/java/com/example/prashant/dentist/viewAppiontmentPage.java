@@ -344,7 +344,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             final Dialog editAppointment = new Dialog(this);
             editAppointment.setContentView(R.layout.editappointmentdialog);
             editAppointment.setTitle("Edit Appointment");
-            editAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            editAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
             final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
             appointmentInformation ai = adb.getAppointmentInfoByID(aID);

@@ -152,7 +152,7 @@ public class viewPatientPage extends ActionBarActivity {
             final Dialog addAppointment = new Dialog(this);
             addAppointment.setContentView(R.layout.editappointmentdialog);
             addAppointment.setTitle("Add Appointment");
-            addAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            addAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
             final TextView name = (TextView)addAppointment.findViewById(R.id.autotxtEADName);
             name.setText(pi.getName());
