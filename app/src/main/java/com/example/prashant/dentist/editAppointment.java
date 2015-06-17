@@ -30,13 +30,13 @@ public class editAppointment extends ActionBarActivity {
 
     private String aidToEdit;
     EditText  dat, tim;
-    private Calendar cal;
     int y, m, d,h,mi;
     Spinner sP;
     boolean currentDateFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Calendar cal;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_appointment);
 
@@ -82,12 +82,9 @@ public class editAppointment extends ActionBarActivity {
         name.setText(pi.getName());
         dat.setText(ai.getaDate());
         tim.setText(ai.getaTime());
-        //pt.setText(ai.getProposedTreatment());
         int spinerValue = adapterpt.getPosition(ai.getProposedTreatment());
         sP.setSelection(spinerValue);
-        spinerValue=0;
         td.setText(ai.getToothDetails());
-
         Button saveButton = (Button) findViewById(R.id.butEAEditAppointment);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,7 +261,7 @@ public class editAppointment extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
 

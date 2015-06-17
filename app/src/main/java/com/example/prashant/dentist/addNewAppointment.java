@@ -28,7 +28,7 @@ import java.util.List;
 
 public class addNewAppointment extends ActionBarActivity {
 
-    private Calendar cal;
+
     int y, m, d,h,mi;
     Button bd,bt;
     EditText e,t;
@@ -37,6 +37,7 @@ public class addNewAppointment extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Calendar cal;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_appointment);
         try{
@@ -249,7 +250,7 @@ public class addNewAppointment extends ActionBarActivity {
 
 
         appointmentDatabaseHandler adb;
-        int lastApptID=1;
+        int lastApptID;
 
         try {
             if(name.getText().length() == 0 ){
@@ -261,9 +262,6 @@ public class addNewAppointment extends ActionBarActivity {
                     if(tim.getText().length() ==0 ){
                         Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
                     }else{
-                        /*if (pt.getSelectedItem().length() == 0 ){
-                            Toast.makeText(getApplicationContext(), "Enter Proposed Treatment", Toast.LENGTH_SHORT).show();
-                        }else{*/
                             if(td.getText().length() == 0 ){
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
                             }else{
@@ -312,7 +310,7 @@ public class addNewAppointment extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
 
