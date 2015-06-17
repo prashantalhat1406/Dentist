@@ -163,20 +163,35 @@ public class addNewAppointment extends ActionBarActivity {
                                         t.setText("");
                                     } else {
                                         if(hourOfDay<=12){
-                                            t.setText(hourOfDay + ":" + minute);
+                                            if(String.valueOf(minute).length() == 1)
+                                                t.setText(hourOfDay + ":0" + minute);
+                                            else
+                                                t.setText(hourOfDay + ":" + minute);
                                         }
                                         if(hourOfDay>12){
                                             hourOfDay=hourOfDay-12;
-                                            t.setText(hourOfDay + ":" + minute);
+                                            if(String.valueOf(minute).length() == 1)
+                                                t.setText(hourOfDay + ":0" + minute);
+                                            else
+                                                t.setText(hourOfDay + ":" + minute);
+                                            //t.setText(hourOfDay + ":" + minute);
                                         }
                                     }
                                 } else{
                                     if(hourOfDay<=12){
-                                        t.setText(hourOfDay + ":" + minute);
+                                        if(String.valueOf(minute).length() == 1)
+                                            t.setText(hourOfDay + ":0" + minute);
+                                        else
+                                            t.setText(hourOfDay + ":" + minute);
+                                        //t.setText(hourOfDay + ":" + minute);
                                     }
                                     if(hourOfDay>12){
                                         hourOfDay=hourOfDay-12;
-                                        t.setText(hourOfDay + ":" + minute);
+                                        if(String.valueOf(minute).length() == 1)
+                                            t.setText(hourOfDay + ":0" + minute);
+                                        else
+                                            t.setText(hourOfDay + ":" + minute);
+                                        //t.setText(hourOfDay + ":" + minute);
                                     }
 
                                 }

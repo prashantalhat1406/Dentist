@@ -201,20 +201,36 @@ public class editAppointment extends ActionBarActivity {
                                         tim.setText("");
                                     } else {
                                         if(hourOfDay<=12){
-                                            tim.setText(hourOfDay + ":" + minute);
+                                            if(String.valueOf(minute).length() == 1)
+                                                tim.setText(hourOfDay + ":0" + minute);
+                                            else
+                                                tim.setText(hourOfDay + ":" + minute);
+                                            //tim.setText(hourOfDay + ":" + minute);
                                         }
                                         if(hourOfDay>12){
                                             hourOfDay=hourOfDay-12;
-                                            tim.setText(hourOfDay + ":" + minute);
+                                            if(String.valueOf(minute).length() == 1)
+                                                tim.setText(hourOfDay + ":0" + minute);
+                                            else
+                                                tim.setText(hourOfDay + ":" + minute);
+                                            //tim.setText(hourOfDay + ":" + minute);
                                         }
                                     }
                                 } else{
                                     if(hourOfDay<=12){
-                                        tim.setText(hourOfDay + ":" + minute);
+                                        if(String.valueOf(minute).length() == 1)
+                                            tim.setText(hourOfDay + ":0" + minute);
+                                        else
+                                            tim.setText(hourOfDay + ":" + minute);
+                                        //tim.setText(hourOfDay + ":" + minute);
                                     }
                                     if(hourOfDay>12){
                                         hourOfDay=hourOfDay-12;
-                                        tim.setText(hourOfDay + ":" + minute);
+                                        if(String.valueOf(minute).length() == 1)
+                                            tim.setText(hourOfDay + ":0" + minute);
+                                        else
+                                            tim.setText(hourOfDay + ":" + minute);
+                                        //tim.setText(hourOfDay + ":" + minute);
                                     }
 
                                 }
