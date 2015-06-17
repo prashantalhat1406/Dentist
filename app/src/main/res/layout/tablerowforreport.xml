@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <TextView android:id="@+id/txtVRReference"
-        android:layout_weight="0.2" android:text="JAN" android:gravity="center_vertical"/>
+        android:layout_weight="0.2" android:text="JAN" android:gravity="center"/>
     <TextView android:id="@+id/txtVRStat1" android:layout_weight="0.1"
         android:text="100" android:gravity="center"/>
     <TextView android:id="@+id/txtVRStat2"

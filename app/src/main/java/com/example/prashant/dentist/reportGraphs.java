@@ -1,10 +1,5 @@
 package com.example.prashant.dentist;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,47 +11,21 @@ import android.widget.DatePicker;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.androidplot.Plot;
-import com.androidplot.ui.LayoutManager;
-import com.androidplot.ui.SizeLayoutType;
-import com.androidplot.ui.SizeMetric;
-import com.androidplot.ui.SizeMetrics;
-import com.androidplot.ui.widget.TextLabelWidget;
-import com.androidplot.xy.BarFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYPlot;
-import com.androidplot.xy.XYSeries;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+
 
 
 public class reportGraphs extends ActionBarActivity {
-    private Calendar cal;
-    TextView currentDate;
-    int y, m, d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_graphs);
-/*
-        currentDate = (TextView)findViewById(R.id.txtVRCurrentDate);
 
-        cal = Calendar.getInstance();
-        y=cal.get(Calendar.YEAR);
-        m=cal.get(Calendar.MONTH);
-        d=cal.get(Calendar.DAY_OF_MONTH);
-        Button bDate = (Button)findViewById(R.id.butVRDateDialog);
-        bDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {showDialog(0);
-            }
-        });
-        */
 
         Button bAppointmentwise = (Button)findViewById(R.id.butVRAppointmentwise);
         bAppointmentwise.setOnClickListener(new View.OnClickListener() {
@@ -66,65 +35,14 @@ public class reportGraphs extends ActionBarActivity {
             }
         });
 
-
-
-
-/*
-        appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar myCal = Calendar.getInstance();
-
-        Number[]yValues = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()));
-        Number[]xValues = {1,2,3,4,5,6,7,8,9,10,11,12};
-
-        XYPlot plot = (XYPlot)findViewById(R.id.plotarea);
-        XYSeries data = new SimpleXYSeries(Arrays.asList(xValues),Arrays.asList(yValues),"MonthWise");
-        BarFormatter barFormatter = new BarFormatter(Color.RED,Color.YELLOW);
-
-
-        plot.setTitle("Appointment Count MonthWise");
-
-
-
-        plot.addSeries(data,barFormatter);
-        */
-
-
-
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        Button bTreatmentwise = (Button)findViewById(R.id.butVRTreatmentwise);
+        bTreatmentwise.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onClick(View v) {
+                displayTreatmentWiseReport();
 
-                try {
-                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                    Calendar myCal = Calendar.getInstance();
-                    myCal.setTime(dObj);
-                    currentDate.setText(df.format(myCal.getTime()));
-/*
-                    if(dayA.isChecked()) {
-                        currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForDate(currentDate.getText().toString());
-                    }
-                    if(weekA.isChecked()){
-                        currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForWeek(currentDate.getText().toString());
-                    }
-                    if(monthA.isChecked()){
-                        currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForMonth(currentDate.getText().toString());
-                    }
-                    */
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
             }
-        }, y, m, d);
+        });
     }
 
     @Override
@@ -148,6 +66,9 @@ public class reportGraphs extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void displayTreatmentWiseReport(){
+        Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
+    }
 
     public void displayAppointmentWiseReport(){
         try {
@@ -167,6 +88,8 @@ public class reportGraphs extends ActionBarActivity {
             rptTable.removeAllViews();
 
             TableRow trhead = (TableRow) inflater.inflate(R.layout.tablerowforreport, rptTable, false);
+            trhead.setBackgroundResource(R.drawable.rectangleyellow);
+
             TextView refhead = (TextView) trhead.findViewById(R.id.txtVRReference);
             refhead.setText("Month");
             refhead.setBackgroundResource(R.drawable.shapeofreportrowdark);
@@ -176,6 +99,7 @@ public class reportGraphs extends ActionBarActivity {
             TextView stat2head = (TextView) trhead.findViewById(R.id.txtVRStat2);
             stat2head.setText("Payment");
             stat2head.setBackgroundResource(R.drawable.shapeofreportrowdark);
+
             rptTable.addView(trhead);
 
             boolean color = false;
@@ -196,15 +120,9 @@ public class reportGraphs extends ActionBarActivity {
 
                 if (color == false) {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    //ref.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    //stat1.setBackgroundResource(R.drawable.shapeofreportrowdark);
-                    //stat2.setBackgroundResource(R.drawable.shapeofreportrowdark);
                     color = true;
                 } else {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                    //ref.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                    //stat1.setBackgroundResource(R.drawable.shapeofreportrowlight);
-                   // stat2.setBackgroundResource(R.drawable.shapeofreportrowlight);
                     color = false;
                 }
 
