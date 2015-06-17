@@ -240,6 +240,21 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
 
     public void displayEditAppointmentScreen() {
+
+        final Dialog test = new Dialog(this);
+        test.setContentView(R.layout.testdialog);
+        test.setTitle("Test Date Dialog");
+        test.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 450);
+
+        Button b = (Button)test.findViewById(R.id.buttestdialog);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(0);
+            }
+        });
+
+        /*
         int aID = getSelectedAppointmentID();
         if (aID == -1) {
             Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
@@ -254,6 +269,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             if (monthA.isChecked())
                 displayAppointmentForMonth(currentDate.getText().toString());
         }
+        */
     }
 
 
