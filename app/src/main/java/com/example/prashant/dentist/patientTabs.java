@@ -1,7 +1,10 @@
 package com.example.prashant.dentist;
 
+import android.app.ActionBar;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +46,8 @@ public class patientTabs extends TabActivity implements TabHost.OnTabChangeListe
 
     @Override
     public void onTabChanged(String tabId) {
+
+
 
     }
 
