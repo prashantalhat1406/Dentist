@@ -49,5 +49,5 @@
     <string name="title_activity_patient_tabs">patientTabs</string>
     <string name="title_activity_add_prescription">add_prescription</string>
     <string name="title_activity_testing_graphs">testingGraphs</string>
-    <string name="title_activity_report_graphs">reportGraphs</string>
+    <string name="title_activity_report_graphs">Reports</string>
 </resources>

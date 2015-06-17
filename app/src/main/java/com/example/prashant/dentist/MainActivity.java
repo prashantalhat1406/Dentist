@@ -15,16 +15,19 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_patient_tabs);
+        Intent i = new Intent(this,patientTabs.class);
+        startActivity(i);
 
-        Button bReports = (Button)findViewById(R.id.reports);
-        bReports.setOnClickListener(new View.OnClickListener() {
+        //Button bReports = (Button)findViewById(R.id.reports);
+        /*bReports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoReportScreen();
 
             }
-        });
+        });*/
 
     }
 

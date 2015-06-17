@@ -24,17 +24,21 @@ public class patientTabs extends TabActivity implements TabHost.OnTabChangeListe
         TabHost.TabSpec spec;
         Intent intent;
 
-        intent = new Intent().setClass(this,viewPatientPage.class);
-        spec = th.newTabSpec("Patients").setIndicator("Patients").setContent(intent);
-        th.addTab(spec);
-
         intent = new Intent().setClass(this,viewAppiontmentPage.class);
         spec = th.newTabSpec("Appointments").setIndicator("Appointments").setContent(intent);
         th.addTab(spec);
 
-        th.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.rectangleblue);
-        th.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.rectanglegreen);
+        intent = new Intent().setClass(this,viewPatientPage.class);
+        spec = th.newTabSpec("Patients").setIndicator("Patients").setContent(intent);
+        th.addTab(spec);
 
+        intent = new Intent().setClass(this,reportGraphs.class);
+        spec = th.newTabSpec("Reports").setIndicator("Reports").setContent(intent);
+        th.addTab(spec);
+
+        th.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.rectanglegreen);
+        th.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.rectangleblue);
+        th.getTabWidget().getChildAt(2).setBackgroundResource(R.drawable.rectangleyellow);
 
     }
 
