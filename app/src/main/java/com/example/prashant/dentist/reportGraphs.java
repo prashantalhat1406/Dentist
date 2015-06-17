@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -76,10 +75,9 @@ public class reportGraphs extends ActionBarActivity {
 
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Calendar myCal = Calendar.getInstance();
-            //currentDate.setText(df.format(myCal.getTime()));
 
-            int[] paymentInfo = adb.getPaymentInfoMonthWise(df.format(myCal.getTime()).toString());
-            int[] appointmentCount = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()).toString());
+            int[] paymentInfo = adb.getPaymentInfoMonthWise(df.format(myCal.getTime()));
+            int[] appointmentCount = adb.getAppointmentCountMonthWise(df.format(myCal.getTime()));
             String[] monthNames = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
             LayoutInflater inflater = getLayoutInflater();
@@ -104,30 +102,20 @@ public class reportGraphs extends ActionBarActivity {
 
             boolean color = false;
             for (int i = 0; i < 12; i++) {
-
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforreport, rptTable, false);
-
                 TextView ref = (TextView) tr.findViewById(R.id.txtVRReference);
                 ref.setText(monthNames[i]);
-
                 TextView stat1 = (TextView) tr.findViewById(R.id.txtVRStat1);
                 stat1.setText(String.valueOf(appointmentCount[i]));
-
-
-
                 TextView stat2 = (TextView) tr.findViewById(R.id.txtVRStat2);
                 stat2.setText(String.valueOf(paymentInfo[i]));
-
-                if (color == false) {
+                if (!color) {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowdark);
                     color = true;
                 } else {
                     tr.setBackgroundResource(R.drawable.shapeofreportrowlight);
                     color = false;
                 }
-
-
-
                 rptTable.addView(tr);
             }
         }catch (Exception e){
