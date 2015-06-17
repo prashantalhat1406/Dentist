@@ -1,18 +1,13 @@
 package com.example.prashant.dentist;
 
-import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,24 +18,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
 
 
 public class viewPatientPage extends ActionBarActivity {
-    private int noOfPatientSelected=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
-
-        //ActionBar ab = getActionBar();
-        //ab.setBackgroundDrawable(new ColorDrawable(0xcfdafa));
-        //getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.accent_material_dark)));
-
         displayAllExistingPatients();
-
         Button bSearch = (Button)findViewById(R.id.butPatientSearch);
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +35,6 @@ public class viewPatientPage extends ActionBarActivity {
                 searchPatientByName();
             }
         });
-
         Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
         bNewPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +43,6 @@ public class viewPatientPage extends ActionBarActivity {
 
             }
         });
-
         Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
         bAppointmeent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +50,6 @@ public class viewPatientPage extends ActionBarActivity {
                 gotoNewAppointmentScreen();
             }
         });
-
         Button bDetails = (Button)findViewById(R.id.butVPDetails);
         bDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +92,13 @@ public class viewPatientPage extends ActionBarActivity {
         if(patientList.size()!=0) {
             for (patientInformation pi : patientList) {
                 TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
-                if (color == false) {
+                if (!color) {
                     color = true;
                     row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
                 } else {
                     color = false;
                     row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
                 }
-                final CheckBox cb = (CheckBox) row.findViewById(R.id.rownumber);
                 TextView recnum = (TextView) row.findViewById(R.id.txtPatientRecordID);
                 recnum.setText(Integer.toString(pi.getID()));
                 TextView name = (TextView) row.findViewById(R.id.name);
@@ -128,7 +111,7 @@ public class viewPatientPage extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), "No Records Found", Toast.LENGTH_SHORT).show();
         searchname.setText("");
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
     }
 
@@ -205,14 +188,13 @@ public class viewPatientPage extends ActionBarActivity {
         boolean color=false;
         for(patientInformation pi : patientList){
             TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
-            if(color == false){
+            if(!color){
                 color=true;
                 row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
             }else{
                 color=false;
                 row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
             }
-            final CheckBox cb = (CheckBox)row.findViewById(R.id.rownumber);
             TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
             recnum.setText(Integer.toString( pi.getID()));
             TextView name = (TextView)row.findViewById(R.id.name) ;
@@ -264,7 +246,6 @@ public class viewPatientPage extends ActionBarActivity {
                 TextView tv = (TextView) tr.getChildAt(1);
                 if (cb.isChecked()) {
                     patientID = Integer.parseInt(tv.getText().toString());
-                    i = i + 1;
                     break;
                 }
                 i = i + 1;
