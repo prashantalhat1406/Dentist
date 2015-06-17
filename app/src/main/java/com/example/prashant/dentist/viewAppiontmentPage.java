@@ -1,7 +1,7 @@
 package com.example.prashant.dentist;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
+import android.app.TimePickerDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,11 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,6 +32,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
     Button bd;
     TextView currentDate;
     RadioButton dayA,weekA,monthA;
+    EditText EADdate, EADtime;
+    boolean currentDateFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +152,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
+        if(id==0) {
             return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -157,23 +162,114 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);
                         currentDate.setText(df.format(myCal.getTime()));
-                        if(dayA.isChecked()) {
+                        if (dayA.isChecked()) {
                             currentDate.setText(df.format(myCal.getTime()));
                             displayAppointmentForDate(currentDate.getText().toString());
                         }
-                        if(weekA.isChecked()){
+                        if (weekA.isChecked()) {
                             currentDate.setText(df.format(myCal.getTime()));
                             displayAppointmentForWeek(currentDate.getText().toString());
                         }
-                        if(monthA.isChecked()){
+                        if (monthA.isChecked()) {
                             currentDate.setText(df.format(myCal.getTime()));
                             displayAppointmentForMonth(currentDate.getText().toString());
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }, y, m, d);
+        }
+        else {
+            if (id == 2) {
+                return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        try {
+                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                            Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            Calendar tempCal = Calendar.getInstance();
+                            tempCal.set(Calendar.HOUR_OF_DAY, 0);
+                            tempCal.set(Calendar.MINUTE, 0);
+                            tempCal.set(Calendar.SECOND, 0);
+                            tempCal.set(Calendar.MILLISECOND, 0);
+                            if (!dObj.before(tempCal.getTime())) {
+                                currentDateFlag = dObj.equals(tempCal.getTime());
+                                Calendar myCal = Calendar.getInstance();
+                                myCal.setTime(dObj);
+                                EADdate.setText(df.format(myCal.getTime()));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
+                                EADdate.setText("");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, y, m, d);
+            } else {
+                if (id == 3) {
+                    return new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            try {
+                                if (hourOfDay >= 10 && hourOfDay <= 20) {
+                                    Calendar timeCheck = Calendar.getInstance();
+                                    timeCheck.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                    timeCheck.set(Calendar.MINUTE, minute);
+                                    if (EADdate.getText().length() == 0) {
+                                        Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
+                                        EADtime.setText("");
+                                    } else {
+                                        if (currentDateFlag) {
+                                            if (Calendar.getInstance().after(timeCheck)) {
+                                                Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                                                EADtime.setText("");
+                                            } else {
+                                                if (hourOfDay <= 12) {
+                                                    if (String.valueOf(minute).length() == 1)
+                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                    else
+                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                }
+                                                if (hourOfDay > 12) {
+                                                    hourOfDay = hourOfDay - 12;
+                                                    if (String.valueOf(minute).length() == 1)
+                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                    else
+                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                }
+                                            }
+                                        } else {
+                                            if (hourOfDay <= 12) {
+                                                if (String.valueOf(minute).length() == 1)
+                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                else
+                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                            }
+                                            if (hourOfDay > 12) {
+                                                hourOfDay = hourOfDay - 12;
+                                                if (String.valueOf(minute).length() == 1)
+                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                else
+                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Clinic working hours 10am-9pm", Toast.LENGTH_SHORT).show();
+                                    EADtime.setText("");
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, h, mi, false);
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -190,7 +286,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.menuVAEdit) {
-            displayEditAppointmentScreen();
+            //displayEditAppointmentScreen();
+            displayEDITAppointmentDialog();
             return true;
         }
         if (id == R.id.menuVADelete) {
@@ -239,20 +336,90 @@ public class viewAppiontmentPage extends ActionBarActivity {
     }
 
 
-    public void displayEditAppointmentScreen() {
+    public void displayEDITAppointmentDialog() {
+        final int aID = getSelectedAppointmentID();
+        if (aID == -1) {
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        } else {
+            final Dialog editAppointment = new Dialog(this);
+            editAppointment.setContentView(R.layout.editappointmentdialog);
+            editAppointment.setTitle("Edit Appointment");
+            editAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
-        final Dialog test = new Dialog(this);
-        test.setContentView(R.layout.testdialog);
-        test.setTitle("Test Date Dialog");
-        test.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 450);
+            final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            appointmentInformation ai = adb.getAppointmentInfoByID(aID);
 
-        Button b = (Button)test.findViewById(R.id.buttestdialog);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(0);
-            }
-        });
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+            patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
+
+            TextView name = (TextView)editAppointment.findViewById(R.id.autotxtEADName);
+            name.setText(pi.getName());
+
+            EADdate = (EditText)editAppointment.findViewById(R.id.txtEADDate);
+            EADdate.setText(ai.getaDate());
+
+            EADtime = (EditText)editAppointment.findViewById(R.id.txtEADTime);
+            EADtime.setText(ai.getaTime());
+
+            final Spinner treatment = (Spinner)editAppointment.findViewById(R.id.spnEADTreamnet);
+            ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+            treatment.setAdapter(adapterpt);
+            treatment.setSelection(adapterpt.getPosition(ai.getProposedTreatment()));
+
+            final EditText toothdetails = (EditText)editAppointment.findViewById(R.id.txtEADToothDetails);
+            toothdetails.setText(ai.getToothDetails());
+
+            Button bdateDialog = (Button)editAppointment.findViewById(R.id.butEADShowDate);
+            bdateDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(2);
+                }
+            });
+            Button btimeDialog = (Button)editAppointment.findViewById(R.id.butEADShowTime);
+            btimeDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(3);
+                }
+            });
+
+
+            Button bEdit = (Button) editAppointment.findViewById(R.id.butEADButton);
+            bEdit.setText("EDIT");
+            bEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    appointmentInformation ai = adb.getAppointmentInfoByID(aID);
+                    if(EADdate.getText().length() == 0){
+                        Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if(EADtime.getText().length() ==0 ){
+                            Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(toothdetails.getText().length() == 0 ){
+                                Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
+                            }else{
+                                ai = new appointmentInformation(ai.getAID(),ai.getPID(),EADdate.getText().toString(),EADtime.getText().toString(),treatment.getSelectedItem().toString(),toothdetails.getText().toString());
+                                adb.updateAppointmentInfo(ai);
+                                Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
+                                editAppointment.dismiss();
+                            }
+                        }
+                    }
+
+                    //Display Appointments as per selection
+                    if (dayA.isChecked())
+                        displayAppointmentForDate(currentDate.getText().toString());
+                    if (weekA.isChecked())
+                        displayAppointmentForWeek(currentDate.getText().toString());
+                    if (monthA.isChecked())
+                        displayAppointmentForMonth(currentDate.getText().toString());
+                }
+            });
+
+            editAppointment.show();
+        }
 
         /*
         int aID = getSelectedAppointmentID();

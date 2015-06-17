@@ -1,6 +1,8 @@
 package com.example.prashant.dentist;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,18 +12,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
 public class viewPatientPage extends ActionBarActivity {
+
+    int y, m, d,h,mi;
+    EditText EADdate, EADtime;
+    boolean currentDateFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +71,14 @@ public class viewPatientPage extends ActionBarActivity {
                 viewPatientDetails();
             }
         });
+
+
+        Calendar cal = Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH);
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        h=cal.get(Calendar.HOUR_OF_DAY);
+        mi=cal.get(Calendar.MINUTE);
     }
 
     @Override
@@ -117,13 +139,95 @@ public class viewPatientPage extends ActionBarActivity {
 
     public void gotoNewAppointmentScreen ()
     {
-        int pID = getSelectedPatientID();
+        final int pID = getSelectedPatientID();
         if (pID==-1){
             Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
         }else {
-            Intent i = new Intent(this, addNewAppointment.class);
+            /*Intent i = new Intent(this, addNewAppointment.class);
             i.putExtra("pid", String.valueOf(pID));
-            startActivity(i);
+            startActivity(i);*/
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+            patientInformation pi = pdb.getPatientInfoByID(pID);
+
+            final Dialog addAppointment = new Dialog(this);
+            addAppointment.setContentView(R.layout.editappointmentdialog);
+            addAppointment.setTitle("Add Appointment");
+            addAppointment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+            final TextView name = (TextView)addAppointment.findViewById(R.id.autotxtEADName);
+            name.setText(pi.getName());
+
+            final Spinner treatment = (Spinner)addAppointment.findViewById(R.id.spnEADTreamnet);
+            ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+            treatment.setAdapter(adapterpt);
+
+            EADdate = (EditText)addAppointment.findViewById(R.id.txtEADDate);
+            EADtime = (EditText)addAppointment.findViewById(R.id.txtEADTime);
+
+            final EditText toothdetails = (EditText)addAppointment.findViewById(R.id.txtEADToothDetails);
+
+            Button bdateDialog = (Button)addAppointment.findViewById(R.id.butEADShowDate);
+            bdateDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(2);
+                }
+            });
+            Button btimeDialog = (Button)addAppointment.findViewById(R.id.butEADShowTime);
+            btimeDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(3);
+                }
+            });
+
+            final appointmentDatabaseHandler adb= new appointmentDatabaseHandler(this);
+
+            Button bAdd = (Button) addAppointment.findViewById(R.id.butEADButton);
+            bAdd.setText("ADD");
+            bAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int lastApptID;
+                    try {
+                        if(name.getText().length() == 0 ){
+                            Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(EADdate.getText().length() == 0){
+                                Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
+                            }else{
+                                if(EADtime.getText().length() ==0 ){
+                                    Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    if(toothdetails.getText().length() == 0 ){
+                                        Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        if (adb.getAppointmentCountForDateTime(EADdate.getText().toString(),EADtime.getText().toString())==0) {
+
+                                            lastApptID = adb.getLastAppointmentID() + 1;
+                                            appointmentInformation ai = new appointmentInformation(lastApptID, pID, EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                            adb.addAppointmentInfo(ai);
+                                            adb.close();
+                                            Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
+                                            name.setText("");
+                                            EADdate.setText("");
+                                            EADtime.setText("");
+                                            toothdetails.setText("");
+                                            addAppointment.dismiss();
+                                        }else {
+                                            Toast.makeText(getApplicationContext(), "Appointment Already existed", Toast.LENGTH_SHORT).show();
+                                            EADdate.setText("");
+                                            EADtime.setText("");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch(Exception e){e.printStackTrace();}
+                }
+            });
+            addAppointment.show();
         }
     }
 
@@ -151,7 +255,7 @@ public class viewPatientPage extends ActionBarActivity {
             age.setText(pi.getAge());
             sex.setText(pi.getSex());
             address.setText(pi.getAddress());
-            totalpayment.setText(String.valueOf( adb.getTotalPaymentForPatient(pi.getID())));
+            totalpayment.setText(String.valueOf(adb.getTotalPaymentForPatient(pi.getID())));
             try {
                 TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
                 patientDetailsTable.removeAllViews();
@@ -234,6 +338,101 @@ public class viewPatientPage extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+            if (id == 2) {
+                return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        try {
+                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                            Date dObj = df.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            Calendar tempCal = Calendar.getInstance();
+                            tempCal.set(Calendar.HOUR_OF_DAY, 0);
+                            tempCal.set(Calendar.MINUTE, 0);
+                            tempCal.set(Calendar.SECOND, 0);
+                            tempCal.set(Calendar.MILLISECOND, 0);
+                            if (!dObj.before(tempCal.getTime())) {
+                                currentDateFlag = dObj.equals(tempCal.getTime());
+                                Calendar myCal = Calendar.getInstance();
+                                myCal.setTime(dObj);
+                                EADdate.setText(df.format(myCal.getTime()));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
+                                EADdate.setText("");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, y, m, d);
+            } else {
+                if (id == 3) {
+                    return new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            try {
+                                if (hourOfDay >= 10 && hourOfDay <= 20) {
+                                    Calendar timeCheck = Calendar.getInstance();
+                                    timeCheck.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                    timeCheck.set(Calendar.MINUTE, minute);
+                                    if (EADdate.getText().length() == 0) {
+                                        Toast.makeText(getApplicationContext(), "Please enter Date first", Toast.LENGTH_SHORT).show();
+                                        EADtime.setText("");
+                                    } else {
+                                        if (currentDateFlag) {
+                                            if (Calendar.getInstance().after(timeCheck)) {
+                                                Toast.makeText(getApplicationContext(), "Entered Time should be after current Time", Toast.LENGTH_SHORT).show();
+                                                EADtime.setText("");
+                                            } else {
+                                                if (hourOfDay <= 12) {
+                                                    if (String.valueOf(minute).length() == 1)
+                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                    else
+                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                }
+                                                if (hourOfDay > 12) {
+                                                    hourOfDay = hourOfDay - 12;
+                                                    if (String.valueOf(minute).length() == 1)
+                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                    else
+                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                }
+                                            }
+                                        } else {
+                                            if (hourOfDay <= 12) {
+                                                if (String.valueOf(minute).length() == 1)
+                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                else
+                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                            }
+                                            if (hourOfDay > 12) {
+                                                hourOfDay = hourOfDay - 12;
+                                                if (String.valueOf(minute).length() == 1)
+                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                else
+                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Clinic working hours 10am-9pm", Toast.LENGTH_SHORT).show();
+                                    EADtime.setText("");
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, h, mi, false);
+                }
+            }
+
+        return null;
+    }
+
 
     public int getSelectedPatientID(){
         int patientID=-1;
