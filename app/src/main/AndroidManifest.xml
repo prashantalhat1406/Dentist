@@ -17,14 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".homePatient"
-            android:label="@string/title_activity_home_patient" >
-        </activity>
-        <activity
-            android:name=".addNewPatient"
-            android:label="@string/title_activity_add_new_patient" >
-        </activity>
-        <activity
             android:name=".viewPatientPage"
             android:label="@string/title_activity_view_patient_page"
             android:screenOrientation="portrait" >
@@ -40,10 +32,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".editPatientPage"
-            android:label="@string/title_activity_edit_patient_page" >
-        </activity>
-        <activity
             android:name=".editAppointment"
             android:label="@string/title_activity_edit_appointment"
             android:screenOrientation="portrait" >
@@ -52,10 +40,6 @@
             android:name=".patientTabs"
             android:label="@string/title_activity_patient_tabs"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".add_prescription"
-            android:label="@string/title_activity_add_prescription" >
         </activity>
         <activity
             android:name=".reportGraphs"
