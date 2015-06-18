@@ -232,6 +232,7 @@ public class viewPatientPage extends ActionBarActivity {
                 }
             });
             addAppointment.show();
+            clearAllSelection();
         }
     }
 
