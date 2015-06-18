@@ -96,8 +96,8 @@ public class viewPatientPage extends ActionBarActivity {
         int i =0;
         try {
             while (i < pt.getChildCount()) {
-                TableRow tr = (TableRow) pt.getChildAt(i);
-                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
+                TableRow tr = (TableRow) pt.findViewById(R.id.tableRowForPatient);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.rownumber);
                 if (cb.isChecked()) {cb.setChecked(false);}
                 i = i + 1;
             }

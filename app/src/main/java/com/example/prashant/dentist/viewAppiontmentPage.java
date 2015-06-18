@@ -341,8 +341,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
         int i =0;
         try {
             while (i < pt.getChildCount()) {
-                TableRow tr = (TableRow) pt.getChildAt(i);
-                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                TableRow tr = (TableRow) pt.findViewById(R.id.trAppointment);
+                CheckBox cb = (CheckBox) tr.findViewById(R.id.cbVAR);
                 if (cb.isChecked()) {cb.setChecked(false);}
                 i = i + 1;
             }
