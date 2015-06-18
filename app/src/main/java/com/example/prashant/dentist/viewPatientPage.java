@@ -545,6 +545,7 @@ public class viewPatientPage extends ActionBarActivity {
             final Dialog editDialog = new Dialog(this);
             editDialog.setContentView(R.layout.editdialoglayout);
             editDialog.setTitle("Edit Patient");
+            editDialog.getWindow().setTitleColor(R.drawable.buttonblue);
             final EditText name = (EditText)editDialog.findViewById(R.id.txtEditPatientName);
             name.setText(pi.getName());
             final EditText phone = (EditText)editDialog.findViewById(R.id.txtEditPatientPhone);
