@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:text="06/05/2015"
-            style="@style/referenceLabel"
+            style="@style/boldBlueCV"
             android:id="@+id/txtViewAppointmentCurrentDate"/>
         <Button
             android:layout_height="wrap_content"

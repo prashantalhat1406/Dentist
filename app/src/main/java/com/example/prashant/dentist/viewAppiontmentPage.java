@@ -150,6 +150,49 @@ public class viewAppiontmentPage extends ActionBarActivity {
         });
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuVAEdit) {
+            //displayEditAppointmentScreen();
+            displayEDITAppointmentDialog();
+            return true;
+        }
+        if (id == R.id.menuVADelete) {
+            deleteAppointment();
+            return true;
+        }
+        if (id == R.id.menuVAPayment) {
+            addPaymentDetails();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            clearAllSelection();
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            currentDate.setText(df.format(myCal.getTime()));
+            if(dayA.isChecked())
+                displayAppointmentForDate(currentDate.getText().toString());
+            if(weekA.isChecked())
+                displayAppointmentForWeek(currentDate.getText().toString());
+            if(monthA.isChecked())
+                displayAppointmentForMonth(currentDate.getText().toString());
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+
     @Override
     protected Dialog onCreateDialog(int id) {
         if(id==0) {
@@ -277,47 +320,6 @@ public class viewAppiontmentPage extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_appiontment_page, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.menuVAEdit) {
-            //displayEditAppointmentScreen();
-            displayEDITAppointmentDialog();
-            return true;
-        }
-        if (id == R.id.menuVADelete) {
-            deleteAppointment();
-            return true;
-        }
-        if (id == R.id.menuVAPayment) {
-            addPaymentDetails();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        try {
-            clearAllSelection();
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
-            Calendar myCal = Calendar.getInstance();
-            myCal.setTime(dObj);
-            currentDate.setText(df.format(myCal.getTime()));
-            if(dayA.isChecked())
-                displayAppointmentForDate(currentDate.getText().toString());
-            if(weekA.isChecked())
-                displayAppointmentForWeek(currentDate.getText().toString());
-            if(monthA.isChecked())
-                displayAppointmentForMonth(currentDate.getText().toString());
-        }catch (Exception e){e.printStackTrace();}
     }
 
     public int getSelectedAppointmentID(){
@@ -479,7 +481,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             final Dialog addPayment = new Dialog(this);
             addPayment.setContentView(R.layout.addpaymentdialog);
             addPayment.setTitle("Add Payment");
-            addPayment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.FILL_PARENT );
+            addPayment.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT );
             TextView nameOfPatient = (TextView) addPayment.findViewById(R.id.txtAPDName);
             nameOfPatient.setText(getPatientNameFromAID(aID));
             final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
