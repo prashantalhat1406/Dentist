@@ -194,19 +194,19 @@ public class viewPatientPage extends ActionBarActivity {
                 public void onClick(View v) {
                     int lastApptID;
                     try {
-                        if(name.getText().length() == 0 ){
+                        if (name.getText().length() == 0) {
                             Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_SHORT).show();
-                        }else{
-                            if(EADdate.getText().length() == 0){
+                        } else {
+                            if (EADdate.getText().length() == 0) {
                                 Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
-                            }else{
-                                if(EADtime.getText().length() ==0 ){
+                            } else {
+                                if (EADtime.getText().length() == 0) {
                                     Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    if(toothdetails.getText().length() == 0 ){
+                                } else {
+                                    if (toothdetails.getText().length() == 0) {
                                         Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        if (adb.getAppointmentCountForDateTime(EADdate.getText().toString(),EADtime.getText().toString())==0) {
+                                    } else {
+                                        if (adb.getAppointmentCountForDateTime(EADdate.getText().toString(), EADtime.getText().toString()) == 0) {
 
                                             lastApptID = adb.getLastAppointmentID() + 1;
                                             appointmentInformation ai = new appointmentInformation(lastApptID, pID, EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
@@ -218,7 +218,8 @@ public class viewPatientPage extends ActionBarActivity {
                                             EADtime.setText("");
                                             toothdetails.setText("");
                                             addAppointment.dismiss();
-                                        }else {
+                                            clearAllSelection();
+                                        } else {
                                             Toast.makeText(getApplicationContext(), "Appointment Already existed", Toast.LENGTH_SHORT).show();
                                             EADdate.setText("");
                                             EADtime.setText("");
@@ -227,8 +228,9 @@ public class viewPatientPage extends ActionBarActivity {
                                 }
                             }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    catch(Exception e){e.printStackTrace();}
                 }
             });
             addAppointment.show();

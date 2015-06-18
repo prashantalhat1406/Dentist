@@ -305,6 +305,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         try {
+            clearAllSelection();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dObj = df.parse(d + "/" + (m + 1) + "/" + y);
             Calendar myCal = Calendar.getInstance();
@@ -437,22 +438,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             clearAllSelection();
         }
 
-        /*
-        int aID = getSelectedAppointmentID();
-        if (aID == -1) {
-            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent i = new Intent(this, editAppointment.class);
-            i.putExtra("aid", String.valueOf(aID));
-            startActivity(i);
-            if (dayA.isChecked())
-                displayAppointmentForDate(currentDate.getText().toString());
-            if (weekA.isChecked())
-                displayAppointmentForWeek(currentDate.getText().toString());
-            if (monthA.isChecked())
-                displayAppointmentForMonth(currentDate.getText().toString());
-        }
-        */
+
     }
 
 
