@@ -335,6 +335,21 @@ public class viewAppiontmentPage extends ActionBarActivity {
         return aID;
     }
 
+    public void clearAllSelection(){
+        TableLayout pt = (TableLayout) findViewById(R.id.apptTable);
+        int i =0;
+        try {
+            while (i < pt.getChildCount()) {
+                TableRow tr = (TableRow) pt.getChildAt(i);
+                CheckBox cb = (CheckBox) tr.getChildAt(0);
+                if (cb.isChecked()) {cb.setChecked(false);}
+                i = i + 1;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void displayEDITAppointmentDialog() {
         final int aID = getSelectedAppointmentID();
@@ -391,16 +406,16 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     appointmentInformation ai = adb.getAppointmentInfoByID(aID);
-                    if(EADdate.getText().length() == 0){
+                    if (EADdate.getText().length() == 0) {
                         Toast.makeText(getApplicationContext(), "Enter Date", Toast.LENGTH_SHORT).show();
-                    }else{
-                        if(EADtime.getText().length() ==0 ){
+                    } else {
+                        if (EADtime.getText().length() == 0) {
                             Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
-                        }else{
-                            if(toothdetails.getText().length() == 0 ){
+                        } else {
+                            if (toothdetails.getText().length() == 0) {
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
-                            }else{
-                                ai = new appointmentInformation(ai.getAID(),ai.getPID(),EADdate.getText().toString(),EADtime.getText().toString(),treatment.getSelectedItem().toString(),toothdetails.getText().toString());
+                            } else {
+                                ai = new appointmentInformation(ai.getAID(), ai.getPID(), EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
                                 adb.updateAppointmentInfo(ai);
                                 Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
                                 editAppointment.dismiss();
@@ -419,6 +434,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             });
 
             editAppointment.show();
+            clearAllSelection();
         }
 
         /*
@@ -477,7 +493,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             final Dialog addPayment = new Dialog(this);
             addPayment.setContentView(R.layout.addpaymentdialog);
             addPayment.setTitle("Add Payment");
-            addPayment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 450);
+            addPayment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.FILL_PARENT );
             TextView nameOfPatient = (TextView) addPayment.findViewById(R.id.txtAPDName);
             nameOfPatient.setText(getPatientNameFromAID(aID));
             final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
@@ -499,6 +515,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 }
             });
             addPayment.show();
+            clearAllSelection();
         }
     }
 
