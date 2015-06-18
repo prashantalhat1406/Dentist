@@ -62,6 +62,8 @@ public class reportGraphs extends ActionBarActivity {
     }
     public void displayTreatmentWiseReport(){
         Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
+        TableLayout rptTable = (TableLayout) findViewById(R.id.reportTable);
+        rptTable.removeAllViews();
     }
 
     public void displayAppointmentWiseReport(){
