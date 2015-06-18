@@ -90,18 +90,20 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
     public List<appointmentInformation> getAppointmentInfoByPaitentID(int pid){
         List<appointmentInformation> appointmentList = new ArrayList<appointmentInformation>();
 
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_PID + "=?", new String[]{String.valueOf(pid)}, null, null, null, null);
-
-        if(cursor.moveToFirst()) {
-            do {
-                appointmentInformation ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getString(6),cursor.getString(7),cursor.getString(8));
-                appointmentList.add(ai);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            //Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_AID, KEY_PID, KEY_ADATE, KEY_ATIME, KEY_STATUS, KEY_PAYMENT, KEY_PROPOSEDTREATMENT, KEY_ACTUALTREATMENT, KEY_TOOTHDETAILS}, KEY_PID + "=?", new String[]{String.valueOf(pid)}, null, null, null, null);
+            String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_PID + " LIKE '%" + String.valueOf(pid) + "%' ORDER BY " + KEY_ADATE + " ASC, " + KEY_ATIME + " ASC";
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    appointmentInformation ai = new appointmentInformation(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), cursor.getString(3), cursor.getString(4), Integer.parseInt(cursor.getString(5)), cursor.getString(6), cursor.getString(7), cursor.getString(8));
+                    appointmentList.add(ai);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        }catch (Exception e){e.printStackTrace();}
         return  appointmentList;
     }
 

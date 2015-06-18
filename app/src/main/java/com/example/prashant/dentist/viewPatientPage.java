@@ -42,6 +42,7 @@ public class viewPatientPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
+
         Button bSearch = (Button)findViewById(R.id.butPatientSearch);
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,7 @@ public class viewPatientPage extends ActionBarActivity {
                 searchPatientByName();
             }
         });
+
         Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
         bNewPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +59,7 @@ public class viewPatientPage extends ActionBarActivity {
 
             }
         });
+
         Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
         bAppointmeent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +67,7 @@ public class viewPatientPage extends ActionBarActivity {
                 gotoNewAppointmentScreen();
             }
         });
+
         Button bDetails = (Button)findViewById(R.id.butVPDetails);
         bDetails.setOnClickListener(new View.OnClickListener() {
             @Override
