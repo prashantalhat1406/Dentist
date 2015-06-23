@@ -418,7 +418,15 @@ public class viewAppiontmentPage extends ActionBarActivity {
             name.setText(pi.getName());
 
             EADdate = (EditText)editAppointment.findViewById(R.id.txtEADDate);
-            EADdate.setText(ai.getaDate());
+
+            try {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                Date dObj = df.parse(ai.getaDate());
+                Calendar myCal = Calendar.getInstance();
+                myCal.setTime(dObj);
+                df = new SimpleDateFormat("dd/MM/yyyy");
+                EADdate.setText(df.format(myCal.getTime()));
+            }catch (Exception e){e.printStackTrace();}
 
             EADtime = (EditText)editAppointment.findViewById(R.id.txtEADTime);
             EADtime.setText(ai.getaTime());
