@@ -67,7 +67,7 @@ public class viewPatientPage extends ActionBarActivity {
                 gotoNewAppointmentScreen();
             }
         });
-
+/*
         Button bDetails = (Button)findViewById(R.id.butVPDetails);
         bDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class viewPatientPage extends ActionBarActivity {
                 viewPatientDetails();
             }
         });
-
+*/
 
         Calendar cal = Calendar.getInstance();
         y=cal.get(Calendar.YEAR);
@@ -241,7 +241,7 @@ public class viewPatientPage extends ActionBarActivity {
         }
     }
 
-    public void viewPatientDetails(){
+    /*public void viewPatientDetails(){
         int pID = getSelectedPatientID();
         if (pID==-1){
             Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
@@ -298,6 +298,66 @@ public class viewPatientPage extends ActionBarActivity {
             patientDetails.show();
             clearAllSelection();
         }
+    }*/
+
+
+    public void viewPatientDetails(int pID){
+        /*int pID = getSelectedPatientID();
+        if (pID==-1){
+            Toast.makeText(getApplicationContext(), "Select Record", Toast.LENGTH_SHORT).show();
+        }else {*/
+            patientDatabaseHandler pdb = new patientDatabaseHandler(this);
+            appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+            patientInformation pi = pdb.getPatientInfoByID(pID);
+            List<appointmentInformation> appointmentList = adb.getAppointmentInfoByPaitentID(pID);
+            Dialog patientDetails = new Dialog(this);
+            patientDetails.setContentView(R.layout.viewpatientdetailsdialog);
+            patientDetails.setTitle("Patient Details");
+            patientDetails.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            TextView name = (TextView) patientDetails.findViewById(R.id.txtVPDName);
+            TextView phone = (TextView) patientDetails.findViewById(R.id.txtVPDPhone);
+            TextView age = (TextView) patientDetails.findViewById(R.id.txtVPDAge);
+            TextView sex = (TextView) patientDetails.findViewById(R.id.txtVPDSex);
+            TextView address = (TextView) patientDetails.findViewById(R.id.txtVPDAddress);
+            TextView totalpayment = (TextView) patientDetails.findViewById(R.id.txtVPDTotalPayment);
+            name.setText(pi.getName());
+            phone.setText(pi.getPhone());
+            age.setText(pi.getAge());
+            sex.setText(pi.getSex());
+            address.setText(pi.getAddress());
+            totalpayment.setText(String.valueOf(adb.getTotalPaymentForPatient(pi.getID())));
+            try {
+                TableLayout patientDetailsTable = (TableLayout) patientDetails.findViewById(R.id.patientDetailsTable);
+                patientDetailsTable.removeAllViews();
+                LayoutInflater inflater = getLayoutInflater();
+                for (appointmentInformation ai : appointmentList) {
+                    TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforpatientdetails, patientDetailsTable, false);
+                    TextView adate = (TextView) tr.findViewById(R.id.txtVPDDate);
+                    TextView treatment = (TextView) tr.findViewById(R.id.txtVPDTreatmentDone);
+                    TextView payment = (TextView) tr.findViewById(R.id.txtVPDPayment);
+
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                    Date dObj = df.parse(ai.getaDate());
+                    Calendar myCal = Calendar.getInstance();
+                    myCal.setTime(dObj);
+                    df = new SimpleDateFormat("dd/MM/yyyy");
+                    //dt.setText(df.format(myCal.getTime()));
+                    //adate.setText(ai.getaDate());
+                    adate.setText(df.format(myCal.getTime()));
+                    treatment.setText(ai.getActualTreatment());
+                    if(ai.getPayment()==0)
+                        payment.setText("-");
+                    else
+                        payment.setText(String.valueOf(ai.getPayment()));
+
+                    patientDetailsTable.addView(tr);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            patientDetails.show();
+            clearAllSelection();
+        /*}*/
     }
 
 
@@ -308,8 +368,14 @@ public class viewPatientPage extends ActionBarActivity {
         List<patientInformation> patientList = db.getAllPatientInfo();
         LayoutInflater inflat = getLayoutInflater();
         boolean color=false;
-        for(patientInformation pi : patientList){
+        for(final patientInformation pi : patientList){
             TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPatientDetails(pi.getID());
+                }
+            });
             if(!color){
                 color=true;
                 row.setBackgroundResource(R.drawable.shapeofpatientrowdark);

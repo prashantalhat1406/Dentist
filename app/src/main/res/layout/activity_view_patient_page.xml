@@ -101,7 +101,7 @@
             android:textColor="#FFFFFF"
             android:id="@+id/butVPNEW"
             />
-
+<!--
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,6 +113,7 @@
             android:textColor="#FFFFFF"
             android:enabled="true"
             />
+            -->
 
     </LinearLayout>
 
