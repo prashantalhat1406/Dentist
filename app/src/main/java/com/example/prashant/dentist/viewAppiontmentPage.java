@@ -548,7 +548,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             final Dialog addPayment = new Dialog(this);
             addPayment.setContentView(R.layout.addpaymentdialog);
             addPayment.setTitle("Add Payment");
-            addPayment.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT );
+            addPayment.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT );
             TextView nameOfPatient = (TextView) addPayment.findViewById(R.id.txtAPDName);
             nameOfPatient.setText(getPatientNameFromAID(aID));
             final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
