@@ -209,7 +209,10 @@ public class viewPatientPage extends ActionBarActivity {
                                         if (adb.getAppointmentCountForDateTime(EADdate.getText().toString(), EADtime.getText().toString()) == 0) {
 
                                             lastApptID = adb.getLastAppointmentID() + 1;
-                                            appointmentInformation ai = new appointmentInformation(lastApptID, pID, EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                            String []temp = EADdate.getText().toString().split("/");
+                                            String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                                            //appointmentInformation ai = new appointmentInformation(lastApptID, pID, EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                            appointmentInformation ai = new appointmentInformation(lastApptID, pID, dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
                                             adb.addAppointmentInfo(ai);
                                             adb.close();
                                             Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
@@ -272,7 +275,15 @@ public class viewPatientPage extends ActionBarActivity {
                     TextView adate = (TextView) tr.findViewById(R.id.txtVPDDate);
                     TextView treatment = (TextView) tr.findViewById(R.id.txtVPDTreatmentDone);
                     TextView payment = (TextView) tr.findViewById(R.id.txtVPDPayment);
-                    adate.setText(ai.getaDate());
+
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                    Date dObj = df.parse(ai.getaDate());
+                    Calendar myCal = Calendar.getInstance();
+                    myCal.setTime(dObj);
+                    df = new SimpleDateFormat("dd/MM/yyyy");
+                    //dt.setText(df.format(myCal.getTime()));
+                    //adate.setText(ai.getaDate());
+                    adate.setText(df.format(myCal.getTime()));
                     treatment.setText(ai.getActualTreatment());
                     if(ai.getPayment()==0)
                         payment.setText("-");

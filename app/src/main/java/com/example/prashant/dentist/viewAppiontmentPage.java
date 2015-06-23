@@ -45,7 +45,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
         dayA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayAppointmentForDate(currentDate.getText().toString());
+                String []temp = currentDate.getText().toString().split("/");
+                String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                //displayAppointmentForDate(currentDate.getText().toString());
+                displayAppointmentForDate(dateInYYYYMMDD);
             }
         });
         weekA = (RadioButton)findViewById(R.id.rdbVAWeek);
@@ -53,7 +56,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
         weekA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayAppointmentForWeek(currentDate.getText().toString());
+                String []temp = currentDate.getText().toString().split("/");
+                String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                //displayAppointmentForWeek(currentDate.getText().toString());
+                displayAppointmentForWeek(dateInYYYYMMDD);
             }
         });
         monthA = (RadioButton)findViewById(R.id.rdbVAMonth);
@@ -62,7 +68,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(monthA.isChecked()){
-                    displayAppointmentForMonth(currentDate.getText().toString());
+                    String []temp = currentDate.getText().toString().split("/");
+                    String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                    //displayAppointmentForMonth(currentDate.getText().toString());
+                    displayAppointmentForMonth(dateInYYYYMMDD);
                 }
             }
         });
@@ -79,7 +88,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
             currentDate.setText(df.format(myCal.getTime()));
-            displayAppointmentForDate(currentDate.getText().toString());
+            String []temp = currentDate.getText().toString().split("/");
+            String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+            //displayAppointmentForDate(currentDate.getText().toString());
+            displayAppointmentForDate(dateInYYYYMMDD);
         }catch (Exception e){e.printStackTrace();}
         bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
@@ -96,21 +108,32 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     Date dObj = df.parse(currentDate.getText().toString());
                     Calendar myCal = Calendar.getInstance();
                     myCal.setTime(dObj);
+
                     if(dayA.isChecked()){
                         myCal.add(Calendar.DATE, -1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForDate(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //displayAppointmentForDate(currentDate.getText().toString());
+                        displayAppointmentForDate(dateInYYYYMMDD);
                     }
                     if(weekA.isChecked()){
                         myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                         myCal.add(Calendar.DATE, -7);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForWeek(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+
+                        //displayAppointmentForWeek(currentDate.getText().toString());
+                        displayAppointmentForWeek(dateInYYYYMMDD);
                     }
                     if(monthA.isChecked()){
-                        myCal.add(Calendar.MONTH,-1);
+                        myCal.add(Calendar.MONTH, -1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForMonth(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //displayAppointmentForMonth(currentDate.getText().toString());
+                        displayAppointmentForMonth(dateInYYYYMMDD);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -129,19 +152,28 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     if(dayA.isChecked()) {
                         myCal.add(Calendar.DATE, 1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForDate(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //displayAppointmentForDate(currentDate.getText().toString());
+                        displayAppointmentForDate(dateInYYYYMMDD);
                     }
                     if(weekA.isChecked()){
-                        myCal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+                        myCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                         myCal.add(Calendar.DATE, 7);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForWeek(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //displayAppointmentForWeek(currentDate.getText().toString());
+                        displayAppointmentForWeek(dateInYYYYMMDD);
                     }
 
                     if(monthA.isChecked()){
                         myCal.add(Calendar.MONTH, 1);
                         currentDate.setText(df.format(myCal.getTime()));
-                        displayAppointmentForMonth(currentDate.getText().toString());
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //displayAppointmentForMonth(currentDate.getText().toString());
+                        displayAppointmentForMonth(dateInYYYYMMDD);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -183,12 +215,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
             currentDate.setText(df.format(myCal.getTime()));
+            String []temp = currentDate.getText().toString().split("/");
+            String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+            //currentDate.setText(d + "/" + (m + 1) + "/" + y);
             if(dayA.isChecked())
-                displayAppointmentForDate(currentDate.getText().toString());
+                //displayAppointmentForDate(currentDate.getText().toString());
+                displayAppointmentForDate(dateInYYYYMMDD);
             if(weekA.isChecked())
-                displayAppointmentForWeek(currentDate.getText().toString());
+                //displayAppointmentForWeek(currentDate.getText().toString());
+                displayAppointmentForWeek(dateInYYYYMMDD);
             if(monthA.isChecked())
-                displayAppointmentForMonth(currentDate.getText().toString());
+                //displayAppointmentForMonth(currentDate.getText().toString());
+                displayAppointmentForMonth(dateInYYYYMMDD);
         }catch (Exception e){e.printStackTrace();}
     }
 
@@ -205,24 +243,30 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         Calendar myCal = Calendar.getInstance();
                         myCal.setTime(dObj);
                         currentDate.setText(df.format(myCal.getTime()));
+                        String []temp = currentDate.getText().toString().split("/");
+                        String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                        //currentDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         if (dayA.isChecked()) {
-                            currentDate.setText(df.format(myCal.getTime()));
-                            displayAppointmentForDate(currentDate.getText().toString());
+                            //currentDate.setText(df.format(myCal.getTime()));
+                            //displayAppointmentForDate(currentDate.getText().toString());
+                            displayAppointmentForDate(dateInYYYYMMDD);
                         }
                         if (weekA.isChecked()) {
-                            currentDate.setText(df.format(myCal.getTime()));
-                            displayAppointmentForWeek(currentDate.getText().toString());
+                            //currentDate.setText(df.format(myCal.getTime()));
+                            //displayAppointmentForWeek(currentDate.getText().toString());
+                            displayAppointmentForWeek(dateInYYYYMMDD);
                         }
                         if (monthA.isChecked()) {
-                            currentDate.setText(df.format(myCal.getTime()));
-                            displayAppointmentForMonth(currentDate.getText().toString());
+                            //currentDate.setText(df.format(myCal.getTime()));
+                            //displayAppointmentForMonth(currentDate.getText().toString());
+                            displayAppointmentForMonth(dateInYYYYMMDD);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }, y, m, d);
-        }
+        } /*DONE THIS LINE */
         else {
             if (id == 2) {
                 return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -418,7 +462,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
                             if (toothdetails.getText().length() == 0) {
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
                             } else {
-                                ai = new appointmentInformation(ai.getAID(), ai.getPID(), EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                String []temp = EADdate.getText().toString().split("/");
+                                String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                                //ai = new appointmentInformation(ai.getAID(), ai.getPID(), EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                ai = new appointmentInformation(ai.getAID(), ai.getPID(), dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
                                 adb.updateAppointmentInfo(ai);
                                 Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
                                 editAppointment.dismiss();
@@ -427,12 +474,22 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     }
 
                     //Display Appointments as per selection
+                    String []temp = currentDate.getText().toString().split("/");
+                    String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                    if (dayA.isChecked())
+                        displayAppointmentForDate(dateInYYYYMMDD);
+                    if (weekA.isChecked())
+                        displayAppointmentForWeek(dateInYYYYMMDD);
+                    if (monthA.isChecked())
+                        displayAppointmentForMonth(dateInYYYYMMDD);
+                    /*
                     if (dayA.isChecked())
                         displayAppointmentForDate(currentDate.getText().toString());
                     if (weekA.isChecked())
                         displayAppointmentForWeek(currentDate.getText().toString());
                     if (monthA.isChecked())
                         displayAppointmentForMonth(currentDate.getText().toString());
+                       */
                 }
             });
 
@@ -453,12 +510,22 @@ public class viewAppiontmentPage extends ActionBarActivity {
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
             adb.deleteAppointmentInfo(aID);
             adb.close();
+            String []temp = currentDate.getText().toString().split("/");
+            String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+            if (dayA.isChecked())
+                displayAppointmentForDate(dateInYYYYMMDD);
+            if (weekA.isChecked())
+                displayAppointmentForWeek(dateInYYYYMMDD);
+            if (monthA.isChecked())
+                displayAppointmentForMonth(dateInYYYYMMDD);
+            /*
             if (dayA.isChecked())
                 displayAppointmentForDate(currentDate.getText().toString());
             if (weekA.isChecked())
                 displayAppointmentForWeek(currentDate.getText().toString());
             if (monthA.isChecked())
                 displayAppointmentForMonth(currentDate.getText().toString());
+                */
         }
     }
 
@@ -516,7 +583,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
             LayoutInflater inflater = getLayoutInflater();
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             Date dObj = df.parse(currentD);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
@@ -525,7 +592,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 TableRow trDate = (TableRow) inflater.inflate(R.layout.tablerowappointmentdayheader, aptTable, false);
                 TextView tvDayOfWeek = (TextView) trDate.findViewById(R.id.txtVARowDayHeaderDate);
                 TextView tvAptCount = (TextView)trDate.findViewById(R.id.txtVARowDayHeaderCount);
+                df = new SimpleDateFormat("dd/MM/yyyy");
                 tvDayOfWeek.setText(df.format(myCal.getTime()));
+                df = new SimpleDateFormat("yyyy/MM/dd");
+                //List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 tvAptCount.setText(String.valueOf( appointmentList.size()));
                 trDate.setBackgroundResource(R.drawable.shapeofappointmentdayheader);
@@ -547,7 +617,12 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
                     TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
-                    dt.setText(ai.getaDate());
+                    //dt.setText(ai.getaDate());
+                    df = new SimpleDateFormat("yyyy/MM/dd");
+                    dObj = df.parse(ai.getaDate());
+                    myCal.setTime(dObj);
+                    df = new SimpleDateFormat("dd/MM/yyyy");
+                    dt.setText(df.format(myCal.getTime()));
                     TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
                     tm.setText(ai.getaTime());
                     TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
@@ -568,7 +643,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
             LayoutInflater inflater = getLayoutInflater();
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             Date dObj = df.parse(currentD);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
@@ -577,7 +652,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 TableRow trDate = (TableRow) inflater.inflate(R.layout.tablerowappointmentdayheader, aptTable, false);
                 TextView tvDayOfWeek = (TextView) trDate.findViewById(R.id.txtVARowDayHeaderDate);
                 TextView tvAptCount = (TextView)trDate.findViewById(R.id.txtVARowDayHeaderCount);
+                df = new SimpleDateFormat("dd/MM/yyyy");
                 tvDayOfWeek.setText(df.format(myCal.getTime()));
+                df = new SimpleDateFormat("yyyy/MM/dd");
+                //List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(df.format(myCal.getTime()));
                 tvAptCount.setText(String.valueOf( appointmentList.size()));
                 trDate.setBackgroundResource(R.drawable.shapeofappointmentdayheader);
@@ -599,7 +677,12 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
                     TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
-                    dt.setText(ai.getaDate());
+                    //dt.setText(ai.getaDate());
+                    df = new SimpleDateFormat("yyyy/MM/dd");
+                    dObj = df.parse(ai.getaDate());
+                    myCal.setTime(dObj);
+                    df = new SimpleDateFormat("dd/MM/yyyy");
+                    dt.setText(df.format(myCal.getTime()));
                     TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
                     tm.setText(ai.getaTime());
                     TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
@@ -622,6 +705,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             aptTable.removeAllViews();
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
             List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(currentD);
+            //List<appointmentInformation> appointmentList = adb.getAppointmentInfoByDate(myCal.YEAR + "/" + myCal.MONTH + "/" + myCal.DAY_OF_MONTH);
             LayoutInflater inflater = getLayoutInflater();
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
             boolean color=false;
@@ -640,7 +724,13 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                 name.setText(pi.getName()+ " , " + pi.getPhone());
                 TextView dt = (TextView) tr.findViewById(R.id.txtVARdate);
-                dt.setText(ai.getaDate());
+                //dt.setText(ai.getaDate());
+                SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                Date dObj = df.parse(ai.getaDate());
+                Calendar myCal = Calendar.getInstance();
+                myCal.setTime(dObj);
+                df = new SimpleDateFormat("dd/MM/yyyy");
+                dt.setText(df.format(myCal.getTime()));
                 TextView tm = (TextView) tr.findViewById(R.id.txtVARtime);
                 tm.setText(ai.getaTime());
                 TextView pt = (TextView) tr.findViewById(R.id.txtVARtreatment);
@@ -655,3 +745,4 @@ public class viewAppiontmentPage extends ActionBarActivity {
 
 
 }
+

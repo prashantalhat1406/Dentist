@@ -70,7 +70,7 @@ public class reportGraphs extends ActionBarActivity {
         try {
             appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
 
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             Calendar myCal = Calendar.getInstance();
 
             int[] paymentInfo = adb.getPaymentInfoMonthWise(df.format(myCal.getTime()));

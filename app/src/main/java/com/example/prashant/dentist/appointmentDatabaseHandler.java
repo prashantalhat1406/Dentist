@@ -135,7 +135,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         int []appointmentCount={0,0,0,0,0,0,0,0,0,0,0,0};
 
         try{
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             Date dObj = df.parse(currentDate);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
@@ -165,7 +165,7 @@ public class appointmentDatabaseHandler extends SQLiteOpenHelper {
         int []paymentInfo={0,0,0,0,0,0,0,0,0,0,0,0};
 
         try{
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             Date dObj = df.parse(currentDate);
             Calendar myCal = Calendar.getInstance();
             myCal.setTime(dObj);
