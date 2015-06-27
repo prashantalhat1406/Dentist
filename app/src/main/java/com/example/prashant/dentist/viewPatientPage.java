@@ -565,6 +565,7 @@ public class viewPatientPage extends ActionBarActivity {
         final EditText address = (EditText)addNP.findViewById(R.id.txtANPDPatientAddress);
         final EditText age = (EditText)addNP.findViewById(R.id.txtANPDPatientAge);
         final RadioButton sexM = (RadioButton)addNP.findViewById(R.id.rdbANPDmale);
+        sexM.setChecked(true);
         final RadioButton sexF = (RadioButton)addNP.findViewById(R.id.rdbANPDfemale);
         Button addButton = (Button)addNP.findViewById(R.id.butANPDialogNew);
         addButton.setOnClickListener(new View.OnClickListener() {
