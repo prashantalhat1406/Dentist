@@ -473,31 +473,31 @@ public class viewPatientPage extends ActionBarActivity {
                                             } else {
                                                 if (hourOfDay <= 12) {
                                                     if (String.valueOf(minute).length() == 1)
-                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                        EADtime.setText(hourOfDay + ":0" + minute + " AM");
                                                     else
-                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                        EADtime.setText(hourOfDay + ":" + minute+ " AM" );
                                                 }
                                                 if (hourOfDay > 12) {
                                                     hourOfDay = hourOfDay - 12;
                                                     if (String.valueOf(minute).length() == 1)
-                                                        EADtime.setText(hourOfDay + ":0" + minute);
+                                                        EADtime.setText(hourOfDay + ":0" + minute+ " PM");
                                                     else
-                                                        EADtime.setText(hourOfDay + ":" + minute);
+                                                        EADtime.setText(hourOfDay + ":" + minute + " PM");
                                                 }
                                             }
                                         } else {
                                             if (hourOfDay <= 12) {
                                                 if (String.valueOf(minute).length() == 1)
-                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                    EADtime.setText(hourOfDay + ":0" + minute+ " AM");
                                                 else
-                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                                    EADtime.setText(hourOfDay + ":" + minute+ " AM");
                                             }
                                             if (hourOfDay > 12) {
                                                 hourOfDay = hourOfDay - 12;
                                                 if (String.valueOf(minute).length() == 1)
-                                                    EADtime.setText(hourOfDay + ":0" + minute);
+                                                    EADtime.setText(hourOfDay + ":0" + minute+ " PM");
                                                 else
-                                                    EADtime.setText(hourOfDay + ":" + minute);
+                                                    EADtime.setText(hourOfDay + ":" + minute+ " PM");
                                             }
                                         }
                                     }
