@@ -32,13 +32,13 @@ public class appointmentInformation {
         this._toothDetails=toothDetails;
     }
 //use this constructor to create new appointment .. payment details are not added here
-    public appointmentInformation(int aid, int pid, String date, String time, String proposedTreatment, String toothDetails){
+    public appointmentInformation(int aid, int pid, String date, String time, String proposedTreatment){//}, String toothDetails){
         this._aid=aid;
         this._pid=pid;
         this._adate=date;
         this._atime=time;
         this._proposedTreatment=proposedTreatment;
-        this._toothDetails=toothDetails;
+        //this._toothDetails=toothDetails;
     }
 
     //use this constructor to add any payment details for patient

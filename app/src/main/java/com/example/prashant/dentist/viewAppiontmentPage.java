@@ -436,8 +436,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
             treatment.setAdapter(adapterpt);
             treatment.setSelection(adapterpt.getPosition(ai.getProposedTreatment()));
 
-            final EditText toothdetails = (EditText)editAppointment.findViewById(R.id.txtEADToothDetails);
-            toothdetails.setText(ai.getToothDetails());
+            //final EditText toothdetails = (EditText)editAppointment.findViewById(R.id.txtEADToothDetails);
+            //toothdetails.setText(ai.getToothDetails());
 
             Button bdateDialog = (Button)editAppointment.findViewById(R.id.butEADShowDate);
             bdateDialog.setOnClickListener(new View.OnClickListener() {
@@ -467,17 +467,17 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         if (EADtime.getText().length() == 0) {
                             Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (toothdetails.getText().length() == 0) {
+                            /*if (toothdetails.getText().length() == 0) {
                                 Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
-                            } else {
+                            } else {*/
                                 String []temp = EADdate.getText().toString().split("/");
                                 String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
                                 //ai = new appointmentInformation(ai.getAID(), ai.getPID(), EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
-                                ai = new appointmentInformation(ai.getAID(), ai.getPID(), dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                ai = new appointmentInformation(ai.getAID(), ai.getPID(), dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString());//, toothdetails.getText().toString());
                                 adb.updateAppointmentInfo(ai);
                                 Toast.makeText(getApplicationContext(), "Record Edited", Toast.LENGTH_SHORT).show();
                                 editAppointment.dismiss();
-                            }
+                            //}
                         }
                     }
 

@@ -168,7 +168,7 @@ public class viewPatientPage extends ActionBarActivity {
             EADdate = (EditText)addAppointment.findViewById(R.id.txtEADDate);
             EADtime = (EditText)addAppointment.findViewById(R.id.txtEADTime);
 
-            final EditText toothdetails = (EditText)addAppointment.findViewById(R.id.txtEADToothDetails);
+            //final EditText toothdetails = (EditText)addAppointment.findViewById(R.id.txtEADToothDetails);
 
             Button bdateDialog = (Button)addAppointment.findViewById(R.id.butEADShowDate);
             bdateDialog.setOnClickListener(new View.OnClickListener() {
@@ -202,24 +202,24 @@ public class viewPatientPage extends ActionBarActivity {
                             } else {
                                 if (EADtime.getText().length() == 0) {
                                     Toast.makeText(getApplicationContext(), "Enter Time", Toast.LENGTH_SHORT).show();
-                                } else {
+                                } else {/*
                                     if (toothdetails.getText().length() == 0) {
                                         Toast.makeText(getApplicationContext(), "Enter ToothDetails", Toast.LENGTH_SHORT).show();
-                                    } else {
+                                    } else {*/
                                         if (adb.getAppointmentCountForDateTime(EADdate.getText().toString(), EADtime.getText().toString()) == 0) {
 
                                             lastApptID = adb.getLastAppointmentID() + 1;
                                             String []temp = EADdate.getText().toString().split("/");
                                             String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
                                             //appointmentInformation ai = new appointmentInformation(lastApptID, pID, EADdate.getText().toString(), EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
-                                            appointmentInformation ai = new appointmentInformation(lastApptID, pID, dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString(), toothdetails.getText().toString());
+                                            appointmentInformation ai = new appointmentInformation(lastApptID, pID, dateInYYYYMMDD, EADtime.getText().toString(), treatment.getSelectedItem().toString());//, toothdetails.getText().toString());
                                             adb.addAppointmentInfo(ai);
                                             adb.close();
                                             Toast.makeText(getApplicationContext(), "Record Added", Toast.LENGTH_SHORT).show();
                                             name.setText("");
                                             EADdate.setText("");
                                             EADtime.setText("");
-                                            toothdetails.setText("");
+                                            //toothdetails.setText("");
                                             addAppointment.dismiss();
                                             clearAllSelection();
                                         } else {
@@ -227,7 +227,7 @@ public class viewPatientPage extends ActionBarActivity {
                                             EADdate.setText("");
                                             EADtime.setText("");
                                         }
-                                    }
+                                    /*}*/
                                 }
                             }
                         }
