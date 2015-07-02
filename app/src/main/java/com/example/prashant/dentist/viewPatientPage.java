@@ -361,6 +361,7 @@ public class viewPatientPage extends ActionBarActivity {
             }
             patientDetails.show();
             clearAllSelection();
+
         /*}*/
     }
 

@@ -751,6 +751,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 if (appointmentList.size()!=0)
                 aptTable.addView(trDate);
                 boolean color=false;
+
                 for (final appointmentInformation ai : appointmentList) {
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
                     tr.setOnClickListener(new View.OnClickListener() {
