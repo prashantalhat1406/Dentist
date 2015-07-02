@@ -545,7 +545,82 @@ public class viewAppiontmentPage extends ActionBarActivity {
         return pi.getName();
     }
 
+    public void viewAppointmentDetails(final int aid){
 
+        final appointmentDatabaseHandler adb = new appointmentDatabaseHandler(this);
+        final Dialog paymentDetails = new Dialog(this);
+        paymentDetails.setContentView(R.layout.addappointmentdetails);
+        paymentDetails.setTitle("Appointment Details");
+        paymentDetails.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+        appointmentInformation ai = adb.getAppointmentInfoByID(aid);
+
+        TextView nameOfPatient = (TextView) paymentDetails.findViewById(R.id.txtVADName);
+        nameOfPatient.setText(getPatientNameFromAID(aid));
+        TextView dateTime = (TextView) paymentDetails.findViewById(R.id.txtVADDate);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date dObj = df.parse(ai.getaDate());
+            Calendar myCal = Calendar.getInstance();
+            myCal.setTime(dObj);
+            df = new SimpleDateFormat("dd/MM/yyyy");
+            dateTime.setText(df.format(myCal.getTime()) + " - "+ai.getaTime().toString());
+        }catch (Exception e){e.printStackTrace();}
+
+
+        TextView proposedTreatment = (TextView) paymentDetails.findViewById(R.id.txtVADProposedTreatment);
+        proposedTreatment.setText(ai.getProposedTreatment().toString());
+
+        final Spinner paymentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADPayment);
+        ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+        paymentInfo.setAdapter(adapterPayment);
+
+        final Spinner actualTreatmentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADActualTreatment);
+        ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        actualTreatmentInfo.setAdapter(adapterTreatmentt);
+
+        final EditText details = (EditText)paymentDetails.findViewById(R.id.txtVADDetails);
+
+        Button saveButton = (Button)paymentDetails.findViewById(R.id.butVADSAVE);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appointmentInformation ai = adb.getAppointmentInfoByID(aid);
+                ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
+                ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
+                ai.setToothDetails(details.getText().toString());
+                adb.updateAppointmentInfo(ai);
+                Toast.makeText(getApplicationContext(), "Appointment Details Added", Toast.LENGTH_SHORT).show();
+                paymentDetails.dismiss();
+            }
+        });
+
+        paymentDetails.show();
+
+
+        /*
+        final Spinner paymentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDPayment);
+        ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+        paymentInfo.setAdapter(adapterPayment);
+        final Spinner actualTreatmentInfo = (Spinner) addPayment.findViewById(R.id.spnAPDActualTreatment);
+        ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        actualTreatmentInfo.setAdapter(adapterTreatmentt);
+        Button addButton = (Button)addPayment.findViewById(R.id.butAPDAdd);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appointmentInformation ai = adb.getAppointmentInfoByID(aID);
+                ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
+                ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
+                adb.updateAppointmentInfo(ai);
+                Toast.makeText(getApplicationContext(), "Payment Added", Toast.LENGTH_SHORT).show();
+                addPayment.dismiss();
+            }
+        });
+        addPayment.show();
+        clearAllSelection();
+*/
+    }
 
     public void addPaymentDetails() {
         final int aID = getSelectedAppointmentID();
@@ -610,8 +685,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 if (appointmentList.size()!=0)
                     aptTable.addView(trDate);
                 boolean color = false;
-                for (appointmentInformation ai : appointmentList) {
+                for (final appointmentInformation ai : appointmentList) {
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                    tr.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewAppointmentDetails(ai.getAID());
+                        }
+                    });
                     if(!color ){
                         color=true;
                         tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);
@@ -670,8 +751,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 if (appointmentList.size()!=0)
                 aptTable.addView(trDate);
                 boolean color=false;
-                for (appointmentInformation ai : appointmentList) {
+                for (final appointmentInformation ai : appointmentList) {
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                    tr.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewAppointmentDetails(ai.getAID());
+                        }
+                    });
                     if(!color ){
                         color=true;
                         tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);
@@ -717,8 +804,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
             LayoutInflater inflater = getLayoutInflater();
             patientDatabaseHandler pdb = new patientDatabaseHandler(this);
             boolean color=false;
-            for (appointmentInformation ai : appointmentList) {
+            for (final appointmentInformation ai : appointmentList) {
                 TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforappointment2, aptTable, false);
+                tr.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewAppointmentDetails(ai.getAID());
+                    }
+                });
                 if(!color){
                     color=true;
                     tr.setBackgroundResource(R.drawable.shapeforappointmentrowdark);

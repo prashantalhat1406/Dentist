@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3" android:orientation="vertical" android:background="@drawable/rectanglegreen">
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="0dp" android:layout_weight="0.1" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Name :"
+                />
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.75" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
+                android:id="@+id/txtVADName"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="0dp" android:layout_weight="0.1" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Date :"
+                />
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.75" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
+                android:id="@+id/txtVADDate"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="0dp" android:layout_weight="0.1" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Proposed Treatment :"
+                />
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.75" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
+                android:id="@+id/txtVADProposedTreatment"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5" android:orientation="vertical" android:background="@drawable/rectanglegreen">
+
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="wrap_content" android:layout_weight="0.2" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Details :"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/txtVADDetails"
+                android:layout_weight="0.6" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="wrap_content" android:layout_weight="0.2" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Actual Treatment :"
+                />
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnVADActualTreatment"
+                android:gravity="center_vertical">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:gravity="center"
+            android:layout_height="wrap_content" android:layout_weight="0.2" android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:text="Payment :"
+                />
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnVADPayment"
+                android:gravity="center_vertical">
+            </Spinner>
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="0.2" android:gravity="center"
+        android:orientation="horizontal" android:background="@drawable/rectanglegreen">
+        <Button
+            android:layout_width="match_parent" android:textColor="#FFFFFF"
+            android:layout_height="match_parent" android:text="SAVE" android:background="@drawable/buttonovalgreen"
+            android:id="@+id/butVADSAVE"/>
+    </LinearLayout>
+
+</LinearLayout>

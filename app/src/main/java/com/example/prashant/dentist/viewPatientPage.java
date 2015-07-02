@@ -333,7 +333,9 @@ public class viewPatientPage extends ActionBarActivity {
                 for (appointmentInformation ai : appointmentList) {
                     TableRow tr = (TableRow) inflater.inflate(R.layout.tablerowforpatientdetails, patientDetailsTable, false);
                     TextView adate = (TextView) tr.findViewById(R.id.txtVPDDate);
-                    TextView treatment = (TextView) tr.findViewById(R.id.txtVPDTreatmentDone);
+                    TextView proposedtreatment = (TextView) tr.findViewById(R.id.txtVPDPropsedTreatment);
+                    TextView actualtreatment = (TextView) tr.findViewById(R.id.txtVPDActualTreatment);
+                    TextView details = (TextView) tr.findViewById(R.id.txtVPDAppointmentDetails);
                     TextView payment = (TextView) tr.findViewById(R.id.txtVPDPayment);
 
                     SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
@@ -344,7 +346,9 @@ public class viewPatientPage extends ActionBarActivity {
                     //dt.setText(df.format(myCal.getTime()));
                     //adate.setText(ai.getaDate());
                     adate.setText(df.format(myCal.getTime()));
-                    treatment.setText(ai.getActualTreatment());
+                    proposedtreatment.setText(ai.getProposedTreatment());
+                    actualtreatment.setText(ai.getActualTreatment());
+                    details.setText(ai.getToothDetails());
                     if(ai.getPayment()==0)
                         payment.setText("-");
                     else
