@@ -9,6 +9,7 @@
         android:text=""
         android:id="@+id/cbVAR"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:text="Date : "

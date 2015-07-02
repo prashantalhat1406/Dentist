@@ -18,6 +18,7 @@
         android:layout_weight="0.5"
         android:gravity="center_vertical"
         android:textSize="15dp"/>
+
     <TextView android:id="@+id/txtVPDAppointmentDetails"
         android:layout_weight="0.5"
         android:gravity="center_vertical"
