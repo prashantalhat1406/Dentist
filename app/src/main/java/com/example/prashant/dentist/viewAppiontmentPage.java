@@ -198,10 +198,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             deleteAppointment();
             return true;
         }
-        if (id == R.id.menuVAPayment) {
+        /*if (id == R.id.menuVAPayment) {
             addPaymentDetails();
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
