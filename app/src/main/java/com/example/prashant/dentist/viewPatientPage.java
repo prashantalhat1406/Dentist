@@ -50,7 +50,7 @@ public class viewPatientPage extends ActionBarActivity {
                 searchPatientByName();
             }
         });
-
+/*
         Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
         bNewPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,8 @@ public class viewPatientPage extends ActionBarActivity {
 
             }
         });
-
+*/
+        /*
         Button bAppointmeent = (Button)findViewById(R.id.butViewPatientAppointment);
         bAppointmeent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +68,7 @@ public class viewPatientPage extends ActionBarActivity {
                 gotoNewAppointmentScreen();
             }
         });
+        */
 /*
         Button bDetails = (Button)findViewById(R.id.butVPDetails);
         bDetails.setOnClickListener(new View.OnClickListener() {
@@ -425,6 +427,20 @@ public class viewPatientPage extends ActionBarActivity {
             displayAllExistingPatients();
             return true;
         }
+
+        if (id == R.id.menuVPAdd) {
+            addNewPatientDialog();
+            displayAllExistingPatients();
+            return true;
+        }
+
+        if (id == R.id.menuVPAppointment) {
+            gotoNewAppointmentScreen();
+            displayAllExistingPatients();
+            return true;
+        }
+
+
         return super.onOptionsItemSelected(item);
     }
 

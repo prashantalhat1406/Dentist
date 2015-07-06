@@ -72,25 +72,29 @@
             </TableLayout>
         </ScrollView>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-        android:background="@drawable/rectangleblue"
-        >
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:text="APPOINTMENT"
-            android:textSize="13dp"
-            android:id="@+id/butViewPatientAppointment"
-            android:background="@drawable/buttonblue"
-            android:textColor="#FFFFFF"
-            android:enabled="true"
-            />
+    <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangleblue"
+            >
+            -->
+            <!--
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:text="APPOINTMENT"
+                android:textSize="13dp"
+                android:id="@+id/butViewPatientAppointment"
+                android:background="@drawable/buttonblue"
+                android:textColor="#FFFFFF"
+                android:enabled="true"
+                />
+                -->
+        <!--
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -101,6 +105,7 @@
             android:textColor="#FFFFFF"
             android:id="@+id/butVPNEW"
             />
+            -->
 <!--
         <Button
             android:layout_width="0dp"
@@ -114,7 +119,8 @@
             android:enabled="true"
             />
             -->
-
+<!--
     </LinearLayout>
+    -->
 
 </LinearLayout>

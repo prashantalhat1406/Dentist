@@ -2,6 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.prashant.dentist.viewPatientPage">
-    <item android:id="@+id/menuVPEdit"  android:title="EDIT" android:showAsAction="never"/>
+    <item android:id="@+id/menuVPAdd" android:title="Add" android:icon="@mipmap/ic_addpatient" app:showAsAction="always"/>
+    <item android:id="@+id/menuVPEdit"  android:title="EDIT"  android:icon="@mipmap/ic_edit" app:showAsAction="always"/>
+    <item android:id="@+id/menuVPAppointment"  android:title="APPOINTMENT"  android:icon="@mipmap/ic_appt" app:showAsAction="always"/>
     <item android:id="@+id/menuVPDelete" android:title="DELETE" android:showAsAction="never"/>
 </menu>
