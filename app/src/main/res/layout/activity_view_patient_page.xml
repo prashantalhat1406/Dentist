@@ -9,7 +9,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1" android:background="@drawable/rectangleblue">
+        android:layout_weight="0.1" android:background="@drawable/rectangleblue" android:gravity="center">
 
         <EditText
             android:paddingTop="5dp"
@@ -21,15 +21,24 @@
             android:textSize="15dp"
             android:id="@+id/txtSearchName"/>
 
-        <Button
-            android:layout_width="0dp"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:text="Search"
+            android:src="@mipmap/ic_search"
+            android:id="@+id/butPatientSearch"
+            android:background="@drawable/buttonblue"
+            />
+
+        <!--<Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_search"
+            android:text=""
             android:textSize="13dp"
             android:background="@drawable/buttonblue"
             android:textColor="#FFFFFF"
             android:id="@+id/butPatientSearch" />
+            -->
             <!--android:onClick="searchPatientByName"-->
 
 

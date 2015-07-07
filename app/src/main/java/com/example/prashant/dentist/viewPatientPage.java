@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -43,7 +44,8 @@ public class viewPatientPage extends ActionBarActivity {
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
 
-        Button bSearch = (Button)findViewById(R.id.butPatientSearch);
+        //Button bSearch = (Button)findViewById(R.id.butPatientSearch);
+        ImageButton bSearch = (ImageButton)findViewById(R.id.butPatientSearch);
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
