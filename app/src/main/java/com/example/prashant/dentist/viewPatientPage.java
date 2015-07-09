@@ -111,39 +111,7 @@ public class viewPatientPage extends ActionBarActivity {
         }
     }
 
-    public void searchPatientByName() {
-        EditText searchname = (EditText) findViewById(R.id.txtSearchName);
-        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
-        pt.removeAllViews();
-        patientDatabaseHandler db = new patientDatabaseHandler(this);
-        List<patientInformation> patientList = db.getPatientInfoByName(searchname.getText().toString());
-        LayoutInflater inflat = getLayoutInflater();
-        boolean color = false;
-        if(patientList.size()!=0) {
-            for (patientInformation pi : patientList) {
-                TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
-                if (!color) {
-                    color = true;
-                    row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
-                } else {
-                    color = false;
-                    row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
-                }
-                TextView recnum = (TextView) row.findViewById(R.id.txtPatientRecordID);
-                recnum.setText(Integer.toString(pi.getID()));
-                TextView name = (TextView) row.findViewById(R.id.name);
-                name.setText(pi.getName());
-                TextView phone = (TextView) row.findViewById(R.id.phone);
-                phone.setText(pi.getPhone());
-                pt.addView(row);
-            }
-        }else
-            Toast.makeText(getApplicationContext(), "No Records Found", Toast.LENGTH_SHORT).show();
-        searchname.setText("");
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-    }
 
     public void gotoNewAppointmentScreen ()
     {
@@ -367,6 +335,46 @@ public class viewPatientPage extends ActionBarActivity {
             clearAllSelection();
 
         /*}*/
+    }
+
+    public void searchPatientByName() {
+        EditText searchname = (EditText) findViewById(R.id.txtSearchName);
+        TableLayout pt = (TableLayout) findViewById(R.id.patientTable);
+        pt.removeAllViews();
+        patientDatabaseHandler db = new patientDatabaseHandler(this);
+        List<patientInformation> patientList = db.getPatientInfoByName(searchname.getText().toString());
+        LayoutInflater inflat = getLayoutInflater();
+        boolean color = false;
+        if(patientList.size()!=0) {
+            for (final patientInformation pi : patientList) {
+                TableRow row = (TableRow) inflat.inflate(R.layout.tablerowforpatient, pt, false);
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewPatientDetails(pi.getID());
+                    }
+                });
+                if (!color) {
+                    color = true;
+                    row.setBackgroundResource(R.drawable.shapeofpatientrowdark);
+                } else {
+                    color = false;
+                    row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
+                }
+                TextView recnum = (TextView) row.findViewById(R.id.txtPatientRecordID);
+                recnum.setText(Integer.toString(pi.getID()));
+                TextView name = (TextView) row.findViewById(R.id.name);
+                name.setText(pi.getName());
+                TextView phone = (TextView) row.findViewById(R.id.phone);
+                phone.setText(pi.getPhone());
+                pt.addView(row);
+            }
+        }else
+            Toast.makeText(getApplicationContext(), "No Records Found", Toast.LENGTH_SHORT).show();
+        searchname.setText("");
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
     }
 
 
