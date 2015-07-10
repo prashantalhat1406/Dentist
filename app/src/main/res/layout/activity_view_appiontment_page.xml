@@ -23,14 +23,13 @@
             android:text="06/05/2015"
             style="@style/boldBlueCV"
             android:id="@+id/txtViewAppointmentCurrentDate"/>
-        <Button
+        <ImageButton
             android:layout_height="wrap_content"
-            android:text="D"
             android:layout_width="0dp"
             android:layout_weight="0.1"
-            android:textColor="#FFFFFF"
+            android:src="@mipmap/ic_date"
             android:id="@+id/butViewAppiontmentDateDialog"
-            android:background="@drawable/buttoncirclegreen"
+            android:background="@drawable/datetimebutton"
             />
 
 

@@ -105,12 +105,8 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:id="@+id/spnEADTreamnet"
-            >
-
-        </Spinner>
-
-
+            android:gravity="center"
+            android:id="@+id/spnEADTreamnet"/>
     </LinearLayout>
 
     <LinearLayout
@@ -119,28 +115,9 @@
         android:layout_weight="0.1"
         android:orientation="horizontal"
         >
-        <!--
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="Tooth Details"
-            style="@style/referenceLabel"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:inputType="text"
-            android:id="@+id/txtEADToothDetails"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:visibility="invisible"
-            />
-            -->
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
@@ -148,14 +125,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-
-
         android:orientation="horizontal"
+        android:gravity="center"
         >
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="ADD"
+            android:text="  ADD  "
+            android:layout_gravity="center"
+            android:gravity="center"
             android:id="@+id/butEADButton"
             android:textColor="#FFFFFF"
             android:textSize="20dp"

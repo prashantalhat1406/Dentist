@@ -30,7 +30,7 @@ import java.util.List;
 
 public class viewAppiontmentPage extends ActionBarActivity {
     int y, m, d,h,mi;
-    Button bd;
+    ImageButton bd;
     TextView currentDate;
     RadioButton dayA,weekA,monthA;
     EditText EADdate, EADtime;
@@ -94,7 +94,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             //displayAppointmentForDate(currentDate.getText().toString());
             displayAppointmentForDate(dateInYYYYMMDD);
         }catch (Exception e){e.printStackTrace();}
-        bd = (Button)findViewById(R.id.butViewAppiontmentDateDialog);
+        bd = (ImageButton)findViewById(R.id.butViewAppiontmentDateDialog);
         bd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {showDialog(0);
