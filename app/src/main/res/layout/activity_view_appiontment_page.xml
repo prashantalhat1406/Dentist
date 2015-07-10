@@ -8,6 +8,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         android:background="@drawable/rectanglegreen"
         >
         <TextView
@@ -15,12 +16,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="Select Date : "
+            android:gravity="left"
+            android:layout_gravity="center_vertical"
             style="@style/referenceLabel"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:text="06/05/2015"
+            android:gravity="left"
+            android:layout_gravity="center_vertical"
             style="@style/boldBlueCV"
             android:id="@+id/txtViewAppointmentCurrentDate"/>
         <ImageButton
