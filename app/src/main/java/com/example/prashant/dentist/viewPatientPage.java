@@ -142,14 +142,14 @@ public class viewPatientPage extends ActionBarActivity {
 
             //final EditText toothdetails = (EditText)addAppointment.findViewById(R.id.txtEADToothDetails);
 
-            Button bdateDialog = (Button)addAppointment.findViewById(R.id.butEADShowDate);
+            ImageButton bdateDialog = (ImageButton)addAppointment.findViewById(R.id.butEADShowDate);
             bdateDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showDialog(2);
                 }
             });
-            Button btimeDialog = (Button)addAppointment.findViewById(R.id.butEADShowTime);
+            ImageButton btimeDialog = (ImageButton)addAppointment.findViewById(R.id.butEADShowTime);
             btimeDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

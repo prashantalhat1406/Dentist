@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -440,14 +441,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
             //final EditText toothdetails = (EditText)editAppointment.findViewById(R.id.txtEADToothDetails);
             //toothdetails.setText(ai.getToothDetails());
 
-            Button bdateDialog = (Button)editAppointment.findViewById(R.id.butEADShowDate);
+            ImageButton bdateDialog = (ImageButton)editAppointment.findViewById(R.id.butEADShowDate);
             bdateDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showDialog(2);
                 }
             });
-            Button btimeDialog = (Button)editAppointment.findViewById(R.id.butEADShowTime);
+            ImageButton btimeDialog = (ImageButton)editAppointment.findViewById(R.id.butEADShowTime);
             btimeDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

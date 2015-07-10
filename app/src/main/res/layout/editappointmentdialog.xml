@@ -51,14 +51,12 @@
             android:inputType="date"
             android:id="@+id/txtEADDate"
             />
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:text="D"
+            android:src="@mipmap/ic_date"
             android:id="@+id/butEADShowDate"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:background="@drawable/buttoncirclegreen"
+            android:background="@drawable/datetimebutton"
             android:layout_weight="0.1"/>
     </LinearLayout>
 
@@ -81,14 +79,12 @@
             android:layout_weight="0.6"
             android:inputType="time"
             android:id="@+id/txtEADTime"/>
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:text="T"
             android:id="@+id/butEADShowTime"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:background="@drawable/buttoncirclegreen"
+            android:src="@mipmap/ic_time"
+            android:background="@drawable/datetimebutton"
             android:layout_weight="0.1"/>
     </LinearLayout>
 
