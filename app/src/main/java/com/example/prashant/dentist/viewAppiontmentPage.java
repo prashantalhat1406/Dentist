@@ -626,7 +626,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
         clearAllSelection();
 */
     }
-
+/*
     public void addPaymentDetails() {
         final int aID = getSelectedAppointmentID();
         if(aID==-1){
@@ -661,7 +661,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             clearAllSelection();
         }
     }
-
+*/
 
     public void displayAppointmentForMonth(String currentD)
     {
