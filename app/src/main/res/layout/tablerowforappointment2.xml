@@ -5,11 +5,20 @@
     <LinearLayout android:layout_width="0dp" android:layout_weight="0.1" android:layout_height="match_parent" android:orientation="vertical">
         <CheckBox
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/cbVAR"/>
+            android:layout_height="0dp" android:layout_weight="0.5" android:id="@+id/cbVAR"/>
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.4"
+            android:layout_height="0dp"
+            android:text="P"
+            android:textColor="#FF0000"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/txtVAPaymentFlag"/>
+        <TextView
+            android:layout_width="match_parent"
             android:layout_weight="0.01"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/txtVARaptID"/>
     </LinearLayout>
     <LinearLayout android:layout_width="0dp" android:layout_weight="0.25" android:layout_height="match_parent" android:orientation="vertical">

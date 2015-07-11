@@ -707,6 +707,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     }
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                     aptID.setText(String.valueOf(ai.getAID()));
+                    TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);
+                    if (ai.getPayment()==0)
+                        paymentFlag.setText("");
+                    else
+                        paymentFlag.setText("P");
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
@@ -774,6 +779,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     }
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                     aptID.setText(String.valueOf(ai.getAID()));
+                    TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);
+                    if (ai.getPayment()==0)
+                        paymentFlag.setText("");
+                    else
+                        paymentFlag.setText("P");
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
@@ -827,6 +837,11 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 }
                 TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                 aptID.setText(String.valueOf(ai.getAID()));
+                TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);
+                if (ai.getPayment()==0)
+                    paymentFlag.setText("");
+                else
+                    paymentFlag.setText("P");
                 patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                 TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                 name.setText(pi.getName()+ " , " + pi.getPhone());
