@@ -12,11 +12,11 @@
             android:layout_width="match_parent" android:gravity="center"
             android:layout_height="0dp" android:layout_weight="0.05" android:orientation="horizontal">
             <TextView
-                android:layout_width="0dp" android:layout_weight="0.5" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:layout_width="0dp" android:layout_weight="0.4" android:layout_height="wrap_content" style="@style/referenceLabel"
                 android:text="Name :"
                 />
             <TextView
-                android:layout_width="0dp" android:layout_weight="0.5" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
+                android:layout_width="0dp" android:layout_weight="0.6" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
                 android:id="@+id/txtVADName"
                 />
         </LinearLayout>
@@ -25,11 +25,11 @@
             android:layout_width="match_parent" android:gravity="center"
             android:layout_height="0dp" android:layout_weight="0.05" android:orientation="horizontal">
             <TextView
-                android:layout_width="0dp" android:layout_weight="0.5" android:layout_height="wrap_content" style="@style/referenceLabel"
+                android:layout_width="0dp" android:layout_weight="0.4" android:layout_height="wrap_content" style="@style/referenceLabel"
                 android:text="Date :"
                 />
             <TextView
-                android:layout_width="0dp" android:layout_weight="0.5" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
+                android:layout_width="0dp" android:layout_weight="0.6" android:layout_height="wrap_content" android:text="Prashant" style="@style/boldBlueCV"
                 android:id="@+id/txtVADDate"
                 />
         </LinearLayout>
@@ -102,8 +102,8 @@
             android:layout_width="match_parent" android:gravity="center"
             android:layout_height="0dp" android:layout_weight="0.1" android:orientation="horizontal">
         <Button
-            android:layout_width="match_parent" android:textColor="#FFFFFF"
-            android:layout_height="match_parent" android:text="SAVE" android:background="@drawable/buttonovalgreen"
+            android:layout_width="wrap_content" android:textColor="#FFFFFF"
+            android:layout_height="wrap_content" android:text="  SAVE  " android:background="@drawable/buttonovalgreen"
             android:id="@+id/butVADSAVE"/>
             </LinearLayout>
 
