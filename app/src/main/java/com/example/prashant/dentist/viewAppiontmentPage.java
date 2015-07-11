@@ -589,7 +589,10 @@ public class viewAppiontmentPage extends ActionBarActivity {
             public void onClick(View v) {
                 appointmentInformation ai = adb.getAppointmentInfoByID(aid);
                 ai.setActualTreatment(actualTreatmentInfo.getSelectedItem().toString());
-                ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
+                if (paymentInfo.getSelectedItem().toString().equals("NA"))
+                    ai.setPayment(0);
+                else
+                    ai.setPayment(Integer.parseInt(paymentInfo.getSelectedItem().toString()));
                 ai.setToothDetails(details.getText().toString());
                 adb.updateAppointmentInfo(ai);
                 Toast.makeText(getApplicationContext(), "Appointment Details Added", Toast.LENGTH_SHORT).show();

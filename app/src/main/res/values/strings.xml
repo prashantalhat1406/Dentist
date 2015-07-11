@@ -23,6 +23,7 @@
         <item>Other</item>
     </string-array>
     <string-array name="PaymentDenominations">
+        <item>NA</item>
         <item>100</item>
         <item>200</item>
         <item>300</item>
