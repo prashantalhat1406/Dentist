@@ -281,15 +281,15 @@ public class viewAppiontmentPage extends ActionBarActivity {
                             tempCal.set(Calendar.MINUTE, 0);
                             tempCal.set(Calendar.SECOND, 0);
                             tempCal.set(Calendar.MILLISECOND, 0);
-                            if (!dObj.before(tempCal.getTime())) {
+                            //if (!dObj.before(tempCal.getTime())) {
                                 currentDateFlag = dObj.equals(tempCal.getTime());
                                 Calendar myCal = Calendar.getInstance();
                                 myCal.setTime(dObj);
                                 EADdate.setText(df.format(myCal.getTime()));
-                            } else {
+                            /*} else {
                                 Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
                                 EADdate.setText("");
-                            }
+                            }*/
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -597,6 +597,15 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 adb.updateAppointmentInfo(ai);
                 Toast.makeText(getApplicationContext(), "Appointment Details Added", Toast.LENGTH_SHORT).show();
                 paymentDetails.dismiss();
+                //refresh appointmentpage to display current status
+                String []temp = currentDate.getText().toString().split("/");
+                String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
+                if (dayA.isChecked())
+                    displayAppointmentForDate(dateInYYYYMMDD);
+                if (weekA.isChecked())
+                    displayAppointmentForWeek(dateInYYYYMMDD);
+                if (monthA.isChecked())
+                    displayAppointmentForMonth(dateInYYYYMMDD);
             }
         });
 
@@ -712,6 +721,15 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         paymentFlag.setText("");
                     else
                         paymentFlag.setText("P");
+
+                    if(ai.getToothDetails()!=null) {
+                        if (ai.getToothDetails().length() == 0)
+                            paymentFlag.setText(paymentFlag.getText() + "");
+                        else
+                            paymentFlag.setText(paymentFlag.getText() + "D");
+                    }
+                    else
+                        paymentFlag.setText(paymentFlag.getText() + "");
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
@@ -784,6 +802,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         paymentFlag.setText("");
                     else
                         paymentFlag.setText("P");
+                    if(ai.getToothDetails()!=null) {
+                        if (ai.getToothDetails().length() == 0)
+                            paymentFlag.setText(paymentFlag.getText() + "");
+                        else
+                            paymentFlag.setText(paymentFlag.getText() + "D");
+                    }
+                    else
+                        paymentFlag.setText(paymentFlag.getText() + "");
                     patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                     TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                     name.setText(pi.getName()+ " , " + pi.getPhone());
@@ -842,6 +868,14 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     paymentFlag.setText("");
                 else
                     paymentFlag.setText("P");
+                if(ai.getToothDetails()!=null) {
+                    if (ai.getToothDetails().length() == 0)
+                        paymentFlag.setText(paymentFlag.getText() + "");
+                    else
+                        paymentFlag.setText(paymentFlag.getText() + "D");
+                }
+                else
+                    paymentFlag.setText(paymentFlag.getText() + "");
                 patientInformation pi = pdb.getPatientInfoByID(ai.getPID());
                 TextView name = (TextView) tr.findViewById(R.id.txtVARnamephone);
                 name.setText(pi.getName()+ " , " + pi.getPhone());
