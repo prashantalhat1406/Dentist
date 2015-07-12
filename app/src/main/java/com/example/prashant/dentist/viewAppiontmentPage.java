@@ -827,6 +827,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     aptTable.addView(tr);
                 }
                 myCal.add(Calendar.DAY_OF_YEAR, 1);
+//bad
+
             }
             pdb.close();
             adb.close();
