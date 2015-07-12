@@ -576,12 +576,19 @@ public class viewAppiontmentPage extends ActionBarActivity {
         final Spinner paymentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADPayment);
         ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
         paymentInfo.setAdapter(adapterPayment);
+        if (ai.getPayment()==0)
+            paymentInfo.setSelection(adapterPayment.getPosition("NA"));
+        else
+            paymentInfo.setSelection(adapterPayment.getPosition(String.valueOf( ai.getPayment())));
 
         final Spinner actualTreatmentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADActualTreatment);
         ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
         actualTreatmentInfo.setAdapter(adapterTreatmentt);
+        actualTreatmentInfo.setSelection(adapterTreatmentt.getPosition(ai.getProposedTreatment()));
 
         final EditText details = (EditText)paymentDetails.findViewById(R.id.txtVADDetails);
+        if(ai.getToothDetails()!=null)
+            details.setText(ai.getToothDetails());
 
         Button saveButton = (Button)paymentDetails.findViewById(R.id.butVADSAVE);
         saveButton.setOnClickListener(new View.OnClickListener() {
