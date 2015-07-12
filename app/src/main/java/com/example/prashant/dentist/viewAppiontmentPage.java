@@ -281,15 +281,15 @@ public class viewAppiontmentPage extends ActionBarActivity {
                             tempCal.set(Calendar.MINUTE, 0);
                             tempCal.set(Calendar.SECOND, 0);
                             tempCal.set(Calendar.MILLISECOND, 0);
-                            //if (!dObj.before(tempCal.getTime())) {
+                            if (!dObj.before(tempCal.getTime())) {
                                 currentDateFlag = dObj.equals(tempCal.getTime());
                                 Calendar myCal = Calendar.getInstance();
                                 myCal.setTime(dObj);
                                 EADdate.setText(df.format(myCal.getTime()));
-                            /*} else {
+                            } else {
                                 Toast.makeText(getApplicationContext(), "Entered Date should not be past date", Toast.LENGTH_SHORT).show();
                                 EADdate.setText("");
-                            }*/
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
