@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="0.9" android:gravity="center"
+        android:layout_height="0dp" android:layout_weight="0.3" android:gravity="center"
         android:orientation="vertical" android:background="@drawable/rectanglegreen">
 
         <LinearLayout
@@ -46,6 +46,11 @@
                 android:id="@+id/txtVADProposedTreatment"
                 />
         </LinearLayout>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="0.6" android:gravity="center"
+        android:orientation="vertical" android:background="@drawable/rectanglegreen">
 
         <LinearLayout
             android:layout_width="match_parent" android:gravity="center"
@@ -59,7 +64,9 @@
                 android:layout_weight="0.6"
                 android:layout_height="wrap_content"
                 android:id="@+id/spnVADActualTreatment"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical"
+
+                >
             </Spinner>
         </LinearLayout>
 
