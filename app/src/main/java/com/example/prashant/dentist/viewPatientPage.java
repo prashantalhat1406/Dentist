@@ -139,7 +139,7 @@ public class viewPatientPage extends ActionBarActivity {
             name.setText(pi.getName());
 
             final Spinner treatment = (Spinner)addAppointment.findViewById(R.id.spnEADTreamnet);
-            ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+            ArrayAdapter<CharSequence> adapterpt = ArrayAdapter.createFromResource(this,R.array.ProposedTreatment, android.R.layout.simple_list_item_single_choice);
             treatment.setAdapter(adapterpt);
 
             EADdate = (EditText)addAppointment.findViewById(R.id.txtEADDate);

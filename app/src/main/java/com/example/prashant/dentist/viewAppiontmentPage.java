@@ -593,7 +593,8 @@ public class viewAppiontmentPage extends ActionBarActivity {
         proposedTreatment.setText(ai.getProposedTreatment().toString());
 
         final Spinner paymentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADPayment);
-        ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterPayment = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.PaymentDenominations, android.R.layout.simple_list_item_single_choice);
         paymentInfo.setAdapter(adapterPayment);
         if (ai.getPayment()==0)
             paymentInfo.setSelection(adapterPayment.getPosition("NA"));
@@ -601,7 +602,7 @@ public class viewAppiontmentPage extends ActionBarActivity {
             paymentInfo.setSelection(adapterPayment.getPosition(String.valueOf( ai.getPayment())));
 
         final Spinner actualTreatmentInfo = (Spinner) paymentDetails.findViewById(R.id.spnVADActualTreatment);
-        ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterTreatmentt = ArrayAdapter.createFromResource(viewAppiontmentPage.this, R.array.ProposedTreatment, android.R.layout.simple_list_item_single_choice);
         actualTreatmentInfo.setAdapter(adapterTreatmentt);
         actualTreatmentInfo.setSelection(adapterTreatmentt.getPosition(ai.getProposedTreatment()));
 
