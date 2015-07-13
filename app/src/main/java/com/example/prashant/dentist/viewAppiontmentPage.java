@@ -34,13 +34,17 @@ public class viewAppiontmentPage extends ActionBarActivity {
     TextView currentDate;
     RadioButton dayA,weekA,monthA;
     EditText EADdate, EADtime;
-    boolean currentDateFlag;
+    boolean currentDateFlag,enableMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Calendar cal;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appiontment_page);
+
+        enableMenu=false;
+        invalidateOptionsMenu();
+
         dayA = (RadioButton)findViewById(R.id.rdbVADay);
         dayA.setChecked(true);
         dayA.setOnClickListener(new View.OnClickListener() {
@@ -364,6 +368,21 @@ public class viewAppiontmentPage extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_appiontment_page, menu);
+        MenuItem mi;
+        if(!enableMenu)
+        {
+            mi=menu.findItem(R.id.menuVAEdit);
+            mi.setVisible(false);
+            mi=menu.findItem(R.id.menuVADelete);
+            mi.setVisible(false);
+        }
+        else
+        {
+            mi=menu.findItem(R.id.menuVAEdit);
+            mi.setVisible(true);
+            mi=menu.findItem(R.id.menuVADelete);
+            mi.setVisible(true);
+        }
         return true;
     }
 
@@ -721,6 +740,18 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         color=false;
                         tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
                     }
+                    final CheckBox cb = (CheckBox)tr.findViewById(R.id.cbVAR);
+                    cb.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (cb.isChecked())
+                                enableMenu=true;
+                            else
+                                enableMenu=false;
+                            invalidateOptionsMenu();
+                        }
+                    });
+
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                     aptID.setText(String.valueOf(ai.getAID()));
                     TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);
@@ -802,6 +833,17 @@ public class viewAppiontmentPage extends ActionBarActivity {
                         color=false;
                         tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
                     }
+                    final CheckBox cb = (CheckBox)tr.findViewById(R.id.cbVAR);
+                    cb.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (cb.isChecked())
+                                enableMenu=true;
+                            else
+                                enableMenu=false;
+                            invalidateOptionsMenu();
+                        }
+                    });
                     TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                     aptID.setText(String.valueOf(ai.getAID()));
                     TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);
@@ -870,6 +912,17 @@ public class viewAppiontmentPage extends ActionBarActivity {
                     color=false;
                     tr.setBackgroundResource(R.drawable.shapeforappointmentrow);
                 }
+                final CheckBox cb = (CheckBox)tr.findViewById(R.id.cbVAR);
+                cb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (cb.isChecked())
+                            enableMenu=true;
+                        else
+                            enableMenu=false;
+                        invalidateOptionsMenu();
+                    }
+                });
                 TextView aptID = (TextView) tr.findViewById(R.id.txtVARaptID);
                 aptID.setText(String.valueOf(ai.getAID()));
                 TextView paymentFlag = (TextView) tr.findViewById(R.id.txtVAPaymentFlag);

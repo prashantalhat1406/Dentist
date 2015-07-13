@@ -36,13 +36,14 @@ public class viewPatientPage extends ActionBarActivity {
 
     int y, m, d,h,mi;
     EditText EADdate, EADtime;
-    boolean currentDateFlag;
+    boolean currentDateFlag,enableMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patient_page);
         displayAllExistingPatients();
+        enableMenu=false;
 
         //Button bSearch = (Button)findViewById(R.id.butPatientSearch);
         ImageButton bSearch = (ImageButton)findViewById(R.id.butPatientSearch);
@@ -52,6 +53,10 @@ public class viewPatientPage extends ActionBarActivity {
                 searchPatientByName();
             }
         });
+
+        invalidateOptionsMenu();
+
+
 /*
         Button bNewPatient = (Button)findViewById(R.id.butVPNEW);
         bNewPatient.setOnClickListener(new View.OnClickListener() {
@@ -400,6 +405,17 @@ public class viewPatientPage extends ActionBarActivity {
                 color=false;
                 row.setBackgroundResource(R.drawable.shapeofpatientrowlight);
             }
+            final CheckBox cb = (CheckBox) row.findViewById(R.id.rownumber);
+            cb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cb.isChecked())
+                        enableMenu=true;
+                    else
+                        enableMenu=false;
+                    invalidateOptionsMenu();
+                }
+            });
             TextView recnum = (TextView)row.findViewById(R.id.txtPatientRecordID);
             recnum.setText(Integer.toString( pi.getID()));
             TextView name = (TextView)row.findViewById(R.id.name) ;
@@ -415,7 +431,28 @@ public class viewPatientPage extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+
         getMenuInflater().inflate(R.menu.menu_view_patient_page, menu);
+        MenuItem mi;
+        if(!enableMenu)
+        {
+            mi=menu.findItem(R.id.menuVPEdit);
+            mi.setVisible(false);
+            mi=menu.findItem(R.id.menuVPDelete);
+            mi.setVisible(false);
+            mi=menu.findItem(R.id.menuVPAppointment);
+            mi.setVisible(false);
+        }
+        else
+        {
+            mi=menu.findItem(R.id.menuVPEdit);
+            mi.setVisible(true);
+            mi=menu.findItem(R.id.menuVPDelete);
+            mi.setVisible(true);
+            mi=menu.findItem(R.id.menuVPAppointment);
+            mi.setVisible(true);
+        }
         return true;
     }
 
