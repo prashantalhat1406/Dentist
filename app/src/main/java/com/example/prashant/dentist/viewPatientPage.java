@@ -143,7 +143,20 @@ public class viewPatientPage extends ActionBarActivity {
             treatment.setAdapter(adapterpt);
 
             EADdate = (EditText)addAppointment.findViewById(R.id.txtEADDate);
+            EADdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(2);
+                }
+            });
             EADtime = (EditText)addAppointment.findViewById(R.id.txtEADTime);
+            EADtime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    showDialog(3);
+                }
+            });
 
             //final EditText toothdetails = (EditText)addAppointment.findViewById(R.id.txtEADToothDetails);
 
