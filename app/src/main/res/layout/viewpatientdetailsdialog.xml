@@ -40,7 +40,7 @@
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.35"
+                android:layout_weight="0.30"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDPhone"
                 style="@style/boldBlueCV"/>
@@ -52,7 +52,7 @@
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.15"
+                android:layout_weight="0.20"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDTotalPayment"
                 style="@style/boldBlueCV"/>
