@@ -625,6 +625,9 @@ public class viewAppiontmentPage extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "Appointment Details Added", Toast.LENGTH_SHORT).show();
                 paymentDetails.dismiss();
                 //refresh appointmentpage to display current status
+                enableMenu=false;
+                invalidateOptionsMenu();
+
                 String []temp = currentDate.getText().toString().split("/");
                 String dateInYYYYMMDD = temp[2] + "/"+temp[1] + "/"+temp[0];
                 if (dayA.isChecked())
