@@ -438,6 +438,8 @@ public class viewPatientPage extends ActionBarActivity {
             pt.addView(row);
         }
         clearAllSelection();
+        enableMenu=false;
+        invalidateOptionsMenu();
     }
 
 
