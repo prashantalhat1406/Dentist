@@ -34,13 +34,13 @@
             android:orientation="horizontal" android:gravity="center_vertical">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.22"
                 android:layout_height="wrap_content"
                 android:text="Phone "
                 style="@style/referenceLabel"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.30"
+                android:layout_weight="0.33"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVPDPhone"
                 style="@style/boldBlueCV"/>
