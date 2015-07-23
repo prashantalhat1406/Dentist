@@ -27,6 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
+            android:textColor="#135b1c"
+            android:textStyle="bold"
             android:id="@+id/autotxtEADName"
             />
     </LinearLayout>
